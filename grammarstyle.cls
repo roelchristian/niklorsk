@@ -1,4 +1,4 @@
-\ProvidesClass{niklorskgrammar}[2024/04/10 Niklorsk Grammar Class]
+\ProvidesClass{grammarstyle}[2024/04/10 Niklorsk Grammar Class]
 \LoadClass{amsbook}
 
 % ---- Basic Package and Layout Configuration ----
@@ -9,6 +9,8 @@
     bmargin=1.1in,
     lmargin=0.7in,
     rmargin=0.7in,
+    marginparwidth=0.5in,
+    marginparsep=0.1in,
 }
 
 \widowpenalty10000
@@ -56,7 +58,7 @@
 
 % ---- Styling for Niklorsk Text ----
 \newcommand{\yaleblue}[1]{\textcolor{yaleblue}{#1}} 
-\newcommand{\medium}[1]{\fontseries{sb}\selectfont{#1}}
+\newcommand{\medium}[1]{{\bfseries #1}}
 
 \newcommand{\niklorsk}[1]{\yaleblue{\medium{#1}}} % Niklorsk text
 \newcommand{\nikp}[2]{\niklorsk{#1} `#2'}

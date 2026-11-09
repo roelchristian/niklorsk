@@ -9,13 +9,14 @@ BUILD_TIMEOUT ?= 180
 BUILD_FLAGS ?=
 export NIKLORSK_ROOT := $(CURDIR)
 export LATEX
+export PYTHON
 
 .PHONY: all book build check vocab clean bootstrap
 all book build check vocab clean: bootstrap
-	@$(PYTHON) "$(NIKLORSK_ROOT)/codex/build.py" $(if $(filter all book build,$@),build,$@) --root "$(NIKLORSK_ROOT)" --max-passes "$(MAX_PASSES)" --timeout "$(BUILD_TIMEOUT)" $(BUILD_FLAGS)
+	@"$${PYTHON}" "$(NIKLORSK_ROOT)/codex/build.py" $(if $(filter all book build,$@),build,$@) --root "$(NIKLORSK_ROOT)" --max-passes "$(MAX_PASSES)" --timeout "$(BUILD_TIMEOUT)" $(BUILD_FLAGS)
 
 bootstrap:
-	@$(PYTHON) -c 'import os; exec(os.environ["NIKLORSK_BOOTSTRAP_SOURCE"])'
+	@"$${PYTHON}" -c 'import os; exec(os.environ["NIKLORSK_BOOTSTRAP_SOURCE"])'
 
 define _NIKLORSK_BOOTSTRAP_SOURCE
 from pathlib import Path
@@ -115,54 +116,80 @@ def snapshot(stage: Path) -> str:
 
 
 def vocabulary(stage: Path) -> int:
-    """Reproduce the existing appendix format without a pandas dependency."""
+    """Validate lexical stress and generate the vocabulary appendix locally."""
     source = stage / "vocabulary/vocabulary.csv"
     rows = []
     seen = set()
+    stress_by_lemma = {}
     with source.open(encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream, delimiter=";")
-        if reader.fieldnames != ["word", "partofspeech", "translation"]:
-            raise BuildError("Vocabulary needs columns word;partofspeech;translation.")
+        required = ["word", "partofspeech", "translation"]
+        if reader.fieldnames not in (required, required + ["stress"]):
+            raise BuildError("Vocabulary needs columns word;partofspeech;translation, optionally followed by stress.")
         for line, row in enumerate(reader, 2):
-            if None in row:
-                raise BuildError(f"Malformed vocabulary row {line}: too many columns.")
-            if any(not row.get(key) for key in reader.fieldnames):
-                continue
+            if None in row or any(value is None for value in row.values()):
+                raise BuildError(f"Malformed vocabulary row {line}: wrong number of columns.")
             row = {key: value.strip() for key, value in row.items()}
-            if not all(row.values()):
+            stress = row.setdefault("stress", "")
+            if stress and (not stress.isascii() or not stress.isdecimal() or stress.startswith("0")):
+                raise BuildError(f"Invalid stress on vocabulary row {line}: use a positive syllable index or leave blank.")
+            if not all(row[key] for key in required):
                 continue
             row["word"] = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ö").replace(r"\\ae\{\}", "æ")
             if row["partofspeech"] not in POS:
                 raise BuildError(f"Unknown vocabulary part of speech on row {line}: {row['partofspeech']}")
+            lemma = row["word"].partition(",")[0].strip(), row["partofspeech"]
+            if stress:
+                previous_stress = stress_by_lemma.get(lemma)
+                if previous_stress is not None and previous_stress != stress:
+                    raise BuildError(f"Conflicting stress for {lemma[0]} on vocabulary row {line}: {previous_stress} and {stress}.")
+                stress_by_lemma[lemma] = stress
             key = row["word"], row["partofspeech"]
             if key not in seen:
                 seen.add(key)
                 rows.append(row)
+    for row in rows:
+        lemma = row["word"].partition(",")[0].strip(), row["partofspeech"]
+        row["stress"] = stress_by_lemma.get(lemma, "")
     rows.sort(key=lambda row: row["word"])
     if not rows:
         raise BuildError("Vocabulary has no complete entries.")
     outdir = stage / "vocabulary"
     with (outdir / "vocabulary_cleaned.csv").open("w", encoding="utf-8", newline="") as stream:
         writer = csv.writer(stream, delimiter=";", lineterminator="\n")
-        writer.writerow(["word", "plural", "partofspeech", "translation"])
+        writer.writerow(["word", "plural", "partofspeech", "translation", "stress"])
         for row in rows:
             singular, separator, plural = row["word"].partition(",")
-            writer.writerow([singular, plural.lstrip() if separator else "", POS[row["partofspeech"]], row["translation"]])
+            writer.writerow([singular, plural.lstrip() if separator else "", POS[row["partofspeech"]], row["translation"], row["stress"]])
     legend = ", ".join(f"{key} = {value}" for key, value in POS.items())
     lines = [
         "% Generated locally from vocabulary/vocabulary.csv. Do not edit.",
         r"\chapter*{Vocabulary}",
         r"{\small\textbf{Legend:} " + legend + "}",
+        "",
+        r"{\small (stress $n$) marks primary stress on syllable $n$ of the lemma, counted from the first syllable. Inflected forms retain that stress. An unmarked entry has no individual stress specification in this list; see Chapter \ref{chap:phonology}, \S\ref{sec:stress-prosody}.}",
         "", r"\begin{multicols}{2}", r"\footnotesize", "",
     ]
     previous = ""
     for row in rows:
         word = row["word"]
-        if word[0] != previous:
+        new_letter = word[0] != previous
+        if new_letter:
             if previous:
                 lines.append(r"\bigskip")
-            lines.extend([r"\vocabcentered{" + word[0].upper() + "}", ""])
-        lines.extend([r"\glossarypair{" + word + "}{" + row["partofspeech"] + "}{" + row["translation"] + "}", ""])
+            lines.extend([
+                r"\begingroup",
+                r"\edef\vocabentryindent{\the\parindent}",
+                r"\noindent\begin{minipage}{\linewidth}",
+                r"\setlength{\parindent}{\vocabentryindent}",
+                r"\vocabcentered{" + word[0].upper() + "}", "",
+            ])
+        translation = row["translation"]
+        if row["stress"]:
+            translation += " (stress " + row["stress"] + ")"
+        lines.extend([r"\glossarypair{" + word + "}{" + row["partofspeech"] + "}{" + translation + "}", ""])
+        if new_letter:
+            lines.extend([r"\end{minipage}\par", r"\endgroup", ""])
         previous = word[0]
     lines.extend([r"\end{multicols}", ""])
     (outdir / "vocabulary.tex").write_text("\n".join(lines), encoding="utf-8")

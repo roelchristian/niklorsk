@@ -18,14 +18,17 @@ the nouns they modify in gender and number. The verbal system includes finite
 and non-finite forms, tense and aspect distinctions, conditional constructions,
 and passive forms.
 
-The phonology chapter treats vowel and consonant length, diphthongs,
-pronunciation changes in different phonetic environments, and the relationship
-between spelling and pronunciation.
+The phonology chapter treats vowel and consonant length, diphthongs, variable
+lexical stress, and the relationship between spelling and pronunciation.
+Stress normally falls on the initial syllable of a native root and remains
+stable through inflection. Compounds and some derivational suffixes introduce
+secondary stress, while a small class of suffixes attracts primary stress.
 
 ## What the grammar covers
 
 - [Phonology and orthography](chapters/phonology.tex): vowel and consonant
-  inventories, length, sound realization, and spelling conventions.
+  inventories, quantity, stress and reduction, sound realization, and spelling
+  conventions.
 - [Verbs](chapters/verbs.tex): conjugation, tense and aspect, negation,
   conditional and modal constructions, infinitives and participles, separable
   verbs, copular and existential constructions, and the passive voice.
@@ -36,15 +39,17 @@ between spelling and pronunciation.
 - [Clause structure](chapters/syntax.tex): basic word order, constituent
   fronting, questions, relative clauses, and complement clauses.
 - [Derivational morphology](chapters/derivations.tex): word-forming affixes and
-  noun-noun compounds.
+  their stress classes, and noun-noun compounds with primary and secondary
+  stress.
 - [Sample texts](chapters/texts.tex): passages in Niklorsk with interlinear
   glosses and English translations.
 
 ## Vocabulary and texts
 
 The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk words, their parts
-of speech, and English meanings. Noun entries include plural forms where
-given. The same word list supplies the manuscript's vocabulary appendix.
+of speech, English meanings, and specified primary-stress positions. Noun
+entries include plural forms where given. The same word list supplies the
+manuscript's vocabulary appendix.
 
 Additional material in [texts/](texts/) includes a translation draft from
 *Middlemarch* and a small Niklorsk–English corpus. These are separate from the

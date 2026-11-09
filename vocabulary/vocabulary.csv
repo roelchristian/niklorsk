@@ -1,122 +1,122 @@
-word;partofspeech;translation
-afte, aften;nm;book
-ag;pron;I
-asse;adv;always
-av;conj;with
-bang;adj;good
-bra;v;to give
-brord, brorda;nn;room
-bærg, bærgen;nn;heaven
-börd;v;to eat
-flikk, flikkar;nf;name
-gaups;adv;right now
-glus, glussar;nm;cat
-hjalt;v;to write
-hjålt, hjålttar;nn;cake
-hus, hussa;nf;house
-i kvett;adv;yesterday
-i sægge;adv;today
-kelv, kelven;nn;half
-kung, kunga;nm;mirror
-kvett, kvetta;nn;previous day
-kvint;v;to bake
-lære;adv;now
-verb, verbar;nm;word
-magasin, magasinnar;nn;store
-malm;v;to go
-maus;adj;happy
-meg;pron;you (sg.)
-murst;v;to cut
-nar;pron;he, she
-naud;v;to enter
-nigot;adv;almost
-nörs;adv;never
-patat, patattor;nm;potato
-på;conj;by
-ront;adj;fast
-skers;v;to sing
-skun;adj;blind
-skäll, skälla;nf;fish
-sond;v;to speak
-sægge, sæggen;nn;morning
-tadd, taddar;nm;father
-tak, takkar;nn;brow
-tvent;adj;slow
-vaed;v;to see
-vell;v;can, to be able to
-geevs;conj;but
-kort;adj;old
-någn;adj;old
-i;prep;in, on, at
-dänn;prep;in, inside
-at;prep;to, into
-atta;prep;to the, into the
-med;pron;that, that over there
-dur, durra;nm;boy, son
-hlåd, hlåden;nm;summer
-kapp, kappa;nf;coat
-tor;v;to believe
-pær, pæror;nf;pen
-ngöld, ngölddar;nm;cow
-bot, boten;nn;grass
-element, elementen;nm;element
-hrådd, hråddor;nm;group
-fjeltt, fjeltta;nf;party, celebration
-veers, veersen;nn;science
-veerser, veerserar;nm;scientist
-hveng;v;to find
-forst, forsta;nm;time
-jagt;v;to remember
-käll;pron;who
-käller;pron;who (plural)
-kan;pron;what
-känner;pron;what (plural)
-kamm;pron;when
-kom;v;to die
-men;adv;here
-imed;adv;there (distal)
-imår;adv;there (medial)
-til;prep;for, in order to
-hond, honden;nn;child
-skämd, skämdar;nn;toy
-grom;adj;stupid
-jærv;adj;tired
-dokument, dokumentar;nf;document
-dreg, drega;nm;mind
-talt, talten;nn;news
-strigg;v;to faint
-spis, spisar;nn;year
-svor;v;to sleep
-greed;v;to use
-mobil, mobilar;nm;phone
-vand;v;to drive
-æder;conj;while
-smed;conj;before
-åd;conj;after
-kanseler;v;to cancel
-fabrik, fabrikkar;nf;factory
-kurt;adj;short
-hot;adj;short
-krust, krusten;nn;earthquake
-leeb, leeba;nf;next day, morrow
-i leeb;adv;tomorrow
-maug, maugen;nn;friend
-billä;adv;right away
-hjörtat, hjörtaten;nn;apology
-är;v;past tense form of \nk{ö} and \nk{vor}
-föd;v;to heat up (a liquid)
-aka;adv;also
-ramm;v;to work
-projekt, projektar;nm;project
-tind;v;to seem
-fjerd;v;to forget
-kost;v;to change
-dreg, dreggar;nm;mind
-meger;v;to vote
-kaffe, kaffen;nm;coffee
-klör;v;to burn
-hent;v;to tell
-giml;v;to buy
-likke;adv;quite
-person, personar;nf;person
-prover;v;to try
+word;partofspeech;translation;stress
+afte, aften;nm;book;
+ag;pron;I;
+asse;adv;always;
+av;conj;with;
+bang;adj;good;
+bra;v;to give;
+brord, brorda;nn;room;
+bærg, bærgen;nn;heaven;
+börd;v;to eat;
+flikk, flikkar;nf;name;
+gaups;adv;right now;
+glus, glussar;nm;cat;
+hjalt;v;to write;
+hjålt, hjålttar;nn;cake;
+hus, hussa;nf;house;
+i kvett;adv;yesterday;
+i sægge;adv;today;
+kelv, kelven;nn;half;
+kung, kunga;nm;mirror;
+kvett, kvetta;nn;previous day;
+kvint;v;to bake;
+lære;adv;now;
+verb, verbar;nm;word;
+magasin, magasinnar;nn;store;3
+malm;v;to go;
+maus;adj;happy;
+meg;pron;you (sg.);
+murst;v;to cut;
+nar;pron;he, she;
+naud;v;to enter;
+nigot;adv;almost;
+nörs;adv;never;
+patat, patattor;nm;potato;2
+på;conj;by;
+ront;adj;fast;
+skers;v;to sing;
+skun;adj;blind;
+skäll, skälla;nf;fish;
+sond;v;to speak;
+sægge, sæggen;nn;morning;
+tadd, taddar;nm;father;
+tak, takkar;nn;brow;
+tvent;adj;slow;
+vaed;v;to see;
+vell;v;can, to be able to;
+geevs;conj;but;
+kort;adj;old;
+någn;adj;old;
+i;prep;in, on, at;
+dänn;prep;in, inside;
+at;prep;to, into;
+atta;prep;to the, into the;
+med;pron;that, that over there;
+dur, durra;nm;boy, son;
+hlåd, hlåden;nm;summer;
+kapp, kappa;nf;coat;
+tor;v;to believe;
+pær, pæror;nf;pen;
+ngöld, ngölddar;nm;cow;
+bot, boten;nn;grass;
+element, elementen;nm;element;
+hrådd, hråddor;nm;group;
+fjeltt, fjeltta;nf;party, celebration;
+veers, veersen;nn;science;
+veerser, veerserar;nm;scientist;
+hveng;v;to find;
+forst, forsta;nm;time;
+jagt;v;to remember;
+käll;pron;who;
+käller;pron;who (plural);
+kan;pron;what;
+känner;pron;what (plural);
+kamm;pron;when;
+kom;v;to die;
+men;adv;here;
+imed;adv;there (distal);
+imår;adv;there (medial);
+til;prep;for, in order to;
+hond, honden;nn;child;
+skämd, skämdar;nn;toy;
+grom;adj;stupid;
+jærv;adj;tired;
+dokument, dokumentar;nf;document;3
+dreg, drega;nm;mind;
+talt, talten;nn;news;
+strigg;v;to faint;
+spis, spisar;nn;year;
+svor;v;to sleep;
+greed;v;to use;
+mobil, mobilar;nm;phone;
+vand;v;to drive;
+æder;conj;while;
+smed;conj;before;
+åd;conj;after;
+kanseler;v;to cancel;
+fabrik, fabrikkar;nf;factory;2
+kurt;adj;short;
+hot;adj;short;
+krust, krusten;nn;earthquake;
+leeb, leeba;nf;next day, morrow;
+i leeb;adv;tomorrow;
+maug, maugen;nn;friend;
+billä;adv;right away;
+hjörtat, hjörtaten;nn;apology;
+är;v;past tense form of \nk{ö} and \nk{vor};
+föd;v;to heat up (a liquid);
+aka;adv;also;
+ramm;v;to work;
+projekt, projektar;nm;project;
+tind;v;to seem;
+fjerd;v;to forget;
+kost;v;to change;
+dreg, dreggar;nm;mind;
+meger;v;to vote;
+kaffe, kaffen;nm;coffee;
+klör;v;to burn;
+hent;v;to tell;
+giml;v;to buy;
+likke;adv;quite;
+person, personar;nf;person;2
+prover;v;to try;

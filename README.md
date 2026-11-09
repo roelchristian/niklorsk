@@ -18,6 +18,12 @@ the nouns they modify in gender and number. The verbal system includes finite
 and non-finite forms, tense and aspect distinctions, conditional constructions,
 and passive forms.
 
+Particle verbs ordinarily combine a preverbal particle with the verbal stem
+as one word. The grammar describes their separation with negation, pronominal
+or demonstrative objects, imperatives, and synthetic passives. It also treats
+particle placement with modals, in questions, and in inverted clauses. Mobile
+particles contrast with inseparable prefixes in both placement and stress.
+
 The phonology chapter treats vowel and consonant length, diphthongs, variable
 lexical stress, and the relationship between spelling and pronunciation.
 Stress normally falls on the initial syllable of a native root and remains
@@ -31,7 +37,8 @@ secondary stress, while a small class of suffixes attracts primary stress.
   conventions.
 - [Verbs](chapters/verbs.tex): conjugation, tense and aspect, negation,
   conditional and modal constructions, infinitives and participles, separable
-  verbs, copular and existential constructions, and the passive voice.
+  verbs and particle placement with direct objects, copular and existential
+  constructions, and the passive voice.
 - [Nouns and pronouns](chapters/nouns.tex): gender, articles, number, case,
   personal and demonstrative pronouns, and noun phrases.
 - [Other word classes](chapters/modifiers.tex): adjective agreement and
@@ -40,8 +47,8 @@ secondary stress, while a small class of suffixes attracts primary stress.
   and the dative alternation, constituent fronting, questions, relative clauses,
   and complement clauses.
 - [Derivational morphology](chapters/derivations.tex): word-forming affixes and
-  their stress classes, and noun-noun compounds with primary and secondary
-  stress.
+  their stress classes, the inseparable prefix *be-*, and noun-noun compounds
+  with primary and secondary stress.
 - [Sample texts](chapters/texts.tex): passages in Niklorsk with interlinear
   glosses and English translations.
 

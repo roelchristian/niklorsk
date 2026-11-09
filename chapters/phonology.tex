@@ -30,7 +30,7 @@ Each vowel occurs in both long and short forms, as shown in Table \ref{tab:vowel
     \label{tab:vowel-length}
 \end{table}
 
-Vowel length is marked in the orthography by doubling the consonant following the vowel. For example, \nikpp{mod}{muːð}{drink} and \nikpp{modd}{mʊðː}{meadow}. The following table shows the orthographic representation of the vowels. The low vowels /ɑː/ and /æː/ are raised to [ɔː] and [ɛː], respectively. (In some dialects, this vowel raising also affects short /æ/, so that /æ/ and /ɛ/ are merged.)
+The following table shows the orthographic representation of the vowels. The low vowels /ɑː/ and /æː/ are raised to [ɔː] and [ɛː], respectively. (In some dialects, this vowel raising also affects short /æ/, so that /æ/ and /ɛ/ are merged.)
 
 \begin{table}[!ht]
     \begin{tabularx}{\textwidth}{X X}
@@ -66,12 +66,37 @@ Vowel length is marked in the orthography by doubling the consonant following th
 
 Niklorsk has three phonemic diphthongs, as shown in Table \ref{tab:diphthongs}. For the sake of prosody, diphthongs are treated as long vowels.
 
+\FloatBarrier
+\subsection{Vowel quantity and stress}
+\label{sec:vowel-quantity}
 
+In stressed syllables, vowel and consonant quantity generally follow a complementary pattern. A long vowel normally precedes a single short consonant, while a short vowel normally precedes a long consonant (a geminate) or a consonant cluster. In the orthography, doubling the following consonant therefore normally marks a short vowel followed by a long consonant. Table \ref{tab:quantity-examples} illustrates the pattern.
+
+\begin{table}[!ht]
+    \begin{tabularx}{\textwidth}{l l X}
+        Word & Pronunciation & Quantity \\
+        \nikp{mod}{drink} & [\ipa{muːð}] & Long vowel \\
+        \nikp{modd}{meadow} & [\ipa{mʊðː}] & Short vowel, long consonant \\
+        \nikp{tak}{brow} & [\ipa{tʰɔːc}] & Long vowel \\
+        \nikp{kapp}{coat} & [\ipa{cʰɑpː}] & Short vowel, long consonant \\
+        \nikp{käll}{who} & [\ipa{ɕælː}] & Short vowel, long consonant \\
+        \nikp{lasst}{salt} & [\ipa{lɑsːt}] & Short vowel, consonant cluster \\
+    \end{tabularx}
+    \caption{Vowel and consonant quantity in stressed syllables}
+    \label{tab:quantity-examples}
+\end{table}
+
+The quantity pattern applies to sounds rather than individual letters. A sequence of consonant letters may represent a single sound, as in \nikpp{mask}{mɔːɕ}{vermin}, where \nk{sk} represents /ɕ/. Consonant loss can also leave a long vowel before a written consonant cluster: final /d/ is silent in \nikpp{börd}{bøːɐ̯}{eat (pres.)}. In the related form \nikpp{bördutt}{bøːɐ̯ðɵtː}{eat (prog.)}, /d/ is pronounced, but the stem vowel remains long. These consonant-loss and suffix alternations are described in \S\ref{sec:orthography}. Syllable-final /r/ forms an offglide while preserving the preceding vowel's quantity (see \S\ref{sec:liquids}).
+
+Stress is marked in transcriptions by [\ipa{ˈ}] before the stressed syllable, as in \nikpp{niklorsk}{nɪˈkluːɐ̯ʂ}{Niklorsk}. The quantity pattern concerns stressed syllables; it does not determine which syllable bears stress. Unstressed final syllables can contain reduced [ə], as in \nikpp{afte}{ɑftə}{book}. The aspiration and affrication of syllable-initial plosives also depend on stress (see \S\ref{sec:plosives}).
+
+
+\FloatBarrier
 \section{Consonants}
 
-The consonant inventory of Niklorsk is shown in Table \ref{tab:consonant-inventory}. Vowels appear as either short or long, with the latter marked by a doubled consonant following the vowel.
+The consonant inventory of Niklorsk is shown in Table \ref{tab:consonant-inventory}. Long consonants normally follow short stressed vowels, as described in \S\ref{sec:vowel-quantity}.
 
-\begin{table}
+\begin{table}[!ht]
     \small
     \begin{tblr}{
         colspec={X[l]X[l]X[l]X[l]X[l]X[l]}
@@ -88,6 +113,7 @@ The consonant inventory of Niklorsk is shown in Table \ref{tab:consonant-invento
 \end{table}
 
 \subsection{Plosives}
+\label{sec:plosives}
 Voiceless plosives /p t k/ are aspirated when they occur at the onset of a stressed syllable, with /k/ often realized as [cʰ] instead of [kʰ]. For example, \nikpp{tor}{tʰuːɐ̯}{to believe,} \nikpp{kapp}{cʰɑpː}{coat,} \nikpp{pær}{pʰaɛ̯}{pen,} \nikpp{patat}{pɑːtʰɔːt}{potato.} This aspiration does not occur in unstressed syllables, at syllable codas, or after /s/ (with /sk/ becoming [ɕ]), e.g., \nikpp{strom}{struːm}{already.} Before front vowels in a stressed syllable, /t/ and /d/ are affricated to /ts/ and /dz/, respectively, e.g., \nikpp{titt}{t͡sɪtː}{to hide,} \nikpp{dyr}{d͡zyːɐ̯}{bear.} Long unvoiced plosives in intervocalic positions are voiced, i.e., /tː/ becomes [ðː], /kː/ becomes [gː], and /pː/ becomes [bː], e.g., \nikpp{atta}{ɑðːɔː}{into the.}
 
 Most stops undergo lenition in the coda. At the end of a syllable /k/ becomes [c], /d/ becomes [ð], and /g/ becomes silent, e.g., \nikpp{tadd}{tʰɑðː}{father,} \nikpp{tak}{tʰɔːc}{brow,} \nikpp{tog}{tʰoː}{desire.}
@@ -99,12 +125,14 @@ Before front vowels, /g/ becomes [j], e.g., \nikpp{merge}{mɛɐ̯ɪ}{shirt,} \ni
 The fricative /s/ becomes [ʂ] (or sometimes [ɕ]) after /l/ or /r/, e.g., \nikpp{skers}{ɕɛɐ̯ʂ}{to sing (inf.)}, or before /t/ or /d/, e.g., \nikpp{forst}{fuːɐ̯ʂt}{time.} Final /ʋ/ is often simplified to [w], e.g., \nikpp{bliv}{bliːw}{man.} The sequence /st/ is written as \nk{sst} and pronounced [sːt], e.g., \nikpp{lasst}{lɑsːt}{salt.} This sequence cannot occur word-initially.
 
 \subsection{Liquids}
+\label{sec:liquids}
 
 Onset /r/ by itself or in a consonant cluster is realized as the uvular fricative [ʁ], e.g., \nikpp{brörd}{bʁøːɐ̯}{room,} \nikpp{ræn}{ʁaɛ̯n}{sweat.}
 
 Syllable-final /r/ is derhotacized to form a /ɐ̯/ diphthong with the preceding vowel, maintaining the vowel length of the latter. Thus we have \nikpp{hör}{høːɐ̯}{pen,} \nikpp{börrs}{bœɐ̯ʂ}{forest.} If the preceding vowel is a diphthong, the /r/ is altogether dropped if /r/ is not part of a consonant cluster: \nikpp{bærg}{baɛ̯rj}{heaven} but \nikpp{seer}{seːɪ̯}{water.}
 
 \section{Orthography}
+\label{sec:orthography}
 
 \subsection{General rules}
 

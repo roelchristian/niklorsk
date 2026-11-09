@@ -22,6 +22,7 @@
 \RequirePackage{tabularx}
 \RequirePackage{tabularray}
 \RequirePackage[tableposition=top]{caption}
+\RequirePackage{placeins}
 \RequirePackage{fontspec}
 \RequirePackage{expex}
 \RequirePackage{etoolbox}

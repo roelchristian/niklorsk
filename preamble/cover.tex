@@ -1,0 +1,53 @@
+% Contemporary Library cover. Coordinates use PDF points (bp), matching the
+% 6.69 x 9.61 inch trim. The class supplies TikZ, xcolor, and fontspec.
+\definecolor{grammarcoverindigo}{HTML}{252D55}
+\definecolor{grammarcoversand}{HTML}{D9CEB4}
+\definecolor{grammarcoverpaper}{HTML}{FAF8F1}
+\definecolor{grammarcovercoral}{HTML}{B65C4C}
+
+\newfontfamily\grammarcoverfont{Noto Sans}[
+    Scale=1,
+    BoldFont=Noto Sans Bold
+]
+
+% Call on a fresh page with page anchors disabled. Page numbering is left to
+% the surrounding front matter; this macro produces one unnumbered page.
+\newcommand{\makegrammarcover}{%
+    \begingroup
+    \thispagestyle{empty}%
+    \noindent
+    \begin{tikzpicture}[remember picture, overlay, x=1bp, y=1bp]
+        \begin{scope}[shift={(current page.south west)}]
+            \fill[grammarcoverindigo] (0,0) rectangle (481.68,691.92);
+            \fill[grammarcoversand] (0,0) rectangle (481.68,207.576);
+            \fill[grammarcovercoral] (43,612.92) rectangle (72,617.92);
+
+            \node[anchor=base west, inner sep=0pt, outer sep=0pt,
+                  text=grammarcoverpaper,
+                  font=\grammarcoverfont\mdseries\fontsize{24bp}{24bp}\selectfont]
+                at (43,544.92) {A Grammar of};
+            \node[anchor=base west, inner sep=0pt, outer sep=0pt,
+                  text=grammarcoverpaper,
+                  font=\grammarcoverfont\bfseries\fontsize{49bp}{49bp}\selectfont]
+                at (40,480.92) {Niklorsk};
+
+            \foreach \i in {0,...,6} {
+                \draw[grammarcoversand, line width=0.8bp,
+                      line cap=butt, line join=miter]
+                    ({43+26*\i},{243.576+9*\i})
+                    -- ({43+26*\i},{332.576+9*\i})
+                    -- ({437.68-10*\i},{332.576+9*\i});
+            }
+
+            \node[anchor=base west, inner sep=0pt, outer sep=0pt,
+                  text=grammarcoverindigo,
+                  font=\grammarcoverfont\mdseries\fontsize{14bp}{14bp}\selectfont]
+                at (43,83) {Roel Christian Yambao};
+            \draw[grammarcoverindigo, line width=0.6bp, line cap=butt]
+                (43,60) -- (438.68,60);
+        \end{scope}
+    \end{tikzpicture}%
+    \null\par
+    \endgroup
+    \newpage
+}

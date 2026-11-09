@@ -165,6 +165,8 @@ def vocabulary(stage: Path) -> int:
     lines = [
         "% Generated locally from vocabulary/vocabulary.csv. Do not edit.",
         r"\chapter*{Vocabulary}",
+        r"\addcontentsline{toc}{chapter}{Vocabulary}",
+        r"\markboth{Vocabulary}{Vocabulary}",
         r"{\small\textbf{Legend:} " + legend + "}",
         "",
         r"{\small (stress $n$) marks primary stress on syllable $n$ of the lemma, counted from the first syllable. Inflected forms retain that stress. An unmarked entry has no individual stress specification in this list; see Chapter \ref{chap:phonology}, \S\ref{sec:stress-prosody}.}",

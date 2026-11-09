@@ -237,6 +237,13 @@ def save_cache(stage: Path, key: str) -> None:
     fresh.rename(old)
 
 
+def save_font_cache(stage: Path) -> None:
+    for name in ("texmf-var", "luatex-cache", "xdg-cache"):
+        source = stage / name
+        if source.is_dir():
+            shutil.copytree(source, CACHE / name, dirs_exist_ok=True)
+
+
 def environment(stage: Path) -> dict[str, str]:
     env = os.environ.copy()
     # The tracked Makefile may bootstrap these helpers through exported text.
@@ -244,15 +251,20 @@ def environment(stage: Path) -> dict[str, str]:
     for key in list(env):
         if key.startswith("NIKLORSK_") and key.endswith("_SOURCE"):
             env.pop(key)
-    # Font discovery and TeX caches are reusable across isolated source builds.
+    # Seed reusable font data into stage-local paths: TeX disallows absolute
+    # output paths under openout_any=p. Keep that restriction enabled.
     locations = {
-        "TEXMFVAR": CACHE / "texmf-var", "TEXMFCONFIG": stage / "texmf-config",
-        "TEXMFCACHE": CACHE / "luatex-cache", "XDG_CACHE_HOME": CACHE / "xdg-cache",
+        "TEXMFVAR": stage / "texmf-var", "TEXMFCONFIG": stage / "texmf-config",
+        "TEXMFCACHE": stage / "luatex-cache", "XDG_CACHE_HOME": stage / "xdg-cache",
         "TMPDIR": stage / "tmp",
     }
     for key, path in locations.items():
         path.mkdir(parents=True, exist_ok=True)
-        env[key] = str(path.resolve())
+        if key in {"TEXMFVAR", "TEXMFCACHE", "XDG_CACHE_HOME"}:
+            cached = CACHE / path.name
+            if cached.is_dir():
+                shutil.copytree(cached, path, dirs_exist_ok=True)
+        env[key] = str(path.relative_to(stage)) if key.startswith("TEXMF") else str(path)
     env["TEXINPUTS"] = str(stage) + os.pathsep
     env["BIBINPUTS"] = str(stage) + os.pathsep
     return env
@@ -340,6 +352,7 @@ def build(args: argparse.Namespace) -> int:
         if not validation["ok"]:
             messages = "\n".join(str(item.get("message", item)) for item in validation["errors"])
             raise BuildError(f"Build checks failed:\n{messages}\nReport: {stage / 'validation.json'}")
+        save_font_cache(stage)
         if not args.no_cache:
             save_cache(stage, cache_key)
         # Prepare reports and publication data before the final source check.

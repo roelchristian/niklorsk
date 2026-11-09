@@ -1,0 +1,33 @@
+# Local environment and macOS metadata
+.DS_Store
+.venv/
+venv/
+
+# LaTeX build products and archived PDFs
+/archive/
+*.pdf
+*.aux
+*.log
+*.toc
+*-tags.tex
+*.out
+*.lot
+*.lof
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.ilg
+*.ind
+*.idx
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Generated vocabulary files
+/vocabulary/vocabulary_cleaned.csv
+/vocabulary/vocabulary.tex

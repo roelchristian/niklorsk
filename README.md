@@ -1,51 +1,59 @@
 # A Grammar of Niklorsk
 
-LaTeX sources for *A Grammar of Niklorsk* by Roel Christian Yambao.
+*A Grammar of Niklorsk*, by Roel Christian Yambao, describes the sound system,
+word forms, and clause structure of Niklorsk. The manuscript combines
+grammatical descriptions with paradigms, interlinear examples, sample texts,
+and a Niklorsk–English vocabulary.
 
-## Contents
+## The language
 
-- `grammar.tex`: manuscript entry point.
-- `chapters/`: phonology, verbs, nouns, modifiers, clause structure, derivations, and sample texts.
-- `grammarstyle.cls` and `preamble/`: typography and glossing commands.
-- `vocabulary/vocabulary.csv`: source vocabulary; edit this file to update the word list.
-- `vocab-parser.py`: generates the vocabulary appendix and a cleaned CSV.
-- `texts/`: additional translation drafts and a small Niklorsk–English corpus, kept outside the compiled manuscript.
+Niklorsk has a basic subject–verb–object word order. It uses prepositions, and
+adjectives generally precede the nouns they modify. The grammar also describes
+constituent fronting and the changes in word order associated with it.
 
-## Build
+Nouns have masculine, feminine, and neuter gender, with several lexical plural
+patterns and a distinction between nominative and genitive case. Personal
+pronouns retain additional accusative and dative forms. Adjectives agree with
+the nouns they modify in gender and number. The verbal system includes finite
+and non-finite forms, tense and aspect distinctions, conditional constructions,
+and passive forms.
 
-Install Python 3.9 or newer, a TeX distribution with LuaLaTeX and the packages
-used by `grammarstyle.cls`, Poppler's `pdfinfo`, and Noto Sans (regular,
-semibold, italic, and semibold italic). Run from the project directory:
+The phonology chapter treats vowel and consonant length, diphthongs,
+pronunciation changes in different phonetic environments, and the relationship
+between spelling and pronunciation.
 
-```sh
-make
-```
+## What the grammar covers
 
-The tracked makefile creates its runtime helpers under `codex/`, snapshots the
-grammar sources into a fresh temporary build directory, and generates the
-vocabulary there without external Python dependencies. LuaLaTeX runs until
-references and auxiliary files converge. Bibliography processing, when needed,
-also runs inside the temporary directory.
+- [Phonology and orthography](chapters/phonology.tex): vowel and consonant
+  inventories, length, sound realization, and spelling conventions.
+- [Verbs](chapters/verbs.tex): conjugation, tense and aspect, negation,
+  conditional and modal constructions, infinitives and participles, separable
+  verbs, copular and existential constructions, and the passive voice.
+- [Nouns and pronouns](chapters/nouns.tex): gender, articles, number, case,
+  personal and demonstrative pronouns, and noun phrases.
+- [Other word classes](chapters/modifiers.tex): adjective agreement and
+  comparison, possessive forms, adverbs, prepositions, and conjunctions.
+- [Clause structure](chapters/syntax.tex): basic word order, constituent
+  fronting, questions, relative clauses, and complement clauses.
+- [Derivational morphology](chapters/derivations.tex): word-forming affixes and
+  noun-noun compounds.
+- [Sample texts](chapters/texts.tex): passages in Niklorsk with interlinear
+  glosses and English translations.
 
-Publication requires a valid, nonempty PDF, resolved and correctly numbered
-references, no duplicate labels, no rerun requests, no missing glyphs, and no
-overfull boxes. Underfull boxes and other warnings appear in the validation
-report. Only after these checks pass does one atomic replacement publish
-`grammar.pdf` in the root. A failed or interrupted build preserves the previous
-PDF. Concurrent builds are rejected, and source edits during a build require a
-new build.
+## Vocabulary and texts
 
-- `make`, `make all`, and `make book`: build, validate, and publish.
-- `make check`: perform the full staged build and checks without publishing.
-- `make vocab`: generate vocabulary files in a temporary build directory.
-- `make clean`: remove local builds and caches, preserving `grammar.pdf`.
-- `make BUILD_FLAGS=--no-cache`: build without reusing auxiliary files.
+The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk words, their parts
+of speech, and English meanings. Noun entries include plural forms where
+given. The same word list supplies the manuscript's vocabulary appendix.
 
-Builds, logs, bibliography files, font/TeX caches, and validation reports stay
-under `codex/`; `codex/last-build.json` points to the latest diagnostics.
-`./archive.sh` validates the grammar and saves a dated PDF under
-`codex/archive/`.
+Additional material in [texts/](texts/) includes a translation draft from
+*Middlemarch* and a small Niklorsk–English corpus. These are separate from the
+sample-text chapter included in the manuscript.
 
-`codex/` and the root `agents.md` are ignored by Git and remain local. The
-standalone legacy `vocab-parser.py` still uses `requirements.txt`; the makefile
-does not require it.
+## Manuscript status
+
+This is a working grammar. Some sections are outlines or partial descriptions,
+and forms and analyses may be revised as the manuscript develops.
+
+The manuscript entry point is [grammar.tex](grammar.tex). Run `make` to compile
+and validate it; a successful build produces `grammar.pdf` in the root.

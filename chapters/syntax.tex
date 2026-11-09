@@ -6,17 +6,17 @@
 
 Niklorsk is an analytic language with a basic word order of Subject-Verb-Object. It is a mostly head-initial language, with prepositions, prenominal adjectives, and preverbal adverbs.
 
-In a neutral sentence, the object will always follow the verb. In the case of a ditransitive verb, i.e., a verb that takes both a direct and an indirect object, the indirect object will precede the direct object. For example,
+In a neutral sentence, the object follows the verb. With a ditransitive verb, an unprepositioned recipient precedes the theme (see \S\ref{sec:ditransitive-verbs}). For example,
 
 \pex
 \begingl
-\gla Ag vædar Martin. Ag brar afte Martin.//
-\glb \First{}\Sg{} see.\Pst{} Martin. \First{}\Sg{} give.\Pst{} book Martin.//
+\gla Ag vædar Martin. Ag brar Martin afte.//
+\glb \First{}\Sg{} see.\Pst{} Martin. \First{}\Sg{} give.\Pst{} Martin book.//
 \glft `I saw Martin. I gave Martin a book.'//
 \endgl
 \xe
 
-Prepositional phrases generally appear after the subject the verb but before the object. For example,
+Adverbial prepositional phrases generally appear after the subject and the verb but before the object. For example,
 
 \pex
 \begingl
@@ -36,14 +36,56 @@ However, if the object is a pronoun, it will precede the prepositional phrase.
 \endgl
 \xe
 
-\subsection{Constinuent fronting}
+\subsection{Ditransitive verbs}
+\label{sec:ditransitive-verbs}
 
-Niklorsk allows the movement of some constituents to the beginning of the sentence. THe movement of a constituent to the beginning of the sentence is sometimes used to emphasize the constituent, although in some cases the movement does not carry any particular emphasis and usually has the same currency as the neutral word order.
+Ditransitive verbs take two internal arguments, conventionally termed the theme and the recipient. With a verb of transfer such as \nikp{bra}{give}, the theme is the entity transferred and the recipient is the entity receiving it. Verbs that permit the dative alternation occur in two constructions: the double-object construction and the prepositional dative construction.
+
+In the double-object construction, both arguments are noun phrases following the verb. In a neutral declarative clause, the recipient precedes the theme, giving the order Subject--Verb--Recipient--Theme.
 
 \pex
 \begingl
-\gla Matti brar skämd om hond.//
-\glb Matti give.\Pst{} toy the.\Dat{} child//
+\gla Ag brar Matti afte.//
+\glb \First{}\Sg{} give.\Pst{} Matti book//
+\glft `I gave Matti a book.'//
+\endgl
+\xe
+
+In the prepositional dative construction, the theme follows the verb and the recipient is introduced by \nikp{at}{to}. The order is Subject--Verb--Theme--\nk{at} Recipient.
+
+\pex
+\begingl
+\gla Ag brar afte at Matti.//
+\glb \First{}\Sg{} give.\Pst{} book to Matti//
+\glft `I gave a book to Matti.'//
+\endgl
+\xe
+
+In this alternation, a recipient following the theme requires \nk{at}. The two noun phrases cannot be freely interchanged in the double-object construction.
+
+\pex
+\begingl
+\gla *Ag brar afte Matti.//
+\glb \First{}\Sg{} give.\Pst{} book Matti//
+\glft Intended: `I gave a book to Matti.'//
+\endgl
+\xe
+
+Ordinary nouns distinguish only nominative and genitive forms (see \S\ref{sec:nominal-case}). An unmarked proper name such as \nk{Matti} therefore has no distinct dative ending; its position before the theme identifies it as the recipient in the double-object construction. A personal pronoun in this position takes its dative form (Table \ref{tab:personal-pronouns}), as in \nikp{Matti brar när ja}{Matti gave it to him}. A definite article likewise takes its dative form, as in \nk{om hond} in \nikp{Matti brar om hond skämd}{Matti gave the child a toy}. Dative marking on the article does not license theme--recipient order without \nk{at}.
+
+With \nk{bra}, both constructions express transfer, but they differ in their discourse use. The double-object construction is particularly natural when the recipient is already established and the theme supplies new information. The prepositional dative construction is particularly natural when the theme is already under discussion and the recipient is being specified. These are preferences rather than conditions of grammaticality. The alternation is lexically restricted: a verb that takes two internal arguments does not necessarily permit both constructions.
+
+The order described here applies to neutral declarative clauses. Constituent fronting is a separate operation and can place either the theme or the recipient at the beginning of the clause, as described in \S\ref{sec:constituent-fronting}.
+
+\subsection{Constituent fronting}
+\label{sec:constituent-fronting}
+
+Niklorsk allows the movement of some constituents to the beginning of the sentence. The movement of a constituent to the beginning of the sentence is sometimes used to emphasize the constituent, although in some cases the movement does not carry any particular emphasis and usually has the same currency as the neutral word order. In the following examples, the neutral double-object construction is followed by versions with the theme and the recipient fronted.
+
+\pex
+\begingl
+\gla Matti brar om hond skämd.//
+\glb Matti give.\Pst{} the.\Dat{} child toy//
 \glft `Matti gave the child a toy.'//
 \endgl
 \xe

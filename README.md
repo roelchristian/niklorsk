@@ -36,8 +36,9 @@ secondary stress, while a small class of suffixes attracts primary stress.
   personal and demonstrative pronouns, and noun phrases.
 - [Other word classes](chapters/modifiers.tex): adjective agreement and
   comparison, possessive forms, adverbs, prepositions, and conjunctions.
-- [Clause structure](chapters/syntax.tex): basic word order, constituent
-  fronting, questions, relative clauses, and complement clauses.
+- [Clause structure](chapters/syntax.tex): basic word order, ditransitive verbs
+  and the dative alternation, constituent fronting, questions, relative clauses,
+  and complement clauses.
 - [Derivational morphology](chapters/derivations.tex): word-forming affixes and
   their stress classes, and noun-noun compounds with primary and secondary
   stress.

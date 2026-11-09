@@ -162,6 +162,7 @@ def vocabulary(stage: Path) -> int:
             singular, separator, plural = row["word"].partition(",")
             writer.writerow([singular, plural.lstrip() if separator else "", POS[row["partofspeech"]], row["translation"], row["stress"]])
     legend = ", ".join(f"{key} = {value}" for key, value in POS.items())
+    # Initialise columns using the vocabulary font's baseline metrics.
     lines = [
         "% Generated locally from vocabulary/vocabulary.csv. Do not edit.",
         r"\chapter*{Vocabulary}",
@@ -170,7 +171,7 @@ def vocabulary(stage: Path) -> int:
         r"{\small\textbf{Legend:} " + legend + "}",
         "",
         r"{\small (stress $n$) marks primary stress on syllable $n$ of the lemma, counted from the first syllable. Inflected forms retain that stress. An unmarked entry has no individual stress specification in this list; see Chapter \ref{chap:phonology}, \S\ref{sec:stress-prosody}.}",
-        "", r"\begin{multicols}{2}", r"\footnotesize", "",
+        "", r"{\footnotesize", r"\begin{multicols}{2}", "",
     ]
     previous = ""
     for row in rows:
@@ -178,7 +179,7 @@ def vocabulary(stage: Path) -> int:
         new_letter = word[0] != previous
         if new_letter:
             if previous:
-                lines.append(r"\bigskip")
+                lines.append(r"\medskip")
             lines.extend([
                 r"\begingroup",
                 r"\edef\vocabentryindent{\the\parindent}",
@@ -193,7 +194,7 @@ def vocabulary(stage: Path) -> int:
         if new_letter:
             lines.extend([r"\end{minipage}\par", r"\endgroup", ""])
         previous = word[0]
-    lines.extend([r"\end{multicols}", ""])
+    lines.extend([r"\end{multicols}", "}", ""])
     (outdir / "vocabulary.tex").write_text("\n".join(lines), encoding="utf-8")
     return len(rows)
 
@@ -243,14 +244,15 @@ def environment(stage: Path) -> dict[str, str]:
     for key in list(env):
         if key.startswith("NIKLORSK_") and key.endswith("_SOURCE"):
             env.pop(key)
+    # Font discovery and TeX caches are reusable across isolated source builds.
     locations = {
-        "TEXMFVAR": stage / "texmf-var", "TEXMFCONFIG": stage / "texmf-config",
-        "TEXMFCACHE": stage / "luatex-cache", "XDG_CACHE_HOME": stage / "xdg-cache",
+        "TEXMFVAR": CACHE / "texmf-var", "TEXMFCONFIG": stage / "texmf-config",
+        "TEXMFCACHE": CACHE / "luatex-cache", "XDG_CACHE_HOME": CACHE / "xdg-cache",
         "TMPDIR": stage / "tmp",
     }
     for key, path in locations.items():
         path.mkdir(parents=True, exist_ok=True)
-        env[key] = str(path.relative_to(stage)) if key.startswith("TEXMF") else str(path)
+        env[key] = str(path.resolve())
     env["TEXINPUTS"] = str(stage) + os.pathsep
     env["BIBINPUTS"] = str(stage) + os.pathsep
     return env

@@ -3,6 +3,11 @@
 .venv/
 venv/
 
+# Local agent instructions, helpers, and isolated grammar builds
+/agents.md
+/AGENTS.md
+/codex/
+
 # LaTeX build products and archived PDFs
 /archive/
 *.pdf

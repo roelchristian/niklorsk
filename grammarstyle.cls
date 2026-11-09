@@ -1,13 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{grammarstyle}[2026/11/09 Contemporary Library reference grammar]
+\ProvidesClass{grammarstyle}[2026/11/10 Contemporary Library reference grammar]
 % All artwork is vector TeX; no external EPS conversion is required.
 \newcommand{\DoNotLoadEpstopdf}{}
 \LoadClass[10pt,twoside,openany]{book}
 
-% Contemporary Library trim, with mirrored binding margins.
+% ISO B5 (176 x 250 mm), with mirrored binding margins.
 \RequirePackage[
-    paperwidth=6.69in,paperheight=9.61in,
-    inner=57bp,outer=45bp,top=54bp,bottom=51bp,
+    b5paper,
+    inner=21mm,outer=17mm,top=20mm,bottom=19mm,
     headheight=12bp,headsep=14bp,footskip=24bp,
     marginparwidth=30bp,marginparsep=8bp
 ]{geometry}
@@ -23,6 +23,7 @@
 \RequirePackage{caption}
 \RequirePackage[section]{placeins}
 \RequirePackage{flafter}
+\RequirePackage{needspace}
 \RequirePackage{expex}
 % Unicode math also names a relation \gla; preserve ExPex's language line.
 \let\grammar@expexgla\gla
@@ -164,6 +165,8 @@
 \captionsetup[table]{position=top,skip=7bp,font=small,labelfont=normalfont,
     justification=raggedright,singlelinecheck=false,labelsep=space}
 \AtBeginEnvironment{table}{\small}
+\def\fps@table{!htbp}
+\renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}
 \setlength{\tabcolsep}{5bp}
 \renewcommand{\arraystretch}{1.18}
 \setlength{\heavyrulewidth}{0.6bp}

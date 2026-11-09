@@ -1,5 +1,6 @@
-% Contemporary Library cover. Coordinates use PDF points (bp), matching the
-% 6.69 x 9.61 inch trim. The class supplies TikZ, xcolor, and fontspec.
+% Contemporary Library cover. Scale the reference artwork to the current
+% paper dimensions while keeping the type unstretched at its physical size.
+% The class supplies TikZ, xcolor, and fontspec.
 \definecolor{grammarcoverindigo}{HTML}{252D55}
 \definecolor{grammarcoversand}{HTML}{D9CEB4}
 \definecolor{grammarcoverpaper}{HTML}{FAF8F1}
@@ -15,9 +16,12 @@
 \newcommand{\makegrammarcover}{%
     \begingroup
     \thispagestyle{empty}%
+    \pgfmathsetmacro{\grammarcoverxscale}{\paperwidth/(481.68bp)}%
+    \pgfmathsetmacro{\grammarcoveryscale}{\paperheight/(691.92bp)}%
     \noindent
     \begin{tikzpicture}[remember picture, overlay, x=1bp, y=1bp]
-        \begin{scope}[shift={(current page.south west)}]
+        \begin{scope}[shift={(current page.south west)},
+                      xscale=\grammarcoverxscale,yscale=\grammarcoveryscale]
             \fill[grammarcoverindigo] (0,0) rectangle (481.68,691.92);
             \fill[grammarcoversand] (0,0) rectangle (481.68,207.576);
             \fill[grammarcovercoral] (43,612.92) rectangle (72,617.92);

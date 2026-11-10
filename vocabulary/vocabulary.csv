@@ -9,12 +9,12 @@ brord, brorda;nn;room;
 brug;nf;house;
 bund, bynder;nm;king;
 bærg, bærgen;nn;heaven;
-börd;v;to eat;
+børd;v;to eat;
 flikk, flikkar;nf;name;
 gaups;adv;right now;
 glus, glussar;nm;cat;
 hjalt;v;to write;
-hjålt, hjölter;nn;cake;
+hjålt, hjølter;nn;cake;
 hus, hysser;nf;straw;
 i kvett;adv;yesterday;
 i sægge;adv;today;
@@ -32,7 +32,7 @@ murst;v;to cut;
 nar;pron;he;
 naud;v;to enter;
 nigot;adv;almost;
-nörs;adv;never;
+nørs;adv;never;
 patat, patattor;nm;potato;2
 på;prep;by;
 ront;adj;fast;
@@ -56,14 +56,14 @@ at;prep;to, into;
 atta;prep;to the, into the;
 med;pron;that, that over there;
 dur, durra;nm;boy, son;
-hlåd, hlöd;nm;summer;
+hlåd, hlød;nm;summer;
 kapp, käpper;nf;coat;
 tor;v;to believe;
 pær, pæror;nf;pen;
-ngöld, ngölddar;nm;cow;
+ngøld, ngølddar;nm;cow;
 bot, boten;nn;grass;
 element, elementen;nm;element;
-hrådd, hrödder;nm;group;
+hrådd, hrødder;nm;group;
 fjeltt, fjeltta;nf;party, celebration;
 värs, värsen;nn;science;
 värser, värserar;nm;scientist;
@@ -112,9 +112,9 @@ läb, läba;nf;next day, morrow;
 i läb;adv;tomorrow;
 maug, maugen;nn;friend;
 billä;adv;right away;
-hjörtat, hjörtaten;nn;apology;
-är;v;past tense form of \nk{ö} and \nk{vor};
-föd;v;to heat up (a liquid);
+hjørtat, hjørtaten;nn;apology;
+är;v;past tense form of \nk{ø} and \nk{vor};
+fød;v;to heat up (a liquid);
 aka;adv;also;
 ramm;v;to work;
 rammåge;adj;industrious;
@@ -128,7 +128,7 @@ kost;v;to change;
 dreg, dreggar;nm;mind;
 meger;v;to vote;
 kaffe, kaffen;nm;coffee;
-klör;v;to burn;
+klør;v;to burn;
 hent;v;to tell;
 giml;v;to buy;
 likke;adv;quite;
@@ -138,16 +138,16 @@ dyr, dyr;nm;bear;
 svern, svern;nm;red deer, stag;
 skåv, skåv;nn;reef, submerged rock;
 hærn, hærn;nn;antler;
-töng, töng;nm;salmon;
+tøng, tøng;nm;salmon;
 våst, våst;nn;rocky field, boulder field;
 norg, norg;nn;rocky islet;
 hålv, hålv;nn;deep pool in a river;
-slöt;v;to come;1
-anslöt;v;to come out;1
-atslöt;v;to come in;1
-ånslöt;v;to come off;1
-hætslöt;v;to come down;1
-helslöt;v;to come up, to ascend;1
+sløt;v;to come;1
+ansløt;v;to come out;1
+atsløt;v;to come in;1
+ånsløt;v;to come off;1
+hætsløt;v;to come down;1
+helsløt;v;to come up, to ascend;1
 ånhjalt;v;to write off (as a loss);1
 helbra;v;to give up;1
 betug;v;to become fat;2

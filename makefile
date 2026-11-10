@@ -137,7 +137,7 @@ def vocabulary(stage: Path) -> int:
                 raise BuildError(f"Invalid stress on vocabulary row {line}: use a positive syllable index or leave blank.")
             if not all(row[key] for key in required):
                 continue
-            row["word"] = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ö").replace(r"\\ae\{\}", "æ")
+            row["word"] = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ø").replace(r"\\ae\{\}", "æ")
             if row["partofspeech"] not in POS:
                 raise BuildError(f"Unknown vocabulary part of speech on row {line}: {row['partofspeech']}")
             lemma = row["word"].partition(",")[0].strip(), row["partofspeech"]

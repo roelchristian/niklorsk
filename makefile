@@ -11,8 +11,8 @@ export NIKLORSK_ROOT := $(CURDIR)
 export LATEX
 export PYTHON
 
-.PHONY: all book build check vocab clean bootstrap
-all book build check vocab clean: bootstrap
+.PHONY: all book build check vocab clean distclean cleanup cleanup-preview bootstrap
+all book build check vocab clean distclean cleanup cleanup-preview: bootstrap
 	@"$${PYTHON}" "$(NIKLORSK_ROOT)/codex/build.py" $(if $(filter all book build,$@),build,$@) --root "$(NIKLORSK_ROOT)" --max-passes "$(MAX_PASSES)" --timeout "$(BUILD_TIMEOUT)" $(BUILD_FLAGS)
 
 bootstrap:
@@ -24,8 +24,10 @@ import os
 import tempfile
 
 folder = Path(os.environ["NIKLORSK_ROOT"]) / "codex"
+if folder.is_symlink():
+    raise SystemExit(f"Refusing local build/cleanup through symlink: {folder}")
 folder.mkdir(exist_ok=True)
-for name, key in (("build.py", "NIKLORSK_BUILD_SOURCE"), ("check_build.py", "NIKLORSK_CHECK_SOURCE")):
+for name, key in (("build.py", "NIKLORSK_BUILD_SOURCE"), ("check_build.py", "NIKLORSK_CHECK_SOURCE"), ("cleanup.py", "NIKLORSK_CLEANUP_SOURCE")):
     fd, temporary = tempfile.mkstemp(prefix=".bootstrap-", suffix=".py", dir=folder)
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as stream:
@@ -222,6 +224,7 @@ def seed_cache(stage: Path, key: str) -> None:
         destination = stage / rel
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(path, destination)
+    os.utime(folder, None)  # Retention uses last successful reuse, not creation.
 
 
 def save_cache(stage: Path, key: str) -> None:
@@ -242,6 +245,7 @@ def save_font_cache(stage: Path) -> None:
         source = stage / name
         if source.is_dir():
             shutil.copytree(source, CACHE / name, dirs_exist_ok=True)
+            os.utime(CACHE / name, None)
 
 
 def environment(stage: Path) -> dict[str, str]:
@@ -264,6 +268,7 @@ def environment(stage: Path) -> dict[str, str]:
             cached = CACHE / path.name
             if cached.is_dir():
                 shutil.copytree(cached, path, dirs_exist_ok=True)
+                os.utime(cached, None)
         env[key] = str(path.relative_to(stage)) if key.startswith("TEXMF") else str(path)
     env["TEXINPUTS"] = str(stage) + os.pathsep
     env["BIBINPUTS"] = str(stage) + os.pathsep
@@ -385,6 +390,15 @@ def build(args: argparse.Namespace) -> int:
         print(f"Build failed; grammar.pdf was not replaced.\n{error}", file=sys.stderr)
         return 1
     finally:
+        # Persistent font data was saved only after validation. Successful
+        # stages retain sources/PDF/logs, without another full cache copy.
+        if report["ok"]:
+            for name in ("texmf-var", "luatex-cache", "xdg-cache", "texmf-config", "tmp"):
+                try:
+                    if (stage / name).exists():
+                        shutil.rmtree(stage / name)
+                except OSError as error:
+                    print(f"Could not trim stage cache {name}: {error}", file=sys.stderr)
         try:
             atomic_report(report)
             (stage / "build-report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
@@ -397,21 +411,27 @@ def build(args: argparse.Namespace) -> int:
 def main() -> int:
     global ROOT, LOCAL, CACHE, BUILDS
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", nargs="?", choices=["build", "check", "vocab", "clean"], default="build")
+    parser.add_argument("action", nargs="?", choices=["build", "check", "vocab", "clean", "distclean", "cleanup", "cleanup-preview"], default="build")
     parser.add_argument("--root", type=Path, default=ROOT, help="Grammar project directory (also useful for isolated checks)")
     parser.add_argument("--engine", default=os.environ.get("LATEX", "lualatex"))
     parser.add_argument("--max-passes", type=int, default=8)
     parser.add_argument("--timeout", type=float, default=180, help="Maximum seconds per LuaLaTeX pass")
     parser.add_argument("--no-cache", action="store_true", help="Do not reuse or save auxiliary files")
+    parser.add_argument("--dry-run", action="store_true", help="Preview cleanup without deleting artifacts (cleanup only)")
     args = parser.parse_args()
     if args.max_passes < 2 or args.timeout <= 0:
         parser.error("--max-passes must be at least 2 and --timeout must be positive")
+    if args.dry_run and args.action not in {"cleanup", "cleanup-preview"}:
+        parser.error("--dry-run is only available for cleanup")
     ROOT = args.root.resolve()
     LOCAL = ROOT / "codex"
     CACHE = LOCAL / "cache"
     BUILDS = LOCAL / "builds"
     if not (ROOT / "grammar.tex").is_file():
         parser.error(f"No grammar.tex in project directory: {ROOT}")
+    for path in (LOCAL, BUILDS, CACHE, CACHE / "aux", LOCAL / "build.lock"):
+        if path.is_symlink():
+            parser.error(f"Refusing local build/cleanup through symlink: {path}")
     LOCAL.mkdir(exist_ok=True)
     with (LOCAL / "build.lock").open("a") as lock:
         try:
@@ -419,16 +439,34 @@ def main() -> int:
         except BlockingIOError:
             print("Another local build is running; try again after it finishes.", file=sys.stderr)
             return 1
-        if args.action == "clean":
-            for folder in (BUILDS, CACHE):
+        if args.action in {"clean", "distclean"}:
+            for folder in ((BUILDS, CACHE) if args.action == "distclean" else (BUILDS,)):
                 if folder.exists():
                     shutil.rmtree(folder)
             (LOCAL / "last-build.json").unlink(missing_ok=True)
-            print("Removed local build/cache files. Published grammar.pdf was preserved.")
+            print("Removed local builds" + (" and caches." if args.action == "distclean" else "; reusable caches retained.") + " Published grammar.pdf was preserved.")
             return 0
+        from cleanup import cleanup, summarize
+        if args.action in {"cleanup", "cleanup-preview"}:
+            try:
+                result = cleanup(LOCAL, dry_run=args.dry_run or args.action == "cleanup-preview")
+                summarize(result, verbose=True)
+                return int(any(group["errors"] for group in result["groups"].values()))
+            except (OSError, ValueError) as error:
+                print(f"Cleanup failed: {error}", file=sys.stderr)
+                return 1
+        def maintain() -> None:
+            try:
+                summarize(cleanup(LOCAL))
+            except (OSError, ValueError) as error:
+                print(f"Cleanup skipped: {error}", file=sys.stderr)
+        maintain()
         BUILDS.mkdir(parents=True, exist_ok=True)
         CACHE.mkdir(parents=True, exist_ok=True)
-        return build(args)
+        try:
+            return build(args)
+        finally:
+            maintain()
 
 
 if __name__ == "__main__":
@@ -686,3 +724,216 @@ if __name__ == "__main__":
     sys.exit(main())
 endef
 export NIKLORSK_CHECK_SOURCE := $(value _NIKLORSK_CHECK_SOURCE)
+
+define _NIKLORSK_CLEANUP_SOURCE
+#!/usr/bin/env python3
+"""Age/size retention for ignored local artifacts; called with build.lock held."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, replace
+import json
+import math
+import os
+from pathlib import Path
+import shutil
+import stat
+import tempfile
+import time
+
+MIB = 1024 * 1024
+DAY = 86400
+DEFAULTS = {
+    "artifacts": {"days": 10, "mib": 192, "grace_hours": 24},
+    "builds": {"days": 5, "mib": 96, "count": 8},
+    "aux": {"days": 21, "mib": 24, "count": 6},
+    "fonts": {"days": 60, "mib": 96},
+}
+FONT_DIRS = ("texmf-var", "luatex-cache", "xdg-cache")
+DURABLE_SUFFIXES = {".md", ".patch", ".py", ".sh", ".mk", ".toml", ".yaml", ".yml"}
+RESERVED = {"builds", "cache", "archive", "build.lock", "last-build.json",
+            "last-build.json.tmp", "cleanup-policy.json", "cleanup-report.json"}
+
+
+@dataclass
+class Entry:
+    path: Path
+    size: int
+    modified: float
+    protected: bool = False
+    children: tuple = ()
+    pinned: bool = False
+
+
+def inspect(path: Path, durable: bool = False) -> Entry:
+    """Never follow links, including links inside an otherwise disposable tree."""
+    info = path.lstat()
+    if stat.S_ISLNK(info.st_mode) or not (stat.S_ISDIR(info.st_mode) or stat.S_ISREG(info.st_mode)):
+        return Entry(path, 0, info.st_mtime, True)
+    if stat.S_ISREG(info.st_mode):
+        keep = durable and (path.suffix.lower() in DURABLE_SUFFIXES or path.name in {"Makefile", "makefile"})
+        return Entry(path, info.st_size, info.st_mtime, keep)
+    children = tuple(inspect(child, durable) for child in sorted(path.iterdir()))
+    pinned = any(child.path.name == ".cleanup-keep" for child in children)
+    # Keep a reusable tool/virtual environment intact, rather than pruning
+    # individual dependencies whose original timestamps predate the fixture.
+    tool = durable and any(child.path.name == "pyvenv.cfg" or child.path.suffix in {".py", ".sh"}
+                           for child in children)
+    pinned = pinned or tool
+    return Entry(path, sum(child.size for child in children),
+                 max([info.st_mtime, *(child.modified for child in children)]),
+                 pinned or any(child.protected for child in children), children, pinned)
+
+
+def candidates(entry: Entry, modified: float = 0):
+    modified = max(modified, entry.modified)
+    if not entry.protected:
+        yield replace(entry, modified=modified)
+    elif entry.children and not entry.pinned:
+        for child in entry.children:
+            yield from candidates(child, modified)
+
+
+def policy(local: Path) -> dict:
+    result = {name: values.copy() for name, values in DEFAULTS.items()}
+    path = local / "cleanup-policy.json"
+    if not path.exists():
+        return result
+    overrides = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(overrides, dict) or set(overrides) - set(result):
+        raise ValueError("cleanup-policy.json: unknown retention group")
+    for name, values in overrides.items():
+        if not isinstance(values, dict) or set(values) - set(result[name]):
+            raise ValueError(f"cleanup-policy.json: unknown option in {name}")
+        for key, value in values.items():
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0:
+                raise ValueError(f"cleanup-policy.json: {name}.{key} must be a finite nonnegative number")
+            if key == "count" and (not isinstance(value, int) or value < 1):
+                raise ValueError(f"cleanup-policy.json: {name}.count must be a positive integer")
+            result[name][key] = value
+    return result
+
+
+def read_report(path: Path) -> dict:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+        return value if isinstance(value, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def retained_builds(local: Path, entries: list[Entry]) -> set[Path]:
+    """Retain the last attempt, last validated PDF, and last failure."""
+    retained = set()
+    last = read_report(local / "last-build.json").get("stage")
+    if isinstance(last, str):
+        retained.update(entry.path for entry in entries if str(entry.path) == last)
+    found = set()
+    for entry in sorted(entries, key=lambda item: (item.modified, item.path.name), reverse=True):
+        if not entry.children or entry.path.is_symlink():
+            continue
+        report = read_report(entry.path / "build-report.json")
+        if report.get("ok") is True and report.get("action") in {"build", "check"}:
+            kind = "validated"
+        elif report.get("ok") is False:
+            kind = "failed"
+        else:
+            continue
+        if kind not in found:
+            found.add(kind)
+            retained.add(entry.path)
+    return retained
+
+
+def prune(name: str, entries: list[Entry], rules: dict, now: float,
+          retained: set[Path], dry_run: bool, local: Path, protected_bytes: int = 0) -> dict:
+    before = protected_bytes + sum(entry.size for entry in entries)
+    remaining = before
+    count = len(entries)
+    removed = []
+    errors = []
+    for entry in sorted(entries, key=lambda item: (item.modified, str(item.path))):
+        if entry.protected or entry.path in retained:
+            continue
+        age = now - entry.modified
+        expired = age > rules["days"] * DAY
+        pressure = remaining > rules["mib"] * MIB or count > rules.get("count", math.inf)
+        if not (expired or pressure) or age < rules.get("grace_hours", 0) * 3600:
+            continue
+        try:
+            if not dry_run:
+                # No shell globs or resolved link targets; all paths came from
+                # lstat walks of the three checked local containers.
+                if entry.children or entry.path.is_dir():
+                    shutil.rmtree(entry.path)
+                else:
+                    entry.path.unlink()
+            removed.append({"path": str(entry.path.relative_to(local)), "bytes": entry.size,
+                            "reason": "age" if expired else "size/count"})
+            remaining -= entry.size
+            count -= 1
+        except OSError as error:
+            errors.append(f"{entry.path}: {error}")
+    return {"before_bytes": before, "after_bytes": remaining, "removed": removed,
+            "over_budget": remaining > rules["mib"] * MIB or count > rules.get("count", math.inf),
+            "errors": errors}
+
+
+def cleanup(local: Path, dry_run: bool = False, now: float | None = None) -> dict:
+    """Caller holds the same lock as builds/clean; limits are separate budgets."""
+    now = time.time() if now is None else now
+    for path in (local, local / "builds", local / "cache", local / "cache/aux"):
+        if path.is_symlink():
+            raise ValueError(f"Refusing cleanup through symlink: {path}")
+    rules = policy(local)  # Validate everything before the first deletion.
+    builds = [inspect(path) for path in (local / "builds").iterdir()] if (local / "builds").exists() else []
+    aux = [inspect(path) for path in (local / "cache/aux").iterdir()] if (local / "cache/aux").exists() else []
+    fonts = [inspect(local / "cache" / name) for name in FONT_DIRS if (local / "cache" / name).exists()]
+    # Keep a warm bundle when it fits. Oversized regenerable caches may be
+    # evicted as a unit rather than growing indefinitely or leaving partial data.
+    fresh_fonts = [entry for entry in fonts if 0 < entry.size <= rules["fonts"]["mib"] * MIB
+                   and now - entry.modified <= rules["fonts"]["days"] * DAY]
+    keep_fonts = {max(fresh_fonts, key=lambda item: item.modified).path} if fresh_fonts else set()
+    artifacts = [inspect(path, durable=True) for path in local.iterdir() if path.name not in RESERVED]
+    disposable = [item for entry in artifacts for item in candidates(entry)]
+    protected = sum(entry.size for entry in artifacts) - sum(entry.size for entry in disposable)
+    groups = {
+        "builds": prune("builds", builds, rules["builds"], now, retained_builds(local, builds), dry_run, local),
+        "aux": prune("aux", aux, rules["aux"], now, set(), dry_run, local),
+        "fonts": prune("fonts", fonts, rules["fonts"], now, keep_fonts, dry_run, local),
+        "artifacts": prune("artifacts", disposable, rules["artifacts"], now, set(), dry_run, local, protected),
+    }
+    # Remove obsolete cache names and interrupted aux-save temporary trees with
+    # the same age/size policy, without treating them as live font data.
+    extras = [inspect(path) for path in (local / "cache").iterdir()
+              if path.name not in {*FONT_DIRS, "aux"}] if (local / "cache").exists() else []
+    groups["cache_scratch"] = prune("cache_scratch", extras, rules["aux"], now, set(), dry_run, local)
+    report = {"dry_run": dry_run, "time": now, "policy": rules, "groups": groups}
+    if not dry_run:
+        descriptor, name = tempfile.mkstemp(prefix=".cleanup-report-", suffix=".tmp", dir=local)
+        temporary = Path(name)
+        try:
+            with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+                stream.write(json.dumps(report, indent=2) + "\n")
+            os.replace(temporary, local / "cleanup-report.json")
+        finally:
+            temporary.unlink(missing_ok=True)
+    return report
+
+
+def summarize(report: dict, verbose: bool = False) -> None:
+    groups = report["groups"]
+    removed = sum(len(group["removed"]) for group in groups.values())
+    saved = sum(group["before_bytes"] - group["after_bytes"] for group in groups.values())
+    print(f"Cleanup {'preview' if report['dry_run'] else 'complete'}: {removed} items, {saved / MIB:.1f} MiB {'reclaimable' if report['dry_run'] else 'reclaimed'}.")
+    for name, group in groups.items():
+        if verbose:
+            print(f"  {name}: {group['before_bytes'] / MIB:.1f} -> {group['after_bytes'] / MIB:.1f} MiB")
+            for item in group["removed"]:
+                print(f"    {item['path']} ({item['reason']})")
+        if group["over_budget"]:
+            print(f"  {name}: retention limit exceeded; protected/recent items retained.")
+        for error in group["errors"]:
+            print(f"  Cleanup warning: {error}")
+endef
+export NIKLORSK_CLEANUP_SOURCE := $(value _NIKLORSK_CLEANUP_SOURCE)

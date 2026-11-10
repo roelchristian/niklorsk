@@ -24,16 +24,21 @@ or demonstrative objects, imperatives, and synthetic passives. It also treats
 particle placement with modals, in questions, and in inverted clauses. Mobile
 particles contrast with inseparable prefixes in both placement and stress.
 
-The phonology chapter treats vowel and consonant length, diphthongs, variable
-lexical stress, and the relationship between spelling and pronunciation.
+The phonology chapter treats vowel and consonant length, diphthongs, syllable
+structure, variable lexical stress, and phrasal intonation.
 Stress normally falls on the initial syllable of a native root and remains
 stable through inflection. Compounds and some derivational suffixes introduce
 secondary stress, while a small class of suffixes attracts primary stress.
+Unstressed syllables undergo extensive vowel reduction, schwa assimilation,
+syncope, apocope, and contraction. Articles, pronouns, and prepositions have
+weak forms and clitic pronunciations in connected speech. The spelling
+preserves distinctions that merge in ordinary pronunciation.
 
 ## What the grammar covers
 
 - [Phonology and orthography](chapters/phonology.tex): vowel and consonant
-  inventories, quantity, stress and reduction, sound realization, and spelling
+  inventories, syllable structure and phonotactics, quantity, lexical and
+  phrasal stress, intonation, vowel erosion, sound realization, and spelling
   conventions.
 - [Verbs](chapters/verbs.tex): conjugation, tense and aspect, negation,
   conditional and modal constructions, infinitives and participles, separable
@@ -65,8 +70,7 @@ sample-text chapter included in the manuscript.
 
 ## Manuscript status
 
-This is a working grammar. Some sections are outlines or partial descriptions,
-and forms and analyses may be revised as the manuscript develops.
+Some sections remain outlines or partial descriptions.
 
 The manuscript entry point is [grammar.tex](grammar.tex). Run `make` to compile
 and validate it; a successful build produces `grammar.pdf` in the root.

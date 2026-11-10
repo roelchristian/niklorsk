@@ -66,11 +66,11 @@ preserves distinctions that merge in ordinary pronunciation.
 
 ## Vocabulary and texts
 
-The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk words, their parts
-of speech, English meanings, and specified primary-stress positions. Noun
-entries include plural forms where given. The same word list supplies the
-manuscript's vocabulary appendix. It does not yet record lexical accent
-categories.
+The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk lemmas, parts of
+speech, noun gender, plural forms where given, English meanings, and specified
+primary-stress positions. Alternate plurals appear together; unchanged plurals
+are explicitly recorded. The same word list supplies the manuscript's
+vocabulary appendix. It does not yet record lexical accent categories.
 
 Additional material in [texts/](texts/) includes a translation draft from
 *Middlemarch* and a small Niklorsk–English corpus. These are separate from the

@@ -226,8 +226,25 @@
     \nk{#1}. \textit{#2}, #3.\par
     \endgroup
 }
+% Compact dictionary entries begin at the column edge; wrapped lines hang.
+\newcommand{\dictionarylabel}[1]{%
+    {\normalfont\fontsize{7.8bp}{11.2bp}\selectfont\itshape #1}%
+}
+\newcommand{\dictionaryentry}[5]{%
+    \par\begingroup
+    \raggedright\setlength{\parindent}{0pt}%
+    \setlength{\hangindent}{1.3em}\hangafter=1
+    \setlength{\parskip}{1bp}%
+    \noindent{\niklorskfont\upshape\color{grammarInk}#1%
+        \ifstrempty{#2}{}{\textsuperscript{#2}}}%
+    \nobreak\hspace{0.35em}\dictionarylabel{#3}%
+    \ifstrempty{#4}{}{\space(\dictionarylabel{pl.}\ #4)}%
+    % Definitions retain embedded forms as plain text; only the lemma is bold.
+    \space{\let\nk\@firstofone\let\niklorsk\@firstofone #5}\par
+    \endgroup
+}
 \newcommand{\vocabcentered}[1]{%
-    \par\addvspace{8bp}\noindent\textbf{#1}\par\nobreak\smallskip
+    \par\vspace*{5bp}\noindent\textbf{\MakeUppercase{#1}}\par\nobreak\vspace{3bp}%
 }
 \setlength{\columnsep}{18bp}
 \setlength{\multicolsep}{12bp}

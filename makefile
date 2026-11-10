@@ -56,6 +56,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import unicodedata
 
 ROOT = Path(__file__).resolve().parent.parent
 LOCAL = ROOT / "codex"
@@ -67,10 +68,16 @@ GENERATED = {"grammar.pdf", "grammar-tags.tex", "vocabulary/vocabulary.tex", "vo
 AUX_SUFFIXES = {".aux", ".toc", ".lot", ".lof", ".out", ".bbl", ".bcf", ".run.xml"}
 POS = {
     "adj": "adjective", "adv": "adverb", "art": "article",
-    "conj": "conjunction", "interj": "interjection", "nf": "noun, feminine",
-    "nm": "noun, masculine", "nn": "noun, neuter", "prep": "preposition",
+    "conj": "conjunction", "interj": "interjection", "n": "noun", "prep": "preposition",
     "pron": "pronoun", "v": "verb",
 }
+VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "plurals", "definition", "stress"]
+LEGACY_GENDERS = {"nm": "m", "nf": "f", "nn": "n"}
+# Dictionary collation follows the requested Danish/Norwegian order, with ö
+# in the place of ø. These equivalences affect sorting, never spelling.
+DICTIONARY_ALPHABET = "abcdefghijklmnopqrstuvwxyzæöå"
+DICTIONARY_WEIGHTS = {letter: index + 1 for index, letter in enumerate(DICTIONARY_ALPHABET)}
+DICTIONARY_EQUIVALENTS = {"ä": "æ", "ø": "ö"}
 
 
 class BuildError(Exception):
@@ -117,85 +124,133 @@ def snapshot(stage: Path) -> str:
     return before
 
 
-def vocabulary(stage: Path) -> int:
-    """Validate lexical stress and generate the vocabulary appendix locally."""
-    source = stage / "vocabulary/vocabulary.csv"
-    rows = []
-    seen = set()
-    stress_by_lemma = {}
+def dictionary_key(text: str) -> tuple:
+    """Collate canonical letter equivalents without altering their spelling."""
+    text = unicodedata.normalize("NFC", text).casefold()
+    return tuple(
+        DICTIONARY_WEIGHTS.get(DICTIONARY_EQUIVALENTS.get(char, char), 100 + ord(char))
+        for char in text if not char.isspace() and char != "-"
+    )
+
+
+def dictionary_heading(lemma: str) -> str:
+    letter = unicodedata.normalize("NFC", lemma).casefold()[0]
+    return DICTIONARY_EQUIVALENTS.get(letter, letter).upper()
+
+
+def read_vocabulary(source: Path) -> list[dict]:
+    """Read structured lexical records, accepting the original CSV headers."""
+    entries = {}
     with source.open(encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream, delimiter=";")
-        required = ["word", "partofspeech", "translation"]
-        if reader.fieldnames not in (required, required + ["stress"]):
-            raise BuildError("Vocabulary needs columns word;partofspeech;translation, optionally followed by stress.")
+        legacy_fields = ["word", "partofspeech", "translation"]
+        legacy = reader.fieldnames in (legacy_fields, legacy_fields + ["stress"])
+        if not legacy and reader.fieldnames != VOCABULARY_FIELDS:
+            raise BuildError(
+                "Vocabulary needs lemma;partofspeech;gender;plurals;definition;stress "
+                "or the legacy word;partofspeech;translation header with optional stress."
+            )
         for line, row in enumerate(reader, 2):
             if None in row or any(value is None for value in row.values()):
                 raise BuildError(f"Malformed vocabulary row {line}: wrong number of columns.")
             row = {key: value.strip() for key, value in row.items()}
-            stress = row.setdefault("stress", "")
+            stress = row.get("stress", "")
             if stress and (not stress.isascii() or not stress.isdecimal() or stress.startswith("0")):
                 raise BuildError(f"Invalid stress on vocabulary row {line}: use a positive syllable index or leave blank.")
-            if not all(row[key] for key in required):
+            pos = row["partofspeech"]
+            allowed_pos = set(POS) | (set(LEGACY_GENDERS) if legacy else set())
+            if pos and pos not in allowed_pos:
+                raise BuildError(f"Unknown vocabulary part of speech on row {line}: {pos}.")
+            if legacy:
+                word = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ö").replace(r"\\ae\{\}", "æ")
+                forms = [form.strip() for form in word.split(",")]
+                lemma, plurals = forms[0], forms[1:]
+                gender = LEGACY_GENDERS.get(pos, "")
+                pos = "n" if gender else pos
+                definition = row["translation"]
+            else:
+                lemma, gender, definition = row["lemma"], row["gender"], row["definition"]
+                plurals = [form.strip() for form in row["plurals"].split("|")] if row["plurals"] else []
+            if "," in lemma or "|" in lemma:
+                raise BuildError(f"Invalid lemma on vocabulary row {line}: put plural forms in the plurals field.")
+            if pos == "n" and gender not in {"m", "f", "n"}:
+                raise BuildError(f"Invalid noun gender on vocabulary row {line}: use m, f or n.")
+            if pos != "n" and gender:
+                raise BuildError(f"Unexpected gender on vocabulary row {line}: gender is recorded for nouns.")
+            if any(not form or "," in form or "|" in form for form in plurals):
+                raise BuildError(f"Invalid plural list on vocabulary row {line}: use nonempty forms separated by pipes.")
+            if len(set(plurals)) != len(plurals):
+                raise BuildError(f"Repeated plural form on vocabulary row {line}.")
+            # Retain legacy incomplete-row compatibility after validating metadata.
+            if legacy and not all(row[key] for key in legacy_fields):
                 continue
-            row["word"] = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ö").replace(r"\\ae\{\}", "æ")
-            if row["partofspeech"] not in POS:
-                raise BuildError(f"Unknown vocabulary part of speech on row {line}: {row['partofspeech']}")
-            lemma = row["word"].partition(",")[0].strip(), row["partofspeech"]
-            if stress:
-                previous_stress = stress_by_lemma.get(lemma)
-                if previous_stress is not None and previous_stress != stress:
-                    raise BuildError(f"Conflicting stress for {lemma[0]} on vocabulary row {line}: {previous_stress} and {stress}.")
-                stress_by_lemma[lemma] = stress
-            key = row["word"], row["partofspeech"]
-            if key not in seen:
-                seen.add(key)
-                rows.append(row)
-    for row in rows:
-        lemma = row["word"].partition(",")[0].strip(), row["partofspeech"]
-        row["stress"] = stress_by_lemma.get(lemma, "")
-    rows.sort(key=lambda row: row["word"])
+            if not lemma or not pos or not definition:
+                raise BuildError(f"Incomplete vocabulary row {line}: lemma, partofspeech and definition are required.")
+            key = unicodedata.normalize("NFC", lemma).casefold(), pos
+            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, plurals=plurals, definition=definition, stress=stress)
+            previous = entries.get(key)
+            if previous:
+                if previous["gender"] != gender or previous["definition"] != definition:
+                    raise BuildError(f"Conflicting lexical records for {lemma} on vocabulary row {line}.")
+                if previous["stress"] and stress and previous["stress"] != stress:
+                    raise BuildError(f"Conflicting stress for {lemma} on vocabulary row {line}: {previous['stress']} and {stress}.")
+                if not legacy:
+                    raise BuildError(f"Duplicate lemma and part of speech on vocabulary row {line}: {lemma}; combine its plural variants in one row.")
+                previous["stress"] = previous["stress"] or stress
+                previous["plurals"].extend(form for form in plurals if form not in previous["plurals"])
+            else:
+                entries[key] = entry
+    rows = sorted(entries.values(), key=lambda row: (
+        dictionary_key(row["lemma"]), unicodedata.normalize("NFC", row["lemma"]).casefold(),
+        row["lemma"], row["partofspeech"],
+    ))
     if not rows:
         raise BuildError("Vocabulary has no complete entries.")
+    return rows
+
+
+def vocabulary(stage: Path) -> int:
+    """Validate lexical records and generate the compact dictionary appendix."""
+    rows = read_vocabulary(stage / "vocabulary/vocabulary.csv")
     outdir = stage / "vocabulary"
     with (outdir / "vocabulary_cleaned.csv").open("w", encoding="utf-8", newline="") as stream:
         writer = csv.writer(stream, delimiter=";", lineterminator="\n")
-        writer.writerow(["word", "plural", "partofspeech", "translation", "stress"])
+        writer.writerow(VOCABULARY_FIELDS)
         for row in rows:
-            singular, separator, plural = row["word"].partition(",")
-            writer.writerow([singular, plural.lstrip() if separator else "", POS[row["partofspeech"]], row["translation"], row["stress"]])
-    legend = ", ".join(f"{key} = {value}" for key, value in POS.items())
+            writer.writerow(["|".join(row[key]) if key == "plurals" else row[key] for key in VOCABULARY_FIELDS])
+    used_pos = {row["partofspeech"] for row in rows}
+    abbreviations = ["m. masculine", "f. feminine", "n. neuter"]
+    abbreviations.extend(f"{key}. {value}" for key, value in POS.items() if key != "n" and key in used_pos)
+    abbreviations.append("pl. plural")
+    legend = r"~\textperiodcentered{} ".join(abbreviations)
     # Initialise columns using the vocabulary font's baseline metrics.
     lines = [
         "% Generated locally from vocabulary/vocabulary.csv. Do not edit.",
         r"\chapter*{Vocabulary}",
         r"\addcontentsline{toc}{chapter}{Vocabulary}",
         r"\markboth{Vocabulary}{Vocabulary}",
-        r"{\small\textbf{Legend:} " + legend + "}",
+        r"{\footnotesize\noindent " + legend + r"\par}",
         "",
-        r"{\small (stress $n$) marks primary stress on syllable $n$ of the lemma, counted from the first syllable. Inflected forms retain that stress. An unmarked entry has no individual stress specification in this list; see Chapter~\ref{chap:phonology}, \S\ref{sec:stress-prosody}.}",
+        r"{\footnotesize\noindent A superscript numeral marks primary stress on a syllable of the lemma, counted from the first syllable. An unmarked entry has no individual stress specification; see Chapter~\ref{chap:phonology}, \S\ref{sec:stress-prosody}. Entries follow A--Z, Æ (including Ä), Ö, Å.\par}",
         "", r"{\footnotesize", r"\begin{multicols}{2}", "",
     ]
     previous = ""
     for row in rows:
-        word = row["word"]
-        new_letter = word[0] != previous
+        letter = dictionary_heading(row["lemma"])
+        new_letter = letter != previous
         if new_letter:
-            if previous:
-                lines.append(r"\medskip")
             lines.extend([
                 r"\begingroup",
-                r"\edef\vocabentryindent{\the\parindent}",
                 r"\noindent\begin{minipage}{\linewidth}",
-                r"\setlength{\parindent}{\vocabentryindent}",
-                r"\vocabcentered{" + word[0].upper() + "}", "",
+                r"\vocabcentered{" + letter + "}", "",
             ])
-        translation = row["translation"]
-        if row["stress"]:
-            translation += " (stress " + row["stress"] + ")"
-        lines.extend([r"\glossarypair{" + word + "}{" + row["partofspeech"] + "}{" + translation + "}", ""])
+        label = row["gender"] + "." if row["partofspeech"] == "n" else row["partofspeech"] + "."
+        plurals = ["unchanged" if form == row["lemma"] else form for form in row["plurals"]]
+        arguments = [row["lemma"], row["stress"], label, ", ".join(plurals), row["definition"]]
+        lines.extend([r"\dictionaryentry" + "".join("{" + value + "}" for value in arguments), ""])
         if new_letter:
             lines.extend([r"\end{minipage}\par", r"\endgroup", ""])
-        previous = word[0]
+        previous = letter
     lines.extend([r"\end{multicols}", "}", ""])
     (outdir / "vocabulary.tex").write_text("\n".join(lines), encoding="utf-8")
     return len(rows)

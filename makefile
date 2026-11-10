@@ -73,11 +73,11 @@ POS = {
 }
 VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "plurals", "definition", "stress"]
 LEGACY_GENDERS = {"nm": "m", "nf": "f", "nn": "n"}
-# Dictionary collation follows Danish/Norwegian order.
+# Dictionary collation follows Danish/Norwegian order, with Ö in the Ø position.
 # These equivalences affect sorting, never spelling.
-DICTIONARY_ALPHABET = "abcdefghijklmnopqrstuvwxyzæøå"
+DICTIONARY_ALPHABET = "abcdefghijklmnopqrstuvwxyzæöå"
 DICTIONARY_WEIGHTS = {letter: index + 1 for index, letter in enumerate(DICTIONARY_ALPHABET)}
-DICTIONARY_EQUIVALENTS = {"ä": "æ", "ö": "ø"}
+DICTIONARY_EQUIVALENTS = {"ä": "æ", "ø": "ö"}
 
 
 class BuildError(Exception):
@@ -162,7 +162,7 @@ def read_vocabulary(source: Path) -> list[dict]:
             if pos and pos not in allowed_pos:
                 raise BuildError(f"Unknown vocabulary part of speech on row {line}: {pos}.")
             if legacy:
-                word = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ø").replace(r"\\ae\{\}", "æ")
+                word = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ö").replace(r"\\ae\{\}", "æ")
                 forms = [form.strip() for form in word.split(",")]
                 lemma, plurals = forms[0], forms[1:]
                 gender = LEGACY_GENDERS.get(pos, "")
@@ -231,7 +231,7 @@ def vocabulary(stage: Path) -> int:
         r"\markboth{Vocabulary}{Vocabulary}",
         r"{\footnotesize\noindent " + legend + r"\par}",
         "",
-        r"{\footnotesize\noindent A superscript numeral marks primary stress on a syllable of the lemma, counted from the first syllable. An unmarked entry has no individual stress specification; see Chapter~\ref{chap:phonology}, \S\ref{sec:stress-prosody}. Entries follow A--Z, Æ (including Ä), Ø, Å.\par}",
+        r"{\footnotesize\noindent A superscript numeral marks primary stress on a syllable of the lemma, counted from the first syllable. An unmarked entry has no individual stress specification; see Chapter~\ref{chap:phonology}, \S\ref{sec:stress-prosody}. Entries follow A--Z, Æ (including Ä), Ö, Å.\par}",
         "", r"{\footnotesize", r"\begin{multicols}{2}", "",
     ]
     previous = ""

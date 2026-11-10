@@ -9,12 +9,12 @@ brord;n;n;brorda;room;
 brug;n;f;;house;
 bund;n;m;bynder;king;
 bærg;n;n;bærgen;heaven;
-børd;v;;;to eat;
+börd;v;;;to eat;
 flikk;n;f;flikkar;name;
 gaups;adv;;;right now;
 glus;n;m;glussar;cat;
 hjalt;v;;;to write;
-hjålt;n;n;hjølter;cake;
+hjålt;n;n;hjölter;cake;
 hus;n;f;hysser;straw;
 i kvett;adv;;;yesterday;
 i sægge;adv;;;today;
@@ -32,7 +32,7 @@ murst;v;;;to cut;
 nar;pron;;;he;
 naud;v;;;to enter;
 nigot;adv;;;almost;
-nørs;adv;;;never;
+nörs;adv;;;never;
 patat;n;m;patattor;potato;2
 på;prep;;;by;
 ront;adj;;;fast;
@@ -40,6 +40,10 @@ skers;v;;;to sing;
 skun;adj;;;blind;
 skäll;n;f;skälla;fish;
 sond;v;;;to speak;
+försond;v;;;to promise (cf. \nk{sond} `to speak');
+stör;n;m;;day;
+sål;n;m;;birth;
+sollna;v;;;to be born (Class II, like \nk{bra});
 sægge;n;n;sæggen;morning;
 tadd;n;m;tädd;father;
 tak;n;n;täk;brow;
@@ -52,18 +56,20 @@ någn;adj;;;old;
 i;prep;;;in, on, at (general location);
 ån;prep;;;off, away;
 dänn;prep;;;within, inside a delimited domain;
+være;prep;;;under, below;
+ud;prep;;;over, above;
 at;prep;;;to, into (goal of motion or transfer);
 atta;prep;;;to the, into the (\nk{at} + definite article);
 med;pron;;;that, that over there;
 dur;n;m;durra;boy, son;
-hlåd;n;m;hlød;summer;
+hlåd;n;m;hlöd;summer;
 kapp;n;f;käpper;coat;
 tor;v;;;to believe;
 pær;n;f;pæror;pen;
-ngøld;n;m;ngølddar;cow;
+ngöld;n;m;ngölddar;cow;
 bot;n;n;boten;grass;
 element;n;m;elementen;element;
-hrådd;n;m;hrødder;group;
+hrådd;n;m;hrödder;group;
 fjeltt;n;f;fjeltta;party, celebration;
 värs;n;n;värsen;science;
 värser;n;m;värserar;scientist;
@@ -112,9 +118,9 @@ läb;n;f;läba;next day, morrow;
 i läb;adv;;;tomorrow;
 maug;n;n;maugen;friend;
 billä;adv;;;right away;
-hjørtat;n;n;hjørtaten;apology;
-är;v;;;past tense form of \nk{ø} and \nk{vor};
-fød;v;;;to heat up (a liquid);
+hjörtat;n;n;hjörtaten;apology;
+är;v;;;past tense form of \nk{ö} and \nk{vor};
+föd;v;;;to heat up (a liquid);
 aka;adv;;;also;
 ramm;v;;;to work;
 rammåge;adj;;;industrious;
@@ -127,7 +133,7 @@ fjerdåghæd;n;f;;forgetfulness;
 kost;v;;;to change;
 meger;v;;;to vote;
 kaffe;n;m;kaffen;coffee;
-klør;v;;;to burn;
+klör;v;;;to burn;
 hent;v;;;to tell;
 giml;v;;;to buy;
 likke;adv;;;quite;
@@ -137,16 +143,16 @@ dyr;n;m;dyr;bear;
 svern;n;m;svern;red deer, stag;
 skåv;n;n;skåv;reef, submerged rock;
 hærn;n;n;hærn;antler;
-tøng;n;m;tøng;salmon;
+töng;n;m;töng;salmon;
 våst;n;n;våst;rocky field, boulder field;
 norg;n;n;norg;rocky islet;
 hålv;n;n;hålv;deep pool in a river;
-sløt;v;;;to come;1
-ansløt;v;;;to come out;1
-atsløt;v;;;to come in;1
-ånsløt;v;;;to come off;1
-hætsløt;v;;;to come down;1
-helsløt;v;;;to come up, to ascend;1
+slöt;v;;;to come;1
+anslöt;v;;;to come out;1
+atslöt;v;;;to come in;1
+ånslöt;v;;;to come off;1
+hætslöt;v;;;to come down;1
+helslöt;v;;;to come up, to ascend;1
 ånhjalt;v;;;to write off (as a loss);1
 helbra;v;;;to give up;1
 betug;v;;;to become fat;2

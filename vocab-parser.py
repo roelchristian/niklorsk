@@ -14,7 +14,9 @@ def main() -> int:
             "Reads vocabulary/vocabulary.csv beside this script, regardless of the "
             "current directory. Generated vocabulary.tex and vocabulary_cleaned.csv "
             "remain in the fresh codex/builds/ directory printed by make. "
-            "The optional stress column records a positive lemma syllable index."
+            "The structured CSV separates lemma, part of speech, gender, plurals, "
+            "definition and stress; legacy word/partofspeech/translation headers "
+            "remain accepted. Stress records a positive lemma syllable index."
         ),
     )
     parser.parse_args()

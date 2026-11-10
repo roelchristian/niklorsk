@@ -1,160 +1,159 @@
-word;partofspeech;translation;stress
-afte, aften;nm;book;
-ag;pron;I;
-asse;adv;always;
-av;prep;with;
-bang;adj;good;
-bra;v;to give;
-brord, brorda;nn;room;
-brug;nf;house;
-bund, bynder;nm;king;
-bærg, bærgen;nn;heaven;
-børd;v;to eat;
-flikk, flikkar;nf;name;
-gaups;adv;right now;
-glus, glussar;nm;cat;
-hjalt;v;to write;
-hjålt, hjølter;nn;cake;
-hus, hysser;nf;straw;
-i kvett;adv;yesterday;
-i sægge;adv;today;
-kelv, kelven;nn;half;
-kung, kyng;nm;mirror;
-kvett, kvetta;nn;previous day;
-kvint;v;to bake;
-lære;adv;now;
-verb, verbar;nm;word;
-magasin, magasinnar;nn;store;3
-malm;v;to go;
-maus;adj;happy;
-meg;pron;you (sg.);
-murst;v;to cut;
-nar;pron;he;
-naud;v;to enter;
-nigot;adv;almost;
-nørs;adv;never;
-patat, patattor;nm;potato;2
-på;prep;by;
-ront;adj;fast;
-skers;v;to sing;
-skun;adj;blind;
-skäll, skälla;nf;fish;
-sond;v;to speak;
-sægge, sæggen;nn;morning;
-tadd, tädd;nm;father;
-tak, täk;nn;brow;
-tvent;adj;slow;
-væd;v;to see;
-vell;v;can, to be able to;
-gävs;conj;but;
-kort;adj;old;
-någn;adj;old;
-i;prep;in, on, at (general location);
-ån;prep;off, away;
-dänn;prep;within, inside a delimited domain;
-at;prep;to, into (goal of motion or transfer);
-atta;prep;to the, into the (\nk{at} + definite article);
-med;pron;that, that over there;
-dur, durra;nm;boy, son;
-hlåd, hlød;nm;summer;
-kapp, käpper;nf;coat;
-tor;v;to believe;
-pær, pæror;nf;pen;
-ngøld, ngølddar;nm;cow;
-bot, boten;nn;grass;
-element, elementen;nm;element;
-hrådd, hrødder;nm;group;
-fjeltt, fjeltta;nf;party, celebration;
-värs, värsen;nn;science;
-värser, värserar;nm;scientist;
-hveng;v;to find;
-forst, forsta;nm;time;
-jagt;v;to remember;
-jagtåge;adj;inclined to remember;
-jagtåghæd;nf;habitual attentiveness to remembering;
-käll;pron;who;
-käller;pron;who (plural);
-læse;pron;every (masculine, neuter, plural);
-læser;pron;every (feminine);
-kan;pron;what;
-känner;pron;what (plural);
-kamm;pron;when;
-kom;v;to die;
-men;adv;here;
-imed;adv;there (distal);
-imår;adv;there (medial);
-til;prep;for, in order to;
-hond, hynd;nn;child;
-skämd, skämdar;nn;toy;
-grom;adj;stupid;
-jærv;adj;tired;
-dokument, dokumentar;nf;document;3
-dreg, drega;nm;mind;
-talt, talten;nn;news;
-strigg;v;to faint;
-spis, spisar;nn;year;
-svor;v;to sleep;
-svoråge;adj;habitually sleepy;
-svoråghæd;nf;habitual sleepiness;
-gräd;v;to use;
-mobil, mobilar;nm;phone;
-modd, mydder;nm;meadow;
-vand;v;to drive;
-æder;conj;while;
-smed;conj;before;
-åd;conj;after;
-kanseler;v;to cancel;
-fabrik, fabrikkar;nf;factory;2
-kurt;adj;short;
-hot;adj;short;
-krust, krusten;nn;earthquake;
-läb, läba;nf;next day, morrow;
-i läb;adv;tomorrow;
-maug, maugen;nn;friend;
-billä;adv;right away;
-hjørtat, hjørtaten;nn;apology;
-är;v;past tense form of \nk{ø} and \nk{vor};
-fød;v;to heat up (a liquid);
-aka;adv;also;
-ramm;v;to work;
-rammåge;adj;industrious;
-rammåghæd;nf;industriousness;
-projekt, projektar;nm;project;
-tind;v;to seem;
-fjerd;v;to forget;
-fjerdåge;adj;forgetful;
-fjerdåghæd;nf;forgetfulness;
-kost;v;to change;
-dreg, dreggar;nm;mind;
-meger;v;to vote;
-kaffe, kaffen;nm;coffee;
-klør;v;to burn;
-hent;v;to tell;
-giml;v;to buy;
-likke;adv;quite;
-person, personar;nf;person;2
-prover;v;to try;
-dyr, dyr;nm;bear;
-svern, svern;nm;red deer, stag;
-skåv, skåv;nn;reef, submerged rock;
-hærn, hærn;nn;antler;
-tøng, tøng;nm;salmon;
-våst, våst;nn;rocky field, boulder field;
-norg, norg;nn;rocky islet;
-hålv, hålv;nn;deep pool in a river;
-sløt;v;to come;1
-ansløt;v;to come out;1
-atsløt;v;to come in;1
-ånsløt;v;to come off;1
-hætsløt;v;to come down;1
-helsløt;v;to come up, to ascend;1
-ånhjalt;v;to write off (as a loss);1
-helbra;v;to give up;1
-betug;v;to become fat;2
-åntug;v;to fatten away, to become obese;1
-mod;v;to drink;1
-opmurst;v;to cut apart, to cut into pieces;1
-helmod;v;to drink up, to finish drinking;1
-attramm;v;to work together, to cooperate;1
-anhveng;v;to discover, to find out;1
-ånvand;v;to drive away, to expel by driving;1
+lemma;partofspeech;gender;plurals;definition;stress
+afte;n;m;aften;book;
+ag;pron;;;I;
+asse;adv;;;always;
+av;prep;;;with;
+bang;adj;;;good;
+bra;v;;;to give;
+brord;n;n;brorda;room;
+brug;n;f;;house;
+bund;n;m;bynder;king;
+bærg;n;n;bærgen;heaven;
+børd;v;;;to eat;
+flikk;n;f;flikkar;name;
+gaups;adv;;;right now;
+glus;n;m;glussar;cat;
+hjalt;v;;;to write;
+hjålt;n;n;hjølter;cake;
+hus;n;f;hysser;straw;
+i kvett;adv;;;yesterday;
+i sægge;adv;;;today;
+kelv;n;n;kelven;half;
+kung;n;m;kyng;mirror;
+kvett;n;n;kvetta;previous day;
+kvint;v;;;to bake;
+lære;adv;;;now;
+verb;n;m;verbar;word;
+magasin;n;n;magasinnar;store;3
+malm;v;;;to go;
+maus;adj;;;happy;
+meg;pron;;;you (sg.);
+murst;v;;;to cut;
+nar;pron;;;he;
+naud;v;;;to enter;
+nigot;adv;;;almost;
+nørs;adv;;;never;
+patat;n;m;patattor;potato;2
+på;prep;;;by;
+ront;adj;;;fast;
+skers;v;;;to sing;
+skun;adj;;;blind;
+skäll;n;f;skälla;fish;
+sond;v;;;to speak;
+sægge;n;n;sæggen;morning;
+tadd;n;m;tädd;father;
+tak;n;n;täk;brow;
+tvent;adj;;;slow;
+væd;v;;;to see;
+vell;v;;;can, to be able to;
+gävs;conj;;;but;
+kort;adj;;;old;
+någn;adj;;;old;
+i;prep;;;in, on, at (general location);
+ån;prep;;;off, away;
+dänn;prep;;;within, inside a delimited domain;
+at;prep;;;to, into (goal of motion or transfer);
+atta;prep;;;to the, into the (\nk{at} + definite article);
+med;pron;;;that, that over there;
+dur;n;m;durra;boy, son;
+hlåd;n;m;hlød;summer;
+kapp;n;f;käpper;coat;
+tor;v;;;to believe;
+pær;n;f;pæror;pen;
+ngøld;n;m;ngølddar;cow;
+bot;n;n;boten;grass;
+element;n;m;elementen;element;
+hrådd;n;m;hrødder;group;
+fjeltt;n;f;fjeltta;party, celebration;
+värs;n;n;värsen;science;
+värser;n;m;värserar;scientist;
+hveng;v;;;to find;
+forst;n;m;forsta;time;
+jagt;v;;;to remember;
+jagtåge;adj;;;inclined to remember;
+jagtåghæd;n;f;;habitual attentiveness to remembering;
+käll;pron;;käller;who;
+käller;pron;;;who (plural);
+læse;pron;;;every (masculine, neuter, plural);
+læser;pron;;;every (feminine);
+kan;pron;;känner;what;
+känner;pron;;;what (plural);
+kamm;pron;;;when;
+kom;v;;;to die;
+men;adv;;;here;
+imed;adv;;;there (distal);
+imår;adv;;;there (medial);
+til;prep;;;for, in order to;
+hond;n;n;hynd;child;
+skämd;n;n;skämdar;toy;
+grom;adj;;;stupid;
+jærv;adj;;;tired;
+dokument;n;f;dokumentar;document;3
+dreg;n;m;drega|dreggar;mind;
+talt;n;n;talten;news;
+strigg;v;;;to faint;
+spis;n;n;spisar;year;
+svor;v;;;to sleep;
+svoråge;adj;;;habitually sleepy;
+svoråghæd;n;f;;habitual sleepiness;
+gräd;v;;;to use;
+mobil;n;m;mobilar;phone;
+modd;n;m;mydder;meadow;
+vand;v;;;to drive;
+æder;conj;;;while;
+smed;conj;;;before;
+åd;conj;;;after;
+kanseler;v;;;to cancel;
+fabrik;n;f;fabrikkar;factory;2
+kurt;adj;;;short;
+hot;adj;;;short;
+krust;n;n;krusten;earthquake;
+läb;n;f;läba;next day, morrow;
+i läb;adv;;;tomorrow;
+maug;n;n;maugen;friend;
+billä;adv;;;right away;
+hjørtat;n;n;hjørtaten;apology;
+är;v;;;past tense form of \nk{ø} and \nk{vor};
+fød;v;;;to heat up (a liquid);
+aka;adv;;;also;
+ramm;v;;;to work;
+rammåge;adj;;;industrious;
+rammåghæd;n;f;;industriousness;
+projekt;n;m;projektar;project;
+tind;v;;;to seem;
+fjerd;v;;;to forget;
+fjerdåge;adj;;;forgetful;
+fjerdåghæd;n;f;;forgetfulness;
+kost;v;;;to change;
+meger;v;;;to vote;
+kaffe;n;m;kaffen;coffee;
+klør;v;;;to burn;
+hent;v;;;to tell;
+giml;v;;;to buy;
+likke;adv;;;quite;
+person;n;f;personar;person;2
+prover;v;;;to try;
+dyr;n;m;dyr;bear;
+svern;n;m;svern;red deer, stag;
+skåv;n;n;skåv;reef, submerged rock;
+hærn;n;n;hærn;antler;
+tøng;n;m;tøng;salmon;
+våst;n;n;våst;rocky field, boulder field;
+norg;n;n;norg;rocky islet;
+hålv;n;n;hålv;deep pool in a river;
+sløt;v;;;to come;1
+ansløt;v;;;to come out;1
+atsløt;v;;;to come in;1
+ånsløt;v;;;to come off;1
+hætsløt;v;;;to come down;1
+helsløt;v;;;to come up, to ascend;1
+ånhjalt;v;;;to write off (as a loss);1
+helbra;v;;;to give up;1
+betug;v;;;to become fat;2
+åntug;v;;;to fatten away, to become obese;1
+mod;v;;;to drink;1
+opmurst;v;;;to cut apart, to cut into pieces;1
+helmod;v;;;to drink up, to finish drinking;1
+attramm;v;;;to work together, to cooperate;1
+anhveng;v;;;to discover, to find out;1
+ånvand;v;;;to drive away, to expel by driving;1

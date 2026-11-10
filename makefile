@@ -172,7 +172,7 @@ def vocabulary(stage: Path) -> int:
         r"\markboth{Vocabulary}{Vocabulary}",
         r"{\small\textbf{Legend:} " + legend + "}",
         "",
-        r"{\small (stress $n$) marks primary stress on syllable $n$ of the lemma, counted from the first syllable. Inflected forms retain that stress. An unmarked entry has no individual stress specification in this list; see Chapter \ref{chap:phonology}, \S\ref{sec:stress-prosody}.}",
+        r"{\small (stress $n$) marks primary stress on syllable $n$ of the lemma, counted from the first syllable. Inflected forms retain that stress. An unmarked entry has no individual stress specification in this list; see Chapter~\ref{chap:phonology}, \S\ref{sec:stress-prosody}.}",
         "", r"{\footnotesize", r"\begin{multicols}{2}", "",
     ]
     previous = ""

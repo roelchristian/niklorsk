@@ -13,7 +13,7 @@
 ]{geometry}
 \RequirePackage[table]{xcolor}
 \RequirePackage{fontspec}
-\RequirePackage{microtype}
+\RequirePackage[protrusion=true,expansion=true,stretch=15,shrink=15]{microtype}
 \RequirePackage{amsmath}
 \RequirePackage{unicode-math}
 \RequirePackage{enumitem}
@@ -63,6 +63,28 @@
     BoldItalicFont=Noto Sans SemiBold Italic
 ]
 
+% Noto Sans punctuation has short sidebearings. Hang quotes and terminal
+% punctuation optically, while keeping phonetic brackets and slashes aligned.
+% Fontspec instance suffixes are ignored by microtype's family matching.
+\SetProtrusion[name=grammar-noto,load=T1-default]
+    {encoding=TU,family={NotoSans,NotoSansSemiBold}}
+    {
+        . = {,700}, {,} = {,550}, : = {,400}, ; = {,400},
+        ! = {,200}, ? = {,150},
+        ‘ = {650,650}, ’ = {650,650},
+        “ = {550,550}, ” = {550,550},
+        - = {400,400}, – = {300,300}, — = {200,200},
+        / = {0,0}, [ = {0,0}, ] = {0,0}
+    }
+% Italic quotes already overhang their advance widths on the right.
+\SetProtrusion[name=grammar-noto-italic,load=grammar-noto]
+    {encoding=TU,family={NotoSans,NotoSansSemiBold},shape={it,sl}}
+    {
+        . = {,800}, {,} = {,650},
+        ‘ = {850,200}, ’ = {850,200},
+        “ = {700,300}, ” = {700,300}
+    }
+
 % Keep the chosen text size after lists, tables, and front matter.
 \renewcommand\normalsize{%
     \@setfontsize\normalsize{10.4bp}{14.1bp}%
@@ -77,6 +99,8 @@
 \normalsize
 \setlength{\parindent}{1.2em}
 \setlength{\parskip}{0pt}
+% Use the same word space after sentences, abbreviations, and vocabulary lemmas.
+\frenchspacing
 \setlength{\emergencystretch}{1.2em}
 \widowpenalty=10000
 \clubpenalty=10000
@@ -106,7 +130,7 @@
 \renewcommand{\thefigure}{\thechapter.\arabic{figure}}
 \titleformat{\chapter}[display]
     {\normalfont\color{grammarInk}}
-    {\fontsize{9bp}{12bp}\selectfont\color{grammarIndigo}CHAPTER \thechapter}
+    {\fontsize{9bp}{12bp}\selectfont\color{grammarIndigo}\textls[80]{CHAPTER \thechapter}}
     {10bp}{\fontsize{29bp}{35bp}\selectfont\bfseries}
 \titleformat{name=\chapter,numberless}[display]
     {\normalfont\color{grammarInk}}{}{0bp}
@@ -194,7 +218,14 @@
 \newcommand{\nikpp}[3]{\niklorsk{#1} [\ipa{#2}] `#3'}
 \newcommand{\nk}[1]{\niklorsk{#1}}
 \newcommand{\ipa}[1]{{\upshape #1}}
-\newcommand{\glossarypair}[3]{\nk{#1}. \textit{#2}, #3.}
+% Narrow vocabulary columns use natural word spaces, retaining entry indents.
+\newcommand{\glossarypair}[3]{%
+    \begingroup
+    \edef\grammar@entryindent{\the\parindent}%
+    \raggedright\setlength{\parindent}{\grammar@entryindent}%
+    \nk{#1}. \textit{#2}, #3.\par
+    \endgroup
+}
 \newcommand{\vocabcentered}[1]{%
     \par\addvspace{8bp}\noindent\textbf{#1}\par\nobreak\smallskip
 }

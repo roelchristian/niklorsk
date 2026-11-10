@@ -25,7 +25,13 @@ particle placement with modals, in questions, and in inverted clauses. Mobile
 particles contrast with inseparable prefixes in both placement and stress.
 
 The phonology chapter treats vowel and consonant length, diphthongs, syllable
-structure, variable lexical stress, and phrasal intonation.
+structure, variable lexical stress, two lexical pitch accents, and phrasal
+intonation. Accent 1 has an early high target followed by a fall; Accent 2
+rises to a late high target, with variable early laryngealisation. Their
+opposition is licensed within the primary-stressed rhyme by a long vowel, a
+diphthong, or a short vowel followed by a moraic sonorant. Metrical weight
+alone does not license the contrast.
+
 Stress normally falls on the initial syllable of a native root and remains
 stable through inflection. Compounds and some derivational suffixes introduce
 secondary stress, while a small class of suffixes attracts primary stress.
@@ -38,8 +44,8 @@ preserves distinctions that merge in ordinary pronunciation.
 
 - [Phonology and orthography](chapters/phonology.tex): vowel and consonant
   inventories, syllable structure and phonotactics, quantity, lexical and
-  phrasal stress, intonation, vowel erosion, sound realization, and spelling
-  conventions.
+  phrasal stress, lexical pitch accent and its history, intonation, vowel
+  erosion, sound realization, and spelling conventions.
 - [Verbs](chapters/verbs.tex): conjugation, tense and aspect, negation,
   conditional and modal constructions, infinitives and participles, separable
   verbs and particle placement with direct objects, copular and existential
@@ -62,7 +68,8 @@ preserves distinctions that merge in ordinary pronunciation.
 The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk words, their parts
 of speech, English meanings, and specified primary-stress positions. Noun
 entries include plural forms where given. The same word list supplies the
-manuscript's vocabulary appendix.
+manuscript's vocabulary appendix. It does not yet record lexical accent
+categories.
 
 Additional material in [texts/](texts/) includes a translation draft from
 *Middlemarch* and a small Niklorsk–English corpus. These are separate from the

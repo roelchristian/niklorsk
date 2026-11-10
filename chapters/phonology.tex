@@ -3,7 +3,7 @@
 
 Niklorsk distinguishes strong syllables, which preserve vowel quality and quantity, from weak syllables, which undergo extensive reduction. Ordinary pronunciation has centralised vowels, syllabic consonants, and the loss of eligible unstressed vowels. Spelling preserves morphological forms even where their pronunciations coincide. Fuller weak syllables occur in careful speech; emphatic grammatical words have strong forms.
 
-Phonemes are enclosed in slashes and phonetic realisations in square brackets. A dot marks a syllable boundary, [\ipa{ˈ}] primary stress, [\ipa{ˌ}] secondary stress, and a subscript syllabicity mark a consonant functioning as a nucleus, as in [n̩]. Broad transcriptions can omit predictable articulatory detail: [t] in \nk{tage} and \nk{tagett} does not mark aspiration, and [ð] includes the weak dental approximant [ð̞]. Narrower transcriptions mark these details where they are relevant.
+Phonemes are enclosed in slashes and phonetic realisations in square brackets. A dot marks a syllable boundary, [\ipa{ˈ}] primary stress, [\ipa{ˌ}] secondary stress, and a subscript syllabicity mark a consonant functioning as a nucleus, as in [n̩]. Broad transcriptions can omit predictable articulatory detail: [t] in \nk{tage} and \nk{tagett} does not mark aspiration, and [ð] includes the weak dental approximant [ð̞]. Transcriptions concerned with segments or stress can omit lexical accent; its notation is described in \S\ref{sec:lexical-accent}. Such omission leaves both the category and its surface licensing unspecified. Narrower transcriptions mark these details where they are relevant.
 
 \section{Vowels}
 
@@ -249,7 +249,7 @@ In loanword adaptation, stress tends to fall on the rightmost heavy syllable amo
 
 \subsection{Morphological stress}
 
-Inflectional endings preserve the position of primary stress. Derivational suffixes have three accentual behaviours: stress-neutral suffixes preserve the stress of the base, secondary-stressed suffixes retain its primary stress while adding subordinate prominence, and stress-attracting suffixes determine a new primary-stress position. The classes and their suffixes are described in Chapter \ref{chap:derivations}, \S\ref{sec:affix-stress}.
+Inflectional endings preserve the position of primary stress. Derivational suffixes have three stress behaviours: stress-neutral suffixes preserve the stress of the base, secondary-stressed suffixes retain its primary stress while adding subordinate prominence, and stress-attracting suffixes determine a new primary-stress position. The classes and their suffixes are described in Chapter \ref{chap:derivations}, \S\ref{sec:affix-stress}. Stress behaviour and lexical accent are separate properties: preserving the position of stress does not by itself determine the accent category.
 
 Compounds normally have primary stress on the first constituent and secondary stress on the second. Each constituent retains the position of its lexical stress; primary prominence need not therefore fall on the first syllable of the whole compound. Linking \nk{-e-} and \nk{-en-} remain unstressed and retain a vowel where it is needed to separate consonants. The compound pattern is illustrated in Chapter \ref{chap:derivations}, \S\ref{sec:compound-stress}.
 
@@ -264,7 +264,7 @@ The inseparable prefix \nk{be-} is unstressed, leaving primary stress on the ver
 
 \subsection{Strong and weak syllables}
 
-Syllables with primary or secondary stress are strong. Primary stress has the greatest prominence, expressed through duration, clear vowel quality, and a locally prominent pitch movement. Secondary stress retains vowel clarity and some duration with less prominence. The quantity pattern in \S\ref{sec:vowel-quantity} applies to strong syllables, but lexical length can also occur in weak syllables. Niklorsk has no phonemic opposition between lexical pitch accents, and glottalisation is not phonemic in the standard system.
+Syllables with primary or secondary stress are strong. Primary stress has the greatest prominence, expressed through duration, clear vowel quality, and a locally prominent pitch movement. Secondary stress retains vowel clarity and some duration with less prominence. The quantity pattern in \S\ref{sec:vowel-quantity} applies to strong syllables, but lexical length can also occur in weak syllables. Only primary stress licenses the lexical accent opposition described below; secondary stress does not introduce another independently contrastive accent.
 
 Unstressed syllables are weak. Short vowels in weak endings undergo centralisation, assimilation, and deletion under the conditions in \S\ref{sec:weak-vowels}. Both primary and secondary stress protect vowel quality and quantity. Lexically long unstressed vowels are also retained, as in \nikpp{patat}{pɑːˈtʰɔːt}{potato}. The resistance to reduction decreases from primary-stressed syllables through secondary-stressed syllables and long unstressed lexical vowels to short unstressed lexical vowels and weak grammatical endings.
 
@@ -279,10 +279,129 @@ Prosodic and orthographic words do not always coincide. A compound has more than
 
 Secondary prominence is clearest in careful speech. It weakens in rapid speech while the secondary-stressed vowel retains its characteristic quality and quantity. Contrastive focus can make the second compound constituent most prominent in the phrase without relocating its lexical stress.
 
+\subsection{Lexical pitch accent}
+\label{sec:lexical-accent}
+
+Niklorsk distinguishes two lexical pitch accents, Accent 1 (A1) and Accent 2 (A2). Each ordinary prosodic word has at most one independently realised accent opposition, associated with its primary-stressed syllable. A lexical or morphological accent category is distinct from the position of stress and from the quantity of its segments. The category has a contrastive surface realisation only where the stressed rhyme meets the licensing conditions in \S\ref{sec:accent-licensing}.
+
+A1 is the early accent, conventionally called acute; A2 is the late accent, conventionally called circumflex. A1 has a high target followed by a low target, while A2 has a low target followed by a high target. Let $\mu_1$ and $\mu_2$ be the two eligible sonorous morae of the primary-stressed rhyme. Their tonal associations are:
+\[
+    \begin{aligned}
+        \mathrm{A1} &\longrightarrow H_{\mu_1}L_{\mu_2},\\
+        \mathrm{A2} &\longrightarrow L_{\mu_1}H_{\mu_2}.
+    \end{aligned}
+\]
+Here $H$ and $L$ denote relative high and low targets. The association specifies their order and relative alignment, rather than equal durations for the two morae or fixed points in a recording. In a long vowel both targets occur within the vowel; in a short-vowel--sonorant sequence the second target extends into the moraic sonorant. Additional coda material does not add another lexical accent or require a third tonal target.
+
+\begin{table}[!ht]
+    \caption{The lexical accents in a neutral phrase-medial position}
+    \label{tab:lexical-accents}
+    \begin{tabularx}{\textwidth}{l X X}
+        \toprule
+        \rowcolor{grammarTableHead}
+        & \textbf{A1: early accent} & \textbf{A2: late accent} \\
+        \midrule
+        Targets & $H_{\mu_1}L_{\mu_2}$ & $L_{\mu_1}H_{\mu_2}$ \\
+        Pitch movement & Early high target and fall & Early low interval and late rise \\
+        Long vowel & $^{1}$[\ipa{ôː}] & $^{2}$[\ipa{ǒː}] \\
+        Vowel--sonorant & $^{1}$[\ipa{ɑ́l̀t}] & $^{2}$[\ipa{ɑ̀ĺt}] \\
+        Phonation & No required laryngeal gesture & Variable early laryngealisation, followed by modal voice \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Superscripts $^{1}$ and $^{2}$ identify the lexical categories in accent descriptions. Falling [\ipa{ôː}] and rising [\ipa{ǒː}] illustrate phonetic contours, not different vowel phonemes. The vowel--sonorant illustrations show targets distributed across the two segments; the tonal mark on the lateral does not make it a separate syllable. These are schematic rhyme realisations, without a lexical assignment. The traditional name ``circumflex'' refers to A2 even though the IPA falling mark has a circumflex shape and the rising mark has a caron shape. Ordinary spelling marks neither accent. A category mark is kept distinct from a particular phrase-final contour, since intonation can add a further rise or fall (\S\ref{sec:intonation}).
+
+A1 is the productive default when no lexical or morphological A2 specification applies, including in recent loanword adaptation. This default assignment still undergoes structural neutralisation. The accent of an inherited form is not computed from its modern syllable count, spelling, or the presence of a weak ending. Both monosyllables and polysyllables can carry either category in an eligible rhyme.
+
+\subsection{Accent licensing and neutralisation}
+\label{sec:accent-licensing}
+
+The A1--A2 opposition requires two phonologically sonorous morae within the primary-stressed rhyme. Long vowels and phonemic diphthongs supply both. A short vowel supplies the first, while a moraic sonorant supplies the second, including the coda portion of a geminate sonorant. A following obstruent does not prevent the vowel--sonorant portion from licensing the contrast. These are Niklorsk licensing conditions; metrical heaviness alone is insufficient.
+
+\begin{table}[!ht]
+    \caption{Licensing of lexical accent in the stressed rhyme}
+    \label{tab:accent-licensing}
+    \begin{tabularx}{\textwidth}{X X}
+        \toprule
+        \rowcolor{grammarTableHead}
+        \textbf{Rhyme} & \textbf{Surface opposition} \\
+        \midrule
+        Long vowel or phonemic diphthong, with or without following consonants & A1--A2, supported by the long nucleus \\
+        Short vowel plus geminate sonorant & A1--A2, supported by vowel and sonorant coda mora \\
+        Short vowel plus moraic sonorant and obstruent & A1--A2, supported by the vowel--sonorant portion \\
+        Short vowel plus obstruent geminate or entirely obstruent coda & Neutralised, despite metrical heaviness \\
+        Short open rhyme, where exceptionally permitted & Neutralised \\
+        Any rhyme without primary stress & No independent lexical opposition \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Thus the vowel and lateral of \nk{hjalt} [\ipa{çɑlt}] provide an eligible domain, while \nk{afte} [\ipa{ɑft}] does not. The /f/ in fuller [\ipa{ˈɑf.tə}] contributes to syllable weight without supplying a sonorous tonal position. Both ordinary \nk{afte} and plural \nk{aften} therefore lack a surface lexical accent opposition, and remain homophonous. A following weak vowel or syllabic consonant cannot complete an otherwise ineligible stressed rhyme. Careful [\ipa{ˈɑf.tə}] remains ineligible even though it has a second syllable.
+
+Licensing follows phonological sonorant status, rather than momentary voicing. Weakened /d/ remains an obstruent when realised as [ð] or approximant [ð̞]. A long vowel before it licenses the contrast, but a short vowel does not acquire a second eligible mora merely through dental lenition. Inherited /r/ retains its sonorant status when vocalised as [ɐ̯], so its moraic coda position can supply the second eligible mora after a short vowel. A long vowel followed by a rhotic offglide already supplies the necessary two morae; the offglide does not require another tonal position.
+
+In an ineligible stressed rhyme the entire opposition is neutralised:
+\[
+    \{\mathrm{A1},\mathrm{A2}\}\longrightarrow A_0.
+\]
+The label $A_0$ means absence of a surface lexical opposition, not a third accent and not assignment to default A1. Such words still have pitch supplied by intonation. Accent-specific phonation is also absent there, so it does not restore a contrast excluded by the rhyme structure.
+
+A category can remain latent where related forms reveal it. An alternation recovers an audible contrast only if it supplies an eligible primary-stressed rhyme; adding an unstressed vowel alone does not suffice. Quantity alternations therefore have different consequences: the long vowel of \nk{glus} permits an opposition which the short vowel before the geminate obstruent of \nk{glussar} does not, whereas the sonorant geminate of \nk{strimmar} preserves eligibility beside long-vowel \nk{strim}. These structural facts do not themselves assign an inherited word to A1 or A2.
+
+\subsection{Accent-conditioned phonation}
+\label{sec:accent-phonation}
+
+A2 has variable early laryngealisation during its low interval. In stronger realisations this is heard as mild creak or irregular voicing. The gesture resolves before the late high target, which has modal voice. It is localised within the early part of the stressed rhyme; it is neither a separate glottal-stop segment nor an independent vowel-phonation opposition. A1 has no required accent-conditioned laryngeal gesture.
+
+The two categories remain the same when their cues vary with prominence. In an eligible rhyme after focus or in strongly reduced speech, a small pitch excursion can leave A2's early phonation as a useful cue. This contextual weakening differs from structural neutralisation, which removes both the tonal opposition and its accent-conditioned phonation. Phrase-final lowering can cause contextual creak with either category; such creak is not independently diagnostic of A2.
+
+\subsection{Accent in morphological words}
+\label{sec:accent-morphology}
+
+Ordinary stress-neutral inflection preserves the stem's accent category unless an inherited morphological alternation is specified. Preservation of a category does not guarantee its audible realisation after a change in stem quantity or coda structure. An ending is not assigned A2 merely because its weak vowel disappears. Accent alternations are morphological properties of particular paradigms, rather than automatic consequences of apocope.
+
+Productive stress-neutral derivation preserves the base accent by default. Secondary-stressed suffixes likewise preserve the main category without receiving an independent A1--A2 opposition. In productive recent formations, stress-attracting suffixes assign default A1 at the new primary stress unless a suffix or formation specifies otherwise. Chapter \ref{chap:derivations}, \S\ref{sec:derivational-accent} distinguishes these tonal effects from the established stress classes.
+
+In an ordinary compound, the primary-stressed constituent determines the compound accent, subject to licensing in its stressed rhyme. A secondary constituent retains quantity and vowel quality but has no independently contrastive accent within the same prosodic word. Increasing its phrasal prominence under focus does not itself supply a second lexical accent domain.
+
+The same rule applies to incorporated particle verbs: the primary-stressed particle controls the main accent, and the secondary-stressed verb does not independently realise its lexical category. When particle and verb separate into independent prosodic words, each can realise its own eligible accent. Unstressed grammatical dependents have no independent lexical accent domain; their pitch belongs to the surrounding phrase. Independently stressed strong forms receive default A1 unless lexically specified otherwise, and remain subject to rhyme licensing.
+
+\subsection{Accent history}
+\label{sec:accent-history}
+
+The lexical opposition continues older differences in the alignment of prominence within the primary-stress domain. A domain ending with the stressed syllable has an early high target followed by a decline; an integrated posttonic syllable supports a later high target. Pretonic material alone does not produce the later alignment. The relevant distinction precedes the loss of weak syllables, so erosion preserves an existing prosodic difference rather than creating one after all conditioning cues have disappeared.
+
+As posttonic vowels shorten, their later high target is increasingly anticipated within the stressed rhyme while the weak syllable is still present or variably realised. Apocope then removes eligible nuclei. Where the surviving rhyme licenses two targets, the older alignment difference remains as A1 versus A2. The difference becomes lexical when its conditioning weak syllable is lost. Stem quantity remains unchanged: preservation of the contour does not require compensatory vowel lengthening.
+
+The following schematic test forms illustrate the sequence; they are not vocabulary entries. The long vowels are present before apocope in both columns.
+
+\begin{table}[!ht]
+    \caption{Preservation of accentual alignment through apocope}
+    \label{tab:accent-history}
+    \begin{tabularx}{\textwidth}{l X X}
+        \toprule
+        \rowcolor{grammarTableHead}
+        \textbf{Stage} & \textbf{Shorter domain} & \textbf{Posttonic domain} \\
+        \midrule
+        Segmental input & /\ipa{ˈmoːt}/ & /\ipa{ˈmoː.tə}/ \\
+        Older alignment & Early high target in /oː/, followed by decline & Low interval in /oː/; high target on or towards /ə/ \\
+        Reduction & Early alignment retained & Later high target anticipated within /oː/ before vowel loss \\
+        After apocope & $^{1}$[\ipa{môːt}] & $^{2}$[\ipa{mǒːt}] \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Schwa assimilation follows a distinct branch. Formation of a syllabic consonant preserves a weak syllable even when schwa loses independent articulation. That nucleus can continue to support the older delayed target; it is not equivalent to immediate deletion of the syllable. Loss of the remaining syllabic interval subsequently requires reassociation or neutralisation according to the surviving structure.
+
+Association with the primary-stressed rhyme then generalises to words retaining posttonic syllables, including those with syllabic consonants. The modern opposition consequently has the same domain in monosyllables, polysyllables, and careful pronunciations with fuller weak vowels. Analogy and inherited morphology affect the distribution of the categories, so modern syllable count no longer predicts lexical accent. Some older distinctions survive and others merge; accent does not distinguish every pair of segmentally identical inflected forms.
+
+Early laryngealisation develops later as an enhancement of A2. Its sustained early low interval first favours variable irregular phonation, which becomes associated with that category. A1 reaches its lower target later in the rhyme and does not acquire the same early gesture. This history establishes an accent-dependent cue, while leaving contextual final creak available with either accent.
+
 \subsection{Intonation and focus}
 \label{sec:intonation}
 
-Primary stress is associated with a local pitch prominence, ordinarily followed by a fall. Phrase-level nuclear prominence falls on the final informative constituent in a neutral clause, often the lexical object. Contrastive focus places a wider pitch movement on the corrected or contrasted constituent. Lexical stress and nuclear prominence are distinct: an independently stressed word need not bear the phrase's most salient pitch movement.
+Primary stress is associated with local pitch prominence, whose lexical targets depend on accent where the rhyme licenses the opposition. Phrase-level nuclear prominence falls on the final informative constituent in a neutral clause, often the lexical object. Contrastive focus places a wider pitch movement on the corrected or contrasted constituent. Lexical stress and nuclear prominence are distinct: an independently stressed word need not bear the phrase's most salient pitch movement.
 
 \par\addvspace{\intextsep}\noindent
 \begin{minipage}{\textwidth}
@@ -305,6 +424,26 @@ Primary stress is associated with a local pitch prominence, ordinarily followed 
 \par\addvspace{\intextsep}
 
 A polar question without \nk{inte} has an audible interrogative contour. The high terminal boundary can be sustained rather than realised as a steep final rise. The independent particle in \nk{Ag hjaltar med ån} `I wrote that off' receives expanded prominence when its result is contrasted. It retains lexical stress even when another constituent bears nuclear prominence.
+
+Lexical targets and boundary tones have separate functions. Declarative lowering contributes $L\%$, and an interrogative high boundary contributes $H\%$. Table \ref{tab:accent-intonation} shows their ordering with the two accents; it gives target sequences rather than a requirement to realise every target fully in every token.
+
+\begin{table}[!ht]
+    \caption{Lexical accent and phrase boundaries}
+    \label{tab:accent-intonation}
+    \begin{tabularx}{\textwidth}{X X X}
+        \toprule
+        \rowcolor{grammarTableHead}
+        \textbf{Context} & \textbf{A1} & \textbf{A2} \\
+        \midrule
+        Neutral phrase-medial & $H-L$: early high and fall & $L-H$: low interval and late rise \\
+        Declarative $L\%$ & $H-L-L\%$: low ending & $L-H-L\%$: late rise followed by lowering \\
+        Interrogative $H\%$ & $H-L-H\%$: fall followed by boundary rise & $L-H-H\%$: rise into a high ending \\
+        After focus or strongly reduced & Smaller pitch excursion & Smaller pitch excursion; early phonation can remain \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+When targets crowd together, relative lexical alignment is preserved in preference to the full boundary movement. A2 before $L\%$ can retain its late high target with an incomplete final fall; A1 before $H\%$ can retain its early high target and decline with a reduced final rise. A surviving posttonic syllable provides room for the boundary movement without becoming part of the lexical accent domain. Phrase-final lengthening also provides time without changing lexical vowel quantity. Rapid speech can reduce or neutralise the perceptible distinction.
 
 \FloatBarrier
 \section{Morphophonology and weak syllables}
@@ -357,7 +496,7 @@ Syllabic consonants are realisations of the underlying consonant and weak vowel,
 
 Internal syncope removes a short unstressed [ə] where the resulting consonant group is permitted. It applies most readily in posttonic material and weak morphological junctions. Strong syllables and lexical vowel length remain protected. If the resulting cluster is impermissible, a reduced vowel is retained. Longer words can have strongly reduced pretonic syllables, subject to the same cluster restrictions. Their lexical stress remains on the same stem syllable, as in \nk{magasin}.
 
-Final apocope removes an eligible short [ə] after an obstruent where the resulting coda is licensed. Thus \nikpp{afte}{ˈɑft}{book} and plural \nikpp{aften}{ˈɑft}{books} are homophonous. Their fuller pronunciation is [\ipa{ˈɑf.tə}]. The plural /n/ is silent independently of apocope. Class I imperatives with an obstruent-final stem likewise lose final schwa under these conditions in ordinary speech, producing homophony with the present stem.
+Final apocope removes an eligible short [ə] after an obstruent where the resulting coda is licensed. Thus \nikpp{afte}{ˈɑft}{book} and plural \nikpp{aften}{ˈɑft}{books} are homophonous. Their fuller pronunciation is [\ipa{ˈɑf.tə}]. The plural /n/ is silent independently of apocope. Class I imperatives with an obstruent-final stem likewise lose final schwa under these conditions in ordinary speech, becoming segmentally identical to the present stem. A lexical accent difference survives only where the paradigm specifies different categories and the stressed rhyme licenses them (\S\ref{sec:accent-licensing}).
 
 Schwa assimilation applies before apocope. A suitable nasal, liquid, or weak dental approximant can retain a syllabic nucleus where an obstruent would remain nonsyllabic. Stressed vowels, long vowels, and final [ɐ] are retained. Apocope does not trigger compensatory lengthening of the stem vowel or automatic shortening of a geminate.
 
@@ -380,6 +519,8 @@ Quantity changes before native endings apply where the inflection class requires
 \subsection{Process order}
 
 Morphological combination and stem-allomorph selection determine the input to syllabification and stress assignment. Stress-conditioned consonant realisations, palatalisation, and cluster simplification apply to this structure. Sibilant retraction applies before rhotic vocalisation. Weak-vowel centralisation and intervocalic lenition precede schwa assimilation, internal syncope, final apocope, and resyllabification; final vocoid contraction and connected-speech assimilation apply to their outputs. This order preserves alternations whose conditioning segment is absent from the final pronunciation.
+
+Lexical and morphological accent assignment follows resolution of primary stress, including stress attraction in derivation. The segmental processes determine the surviving rhyme and its syllabification before surface accent licensing is evaluated. The assigned category is realised on the eligible morae within the primary-stressed rhyme; structural neutralisation applies where that rhyme fails to license the contrast. Accent-conditioned phonation follows licensing, and phrase-level intonation modifies the resulting contour. Neither a deleted weak vowel nor its restoration in careful speech changes the modern rhyme-based association rule.
 
 \subsection{Grammatical words and connected speech}
 \label{sec:connected-speech}
@@ -430,7 +571,7 @@ The degree of stem adaptation is independent of the plural ending. A fully nativ
 \subsection{Syllabified pronunciations}
 \label{sec:pronunciation-corpus}
 
-Tables \ref{tab:pronunciation-corpus-a} and \ref{tab:pronunciation-corpus-b} distinguish phonological segments and quantity from their surface realisations. The input column gives the segmental structure relevant to the listed pronunciation before consonant weakening and weak-vowel reduction. Dots in the surface column separate syllables; a monosyllable has no internal dot. Primary stress is implicit in isolated monosyllables. The inputs retain silent stem consonants and weak vowels where they belong to the morphological form. Surface forms are broad transcriptions: [t] in \nk{tage} and \nk{tagett} does not mark predictable aspiration, and [ð] in \nk{bördutt} includes the dental approximant realisation.
+Tables \ref{tab:pronunciation-corpus-a} and \ref{tab:pronunciation-corpus-b} distinguish phonological segments and quantity from their surface realisations. The input column gives the segmental structure relevant to the listed pronunciation before consonant weakening and weak-vowel reduction. Dots in the surface column separate syllables; a monosyllable has no internal dot. Primary stress is implicit in isolated monosyllables. The inputs retain silent stem consonants and weak vowels where they belong to the morphological form. Surface forms are broad transcriptions: [t] in \nk{tage} and \nk{tagett} does not mark predictable aspiration, and [ð] in \nk{bördutt} includes the dental approximant realisation. These tables omit lexical accent in order to show segmental structure; the omission specifies neither default A1 nor structural $A_0$.
 
 \begin{table}[!ht]
     \caption{Syllabified pronunciations: quantity and consonants}

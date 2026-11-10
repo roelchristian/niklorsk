@@ -44,12 +44,13 @@ preserves distinctions that merge in ordinary pronunciation.
 
 - [Phonology and orthography](chapters/phonology.tex): vowel and consonant
   inventories, syllable structure and phonotactics, quantity, lexical and
-  phrasal stress, lexical pitch accent and its history, intonation, vowel
-  erosion, sound realization, and spelling conventions.
-- [Verbs](chapters/verbs.tex): conjugation, tense and aspect, negation,
-  conditional and modal constructions, infinitives and participles, separable
-  verbs and particle placement with direct objects, copular and existential
-  constructions, and the passive voice.
+  phrasal stress, lexical pitch accent and its history, selected nominal,
+  verbal, and particle accent paradigms, intonation, vowel erosion, sound
+  realization, and spelling conventions.
+- [Verbs](chapters/verbs.tex): conjugation, inherited lexical accent
+  alternations, tense and aspect, negation, conditional and modal constructions,
+  infinitives and participles, separable verbs and particle placement with
+  direct objects, copular and existential constructions, and the passive voice.
 - [Nouns and pronouns](chapters/nouns.tex): gender, articles, number, case,
   personal and demonstrative pronouns, and noun phrases.
 - [Other word classes](chapters/modifiers.tex): adjective agreement and

@@ -279,7 +279,7 @@ The use of the bare genitive and the \nk{sla} construction to indicate possessio
 \section{Personal pronouns}
 \label{sec:personal-pronouns}
 
-As in English, Niklorsk pronouns replace nouns or noun phrases. Unlike nouns, however, pronouns retain case marking; in addition to the unmarked nominative form and the genitive form, pronouns have distinct accusative and dative forms, used when the pronoun is the direct or indirect object of a verb, respectively, among other things. The declension of personal pronouns is shown in Table~\ref{tab:personal-pronouns}.
+Niklorsk personal pronouns distinguish nominative, accusative, and dative forms, as shown in Table~\ref{tab:personal-pronouns}. The nominative is used for subjects, while direct and indirect objects normally take the accusative and dative, respectively. Possession is expressed by a separate agreeing possessive paradigm rather than by an additional independent genitive column (Chapter~\ref{chap:modifiers}, \S\ref{sec:possessive-forms}). The noun-phrase construction and the choice between ordinary and reflexive possession are described in \S\ref{sec:noun-phrase-syntax} and Chapter~\ref{chap:syntax}, \S\ref{sec:reflexive-binding}.
 
 \begin{table}[!ht]
     \caption{Personal pronouns in Niklorsk}
@@ -289,7 +289,7 @@ As in English, Niklorsk pronouns replace nouns or noun phrases. Unlike nouns, ho
         {
             colspec={X[2]XXXX}
         }
-        Person & English & Base form & Accusative & Dative \\
+        Person & English & Nominative & Accusative & Dative \\
         First person, sg. & `I' & \nk{ag} & \nk{ægn} & \nk{ægnar} \\
         Second person, sg. & `you' & \nk{meg} & \nk{mæg} & \nk{mæg} \\
         Third person, masc., sg. & `he' & \nk{nar} & \nk{när} & \nk{när} \\
@@ -350,9 +350,38 @@ In rapid speech, \nk{ag} is further reduced to [\ipa{ə}], and weak \nk{hon} los
 \xe
 
 
-\subsection{The reflexive pronoun ham}
+\subsection{Reflexive pronouns}
+\label{sec:reflexive-pronouns}
 
-The reflexive pronoun \nk{ham} is used to refer back to the subject of the sentence
+The reflexive pronouns refer to the grammatical subject of their local binding domain. They are person-neutral: the same forms refer back to first-, second-, or third-person subjects, singular or plural. There is no independent nominative reflexive. The subject is expressed separately, and the reflexive occupies a dependent position in the clause or noun phrase. The binding domains and contrasts with ordinary pronouns are described in Chapter~\ref{chap:syntax}, \S\ref{sec:reflexive-binding}.
+
+\begin{table}[!ht]
+    \caption{Reflexive pronouns and possessives}
+    \label{tab:reflexive-forms}
+    \small
+    \begin{tabularx}{\textwidth}{l l >{\raggedright\arraybackslash}X}
+        \toprule
+        \rowcolor{grammarTableHead}
+        \textbf{Function} & \textbf{Form} & \textbf{Distribution} \\
+        \midrule
+        Nominative & \textemdash{} & No independent subject form \\
+        Accusative & \nk{hæm} & Direct object or accusative-selected complement \\
+        Dative & \nk{ham} & Indirect object or dative complement \\
+        Possessive, masculine & \nk{hamde} & Masculine singular possessed head \\
+        Possessive, feminine & \nk{hamdär} & Feminine singular possessed head \\
+        Possessive, neuter & \nk{hamde} & Neuter singular possessed head \\
+        Possessive, plural & \nk{hamda} & Plural possessed head, of any gender \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Case on an argumental reflexive follows its syntactic position: \nk{hæm} is accusative, while \nk{ham} is dative. A preposition selects the case of its complement under the same conditions as with an ordinary personal pronoun; reflexive reference does not itself change that selection. These argument forms do not agree in person, gender, or number with their antecedent.
+
+The possessives instead agree with the possessed nominal, not with the subject that supplies the possessor. Thus \nk{hamde mobil} has a masculine head, \nk{hamde brord} a neuter head, \nk{hamdär flikk} a feminine head, and \nk{hamda brorda} a plural head. The masculine--neuter syncretism in \nk{hamde} is part of this paradigm. The agreeing forms are not nominative argument forms of \nk{hæm} or \nk{ham}. A possessive within an object noun phrase or a prepositional phrase retains this agreement; the case of the containing phrase does not replace its agreement ending.
+
+When a possessor is coreferential with the local subject, the reflexive possessive is required across persons. For example, \nk{hamdär} in \nikp{Ag sortäs hamdär nyst}{I shall complete my own part} refers to \nk{ag}, while its feminine ending agrees with \nk{nyst}. Ordinary possessives identify a different possessor in that local relation; they remain available for ordinary nonlocal reference when the local subject is someone else. See Chapter~\ref{chap:modifiers}, \S\ref{sec:possessive-forms}.
+
+Some predicates conventionally occur with a reflexive, as in \nikp{strigg hæm}{faint}. Such combinations have lexical meanings; the reflexive paradigm does not by itself determine which other verbs admit a similar construction. Argumental reflexives also differ from intensifiers: \nk{hæm} and \nk{ham} fill case-marked argument positions, whereas emphatic English expressions such as `Martin himself' emphasise a participant. No separate intensifying construction follows simply from adding an argumental reflexive to a subject.
 
 \section{Demonstrative pronouns}
 
@@ -522,5 +551,22 @@ The interrogative pronouns in Niklorsk are shown in Table~\ref{tab:interr-pronou
 \end{tblr}
 \end{table}
 
-\enlargethispage{20bp}
 \section{Syntax of noun phrases}
+\label{sec:noun-phrase-syntax}
+
+The ordinary noun phrase places a determiner before any attributive adjective and the head noun. A definite article agrees with the head in gender and number, as do the adjectives: \nikp{en bang afte}{the good book} has a masculine head, while \nikp{de banger brug}{the good house} has a feminine head. A bare noun phrase has no article; Niklorsk has no indefinite article (\S\ref{sec:article-contraction}).
+
+\subsection{Possessors and attributive agreement}
+
+An agreeing pronominal possessive occupies the determiner position before attributive adjectives and the overt head: \nikp{æga bang afte}{my good book}. In this construction, possession is normally expressed without an additional definite article for the possessed head. Reflexive possessives have the same position and agreement, as in \nk{hamde bang afte}; their local subject antecedent is determined by the binding rules, not by the noun phrase's word order (Chapter~\ref{chap:syntax}, \S\ref{sec:reflexive-binding}).
+
+A genitive possessor is a whole noun phrase, not an agreeing possessive adjective. It precedes the adjectives and possessed head, as in \nikp{Martint banger brug}{Martin's good house}. The genitive ending belongs to the possessor phrase and does not agree with \nk{brug}. In \nikp{en blivt banger brug}{the man's good house}, \nk{en} is the article inside the masculine possessor phrase \nk{en blivt}; \nk{banger} agrees with the feminine possessed head \nk{brug}. Phrasal genitive attachment and the alternative \nk{sla} construction are described in \S\ref{sec:nominal-case}.
+
+This distinction also applies after a preposition. The established \nk{at}/\nk{atta} contraction combines \nk{at} with an article; it does not introduce an extra article into a possessive construction. Thus \nk{at Martint brug} retains \nk{at} without \nk{atta}, as described in \S\ref{sec:article-contraction}. The absence of a separate article is a property of this noun-phrase construction, not a change to the preposition's goal meaning.
+
+\subsection{Possessive ellipsis}
+\label{sec:possessive-ellipsis}
+
+When the possessed head is recoverable from context, it may be omitted. An article then accompanies the agreeing possessive, and the agreement identifies the gender and number of the omitted head. The article takes the case form required by the containing construction. This is distinct from a possessive followed by an overt noun: the article marks the elliptical nominal construction rather than appearing as an additional determiner before a possessed head.
+
+For feminine \nikp{nyst}{part} in direct-object position, the elliptical reflexive phrase is \nk{de hamdär}. Both the article and the possessive remain feminine, regardless of whether the local subject is \nk{ag}, \nk{Matti}, or another antecedent. The neuter \nk{eg hamde} would require a recoverable neuter head such as \nk{brord}; it cannot substitute for feminine \nk{nyst} merely because English uses the gender-neutral word `one'. The omitted head determines agreement; the local subject supplies the possessor.

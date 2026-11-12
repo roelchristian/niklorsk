@@ -64,7 +64,7 @@ preserves distinctions that merge in ordinary pronunciation.
   and the dative alternation, constituent fronting, questions, relative clauses,
   and complement clauses.
 - [Derivational morphology](chapters/derivations.tex): word-forming affixes and
-  their stress classes, the inseparable lexical derivational prefix *gæ-*, and noun-noun compounds
+  their stress classes, the inseparable lexical derivational prefixes *gæ-*, *för-* and *en-*, and noun-noun compounds
   with primary and secondary stress.
 - [Sample texts](chapters/texts.tex): passages in Niklorsk with interlinear
   glosses and English translations.

@@ -40,7 +40,7 @@ skers;v;;;to sing;
 skun;adj;;;blind;
 skäll;n;f;skälla;fish;
 sond;v;;;to speak;
-försond;v;;;to promise (cf. \nk{sond} `to speak');
+försond;v;;;to promise (cf. \nk{sond} `to speak');2
 stör;n;m;;day;
 sål;n;m;;birth;
 sollna;v;;;to be born (Class II, like \nk{bra});
@@ -155,7 +155,23 @@ hætslöt;v;;;to come down;1
 helslöt;v;;;to come up, to ascend;1
 ånhjalt;v;;;to write off (as a loss);1
 helbra;v;;;to give up;1
-betug;v;;;to become fat;2
+gætug;v;;;to become fat;2
+gæsond;v;;;to address, to speak to (someone as direct object);2
+gæramm;v;;;to work on, to process (something as direct object);2
+gævand;v;;;to traverse by driving (a territory as direct object);2
+gæbot;v;;;to cover with grass, to grass over (a surface as direct object);2
+gæskun;v;;;to render blind (an affected participant as direct object);2
+gæjærv;v;;;to exhaust, to make tired (an affected participant as direct object);2
+förkost;v;;;to distort, to alter beyond recognition (an affected object as direct object);2
+förklör;v;;;to burn up, to consume by fire (an affected object as direct object);2
+förgräd;v;;;to wear out through use (an affected object as direct object);2
+förramm;v;;;to overwork, to exhaust through labour (a worker as direct object);2
+förfjerd;v;;;to forget irretrievably (forgotten content as direct object);2
+enramm;v;;;to produce or develop through labour (the result as direct object);2
+enhjalt;v;;;to compose, to produce a written work (the work as direct object);2
+ensatt;v;;;to obtain through requesting (the acquired entity as direct object, infinitive \nk{ensatts});2
+entor;v;;;to become convinced (intransitive, optionally with an \nk{og} content clause), to acknowledge as true (content as direct object);2
+enjagt;v;;;to retrieve from memory, to recollect (recalled content as direct object);2
 åntug;v;;;to fatten away, to become obese;1
 mod;v;;;to drink;1
 opmurst;v;;;to cut apart, to cut into pieces;1
@@ -175,7 +191,7 @@ grädånde;n;n;grädönder;use, usage;
 födånde;n;n;födönder;heating a liquid;
 megerånde;n;n;megerönder;voting, a vote as an event;
 skersånde;n;n;skersönder;singing;
-försondånde;n;n;försondönder;promising;
+försondånde;n;n;försondönder;promising;2
 tid;v;;;to call (infinitive \nk{tids});
 satt;v;;;to ask (infinitive \nk{satts});
 religiös;adj;;;religious;4

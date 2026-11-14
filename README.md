@@ -23,6 +23,12 @@ infinitive. The synthetic progressive in *-att* or *-tt* remains preferred in
 writing, especially in literary prose. The two forms have essentially the same
 meaning; their usual difference is register.
 
+The synthetic passive in *-(e)n* is especially common in general statements,
+instructions and formal prose, but also permits particular events. The
+periphrastic *vor* passive is preferred for ordinary spoken event reports.
+Resultant-state predicates share the latter form but have a distinct adjectival
+analysis. Ordinary erosion can neutralise synthetic active–passive contrasts.
+
 Particle verbs ordinarily combine a preverbal particle with the verbal stem
 as one word. The grammar describes their separation with negation, pronominal
 or demonstrative objects, imperatives, and synthetic passives. It also treats

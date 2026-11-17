@@ -130,7 +130,7 @@ def plural_groups(lemma: str, plurals: list[str]) -> str:
     for form in plurals:
         if form == lemma:
             group = "N-zero"
-        elif lemma.endswith("ånde") and form == lemma[:-4] + "önder":
+        elif lemma.endswith("ånde") and form == lemma[:-4] + "ønder":
             group = "N-ånde"
         elif form in {lemma + "n", lemma + "en"}:
             group = "N-n"
@@ -151,11 +151,11 @@ def plural_groups(lemma: str, plurals: list[str]) -> str:
     return "|".join(groups) or "N?"
 
 LEGACY_GENDERS = {"nm": "m", "nf": "f", "nn": "n"}
-# Dictionary collation follows Danish/Norwegian order, with Ö in the Ø position.
+# Dictionary collation follows Danish/Norwegian order.
 # These equivalences affect sorting, never spelling.
-DICTIONARY_ALPHABET = "abcdefghijklmnopqrstuvwxyzæöå"
+DICTIONARY_ALPHABET = "abcdefghijklmnopqrstuvwxyzæøå"
 DICTIONARY_WEIGHTS = {letter: index + 1 for index, letter in enumerate(DICTIONARY_ALPHABET)}
-DICTIONARY_EQUIVALENTS = {"ä": "æ", "ø": "ö"}
+DICTIONARY_EQUIVALENTS = {"ä": "æ", "ö": "ø"}
 
 
 class BuildError(Exception):
@@ -227,9 +227,9 @@ def perfect_auxiliary(row: dict) -> str:
 
 
 # Stress anchors are one-based extended-grapheme positions in the citation form.
-# Niklorsk's written öy occupies one nucleus; other adjacent vowels are hiatus.
+# Niklorsk's written øy occupies one nucleus; other adjacent vowels are hiatus.
 # Explicit anchors take precedence for lexical syllabification exceptions.
-VOWEL_GRAPHEMES = set("aeiouyæåäö")
+VOWEL_GRAPHEMES = set("aeiouyæøå")
 
 
 def orthographic_graphemes(text: str) -> list[str]:
@@ -257,7 +257,7 @@ def stress_display(row: dict) -> tuple[str, str]:
         char = clusters[index].casefold()
         if char in VOWEL_GRAPHEMES:
             vowels.append(index)
-            if char == "ö" and index + 1 < len(clusters) and clusters[index + 1].casefold() == "y":
+            if char == "ø" and index + 1 < len(clusters) and clusters[index + 1].casefold() == "y":
                 index += 1
         index += 1
     warning = ""
@@ -307,7 +307,7 @@ def read_vocabulary(source: Path) -> list[dict]:
                 raise BuildError(f"Unknown vocabulary part of speech on row {line}: {pos}.")
             plurals = []
             if legacy:
-                word = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ö").replace(r"\\ae\{\}", "æ")
+                word = row["word"].replace(r'\\"a', "æ").replace(r'\\"o', "ø").replace(r"\\ae\{\}", "æ")
                 forms = [form.strip() for form in word.split(",")]
                 lemma, plurals = forms[0], forms[1:]
                 gender = LEGACY_GENDERS.get(pos, "")
@@ -410,7 +410,7 @@ def vocabulary(stage: Path) -> int:
         r"\label{sec:vocabulary-key}",
         r"Headwords are nominative singular nouns, verbal infinitives, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites appear in the neuter, possessives in the masculine (masculine--neuter \nk{hamde}), and reflexive \nk{hæm} in the accusative. Articles are listed under \nk{en} and \nk{men} (\S~\ref{sec:indefinite-article}); for preposition--article contractions, see \S~\ref{sec:article-contraction}. Derivatives are listed separately; personal and place names are omitted.",
         "",
-        r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. An acute marks primary stress, while superscripts 1 and 2 identify lexical Accent 1 and Accent 2. Either property may be unrecorded, in which case its mark is omitted; surface neutralisation is represented separately as A0. These editorial annotations are absent from ordinary spelling (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ (including Ä), Ö, Å.",
+        r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. An acute marks primary stress, while superscripts 1 and 2 identify lexical Accent 1 and Accent 2. Either property may be unrecorded, in which case its mark is omitted; surface neutralisation is represented separately as A0. These editorial annotations are absent from ordinary spelling (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ, Ø, Å.",
         "",
         r"\begingroup\raggedright",
         r"\noindent\textbf{Inflection key.} N-ar, N-or, N-a, N-n: suffixal plurals; N-er: umlaut with \nk{-er}; N-U: umlaut alone; N-$\varnothing$: zero plural; N-s: borrowed \nk{-s} and recorded native alternatives; N-ånde: \nk{-ånde} nouns. N-exp identifies an explicitly recorded plural without assigning a productive class; N? indicates no recorded plural. Genitives follow \S~\ref{sec:nominal-case}; person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",

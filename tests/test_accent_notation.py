@@ -14,7 +14,7 @@ def record(word, stress='', accent='', anchor=''):
 
 class AccentNotationTests(unittest.TestCase):
     def test_all_vowel_graphemes(self):
-        for vowel, expected in zip('aeiouyæåäö', ['á','é','í','ó','ú','ý','ǽ','ǻ','ä́','ö́']):
+        for vowel, expected in zip('aeiouyæøå', ['á','é','í','ó','ú','ý','ǽ','ǿ','ǻ']):
             with self.subTest(vowel=vowel):
                 actual, warning = build.stress_display(record(vowel, '1'))
                 self.assertEqual(unicodedata.normalize('NFC', actual), unicodedata.normalize('NFC', expected))
@@ -24,17 +24,17 @@ class AccentNotationTests(unittest.TestCase):
     def test_nuclei_compounds_and_prefixes(self):
         for word, stress, expected in [('magasin','3','magasín'),('hjalts','1','hjálts'),
                                        ('tages','1','táges'),('afte','1','áfte'),
-                                       ('böyses','1','bö́yses'),('böyses','2','böysés'),
+                                       ('bøyses','1','bǿyses'),('bøyses','2','bøysés'),
                                        ('situasion','3','situásion'),('enhjalts','2','enhjálts'),
-                                       ('gætugs','2','gætúgs'),('anslöts','1','ánslöts')]:
+                                       ('gætugs','2','gætúgs'),('ansløts','1','ánsløts')]:
             self.assertEqual(build.stress_display(record(word, stress)), (expected, ''))
 
     def test_unknown_not_invented_and_anchor_override(self):
         self.assertEqual(build.stress_display(record('afte'))[0], 'afte')
         self.assertIn('unrecorded', build.stress_display(record('afte'))[1])
         self.assertIn('stress_anchor', build.stress_display(record('afte', '3'))[1])
-        self.assertEqual(build.stress_display(record('öy', '2', anchor='2'))[0], 'öý')
-        self.assertIn('overrides', build.stress_display(record('öy', '2', anchor='2'))[1])
+        self.assertEqual(build.stress_display(record('øy', '2', anchor='2'))[0], 'øý')
+        self.assertIn('overrides', build.stress_display(record('øy', '2', anchor='2'))[1])
         with self.assertRaises(build.BuildError):
             build.stress_display(record('afte', '1', anchor='2'))
 
@@ -111,6 +111,27 @@ class AccentNotationTests(unittest.TestCase):
         chapter = (ROOT/'chapters/phonology.tex').read_text()
         table = chapter.split(r'\label{tab:particle-lexical-accent}', 1)[1].split(r'\end{table}', 1)[0]
         for form in [r'\nkaccent{án}{A1}', r'\nkaccent{ǻn}{A1}',
-                     r'\nkaccent{slö́t}{A1}', r'\nkaccent{ánˌslöt}{A1}',
-                     r'\nkaccent{slö́tar}{A1}', r'\nkaccent{Slö́te}{A1}']:
+                     r'\nkaccent{slǿt}{A1}', r'\nkaccent{ánˌsløt}{A1}',
+                     r'\nkaccent{slǿtar}{A1}', r'\nkaccent{Slǿte}{A1}']:
             self.assertIn(form, table)
+
+
+class RevisedVowelSpellingTests(unittest.TestCase):
+    def test_current_vowels_and_diphthong_resolution(self):
+        self.assertEqual(build.VOWEL_GRAPHEMES, set('aeiouyæøå'))
+        for word, stress, expected in [('æ', '1', 'ǽ'), ('ø', '1', 'ǿ'),
+                                      ('ae', '1', 'áe'), ('ae', '2', 'aé'),
+                                      ('øys', '1', 'ǿys')]:
+            self.assertEqual(build.stress_display(record(word, stress)), (expected, ''))
+        self.assertIn('no written nucleus', build.stress_display(record('øys', '2'))[1])
+
+    def test_current_letter_collation(self):
+        self.assertEqual(sorted(['å', 'ø', 'æ', 'z'], key=build.dictionary_key),
+                         ['z', 'æ', 'ø', 'å'])
+        self.assertEqual(build.dictionary_heading('øys'), 'Ø')
+        self.assertEqual(build.dictionary_heading('ærs'), 'Æ')
+
+    def test_lexical_spelling_has_no_retired_letters(self):
+        for row in build.read_vocabulary(ROOT / 'vocabulary/vocabulary.csv'):
+            for field in ('lemma', 'infinitive', 'plural'):
+                self.assertFalse(set(row.get(field, '')) & set('äöÄÖ'), (row['lemma'], field))

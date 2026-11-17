@@ -15,10 +15,10 @@ class AspectTests(unittest.TestCase):
 
     def test_obsolete_finite_aspect_absent(self):
         obsolete = ('hjaltatt', 'hjaltet', 'bratt', 'sollnatt', 'kanselatt',
-                    'kanselert', 'tagett', 'bördutt', 'bängdutt', 'slämatt',
-                    'stettatt', 'svoratt', 'pöljatt', 'hjeckatt', 'mykatt',
-                    'bördet', 'vædatten', 'naurtet', 'nöyrtet', 'enrammet', 'anslötet',
-                    'anslötatt', 'voratt', 'vorst', 'normaˈlisatt')
+                    'kanselert', 'tagett', 'børdutt', 'bængdutt', 'slæmatt',
+                    'stettatt', 'svoratt', 'pøljatt', 'hjeckatt', 'mykatt',
+                    'børdet', 'vædatten', 'naurtet', 'nøyrtet', 'enrammet', 'ansløtet',
+                    'ansløtatt', 'voratt', 'vorst', 'normaˈlisatt')
         pattern = r'(?<!\w)(?:' + '|'.join(map(re.escape, obsolete)) + r')(?!\w)'
         for path in self.sources:
             text = path.read_text()
@@ -30,29 +30,29 @@ class AspectTests(unittest.TestCase):
         self.assertIsNone(re.search(r'^\s*(?:Perfect|Progressive)\s*&', self.verbs, re.M))
 
     def test_perfect_auxiliary_and_invariable_participle(self):
-        for form in ('får hjaltur', 'fårar hjaltur', 'fåräs hjaltur',
-                     'Ag får så när hjaltur', 'får vorur i hjalts'):
+        for form in ('får hjaltur', 'fårar hjaltur', 'fåræs hjaltur',
+                     'Ag får så nær hjaltur', 'får vorur i hjalts'):
             self.assertIn(form, self.verbs)
         self.assertIn('invariable', self.verbs)
         self.assertIn('fårar nortur Joann', (ROOT / 'chapters/texts.tex').read_text())
 
     def test_be_perfect_examples(self):
         for form in ('Ag får hjaltur en afte', 'Matti får lotur',
-                     'Matti ö slötur', 'Matti ö malmur at Norge',
-                     'Matti ö anslötur', 'Matti ö atslötur',
-                     'Matti vor slötur', 'Matti vörs slötur',
-                     'Matti års slötur', 'Matti voren slötur',
-                     'Matti ö så slötur', 'Matti ö så slötur an',
-                     'Gå ö slöturen', 'Matti tind slötsk'):
+                     'Matti ø sløtur', 'Matti ø malmur at Norge',
+                     'Matti ø ansløtur', 'Matti ø atsløtur',
+                     'Matti vor sløtur', 'Matti vørs sløtur',
+                     'Matti års sløtur', 'Matti voren sløtur',
+                     'Matti ø så sløtur', 'Matti ø så sløtur an',
+                     'Gå ø sløturen', 'Matti tind sløtsk'):
             self.assertIn(form, self.verbs)
         for form in ('mustur', 'lotur', '-uren', '-guren'):
             self.assertIn(form, self.verbs)
-        self.assertNotIn('Matti ö så anslötur', self.verbs)
+        self.assertNotIn('Matti ø så ansløtur', self.verbs)
 
     def test_number_only_past_participles(self):
         for path in self.sources:
             with self.subTest(path=path.name):
-                self.assertNotIn('urär', path.read_text())
+                self.assertNotIn('urær', path.read_text())
         modifiers = (ROOT / 'chapters/modifiers.tex').read_text()
         self.assertIn('hjalturen', modifiers)
         # Present participle agreement remains distinct.
@@ -62,8 +62,8 @@ class AspectTests(unittest.TestCase):
         pairs = re.findall(r'\\gla\s+(.*?)//\s*\\glb\s+(.*?)//',
                            self.verbs, re.S)
         examples = {source: gloss for source, gloss in pairs}
-        be_perfect = 'Matti ö slötur. Gå ö slöturen.'
-        passive = 'Der hjölter får vorur kvinturen på Matti.'
+        be_perfect = 'Matti ø sløtur. Gå ø sløturen.'
+        passive = 'Der hjølter får vorur kvinturen på Matti.'
         self.assertIn(be_perfect, examples)
         self.assertIn(passive, examples)
         for source in (be_perfect, passive):
@@ -91,8 +91,8 @@ class AspectTests(unittest.TestCase):
         self.assertIn('is independent of finite auxiliary selection', self.verbs)
 
     def test_progressive_remains_infinitival(self):
-        for form in ('ö i hjalts', 'vor i hjalts', 'vörs i hjalts',
-                     'Ag ö så i hjalts', 'Ag ö så i mursts med op'):
+        for form in ('ø i hjalts', 'vor i hjalts', 'vørs i hjalts',
+                     'Ag ø så i hjalts', 'Ag ø så i mursts med op'):
             self.assertIn(form, self.verbs)
 
     def test_retained_nonfinite_and_mood_forms(self):

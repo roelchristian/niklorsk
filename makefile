@@ -401,10 +401,11 @@ def vocabulary(stage: Path) -> int:
         "",
 
         r"\label{sec:vocabulary-key}",
-        r"Headwords are nominative singular nouns, verbal infinitives, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites appear in the neuter, possessives in the masculine (masculine--neuter \nk{hamde}), and reflexive \nk{hæm} in the accusative. Articles are listed under \nk{en} and \nk{men} (\S~\ref{sec:indefinite-article}); for contracted \nk{atta}, see \S~\ref{sec:article-contraction}. Derivatives are listed separately; personal and place names are omitted.",
+        r"Headwords are nominative singular nouns, verbal infinitives, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites appear in the neuter, possessives in the masculine (masculine--neuter \nk{hamde}), and reflexive \nk{hæm} in the accusative. Articles are listed under \nk{en} and \nk{men} (\S~\ref{sec:indefinite-article}); for preposition--article contractions, see \S~\ref{sec:article-contraction}. Derivatives are listed separately; personal and place names are omitted.",
         "",
         r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. An acute marks primary stress, while superscripts 1 and 2 identify lexical Accent 1 and Accent 2. Either property may be unrecorded, in which case its mark is omitted; surface neutralisation is represented separately as A0. These editorial annotations are absent from ordinary spelling (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ (including Ä), Ö, Å.",
         "",
+        r"\begingroup\raggedright",
         r"\noindent\textbf{Inflection key.} N-ar, N-or, N-a, N-n: suffixal plurals; N-er: umlaut with \nk{-er}; N-U: umlaut alone; N-$\varnothing$: zero plural; N-s: borrowed \nk{-s} and recorded native alternatives; N-ånde: \nk{-ånde} nouns. N? indicates no recorded plural. Genitives follow \S~\ref{sec:nominal-case}; person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
         "",
         r"\noindent I, II: regular conjugations (Table~\ref{tab:verb-conjugation}); L: Latinate (Table~\ref{tab:verb-conjugation-latinate}); \emph{vowel alt.}: participial vowel alternation; \emph{stem alt.}: consonant restoration; \emph{irr.}: irregular; \emph{irr.?}: irregular, paradigm incomplete; V?: conjugation unrecorded; \emph{sep.}: mobile particle; \emph{insep.}: inseparable prefix.",
@@ -414,6 +415,7 @@ def vocabulary(stage: Path) -> int:
         r"\noindent A: ordinary adjective agreement and comparison (Tables~\ref{tab:adj-declension}, \ref{tab:adj-comp}); A?: full agreement pattern unrecorded. Adv: regular \nk{-æginn/-gæginn} comparison; Adv-irr.: irregular comparison; Adv0: no comparative listed, including \nk{-s} adverbs (\S~\ref{sec:adverb-formation}).",
         "",
         r"\noindent P: personal; D: demonstrative; Ind: indefinite; Q: interrogative with plural; Q0: invariable interrogative; Poss: possessive; R: argumental reflexive; RP: reflexive possessive; Art: definite article; Art-ind: indefinite article.",
+        r"\par\endgroup",
         "", r"{\footnotesize", r"\begin{multicols}{2}", "",
     ]
     previous = ""

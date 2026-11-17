@@ -22,10 +22,11 @@ class ArticleCaseTests(unittest.TestCase):
 
     def test_possessor_articles_agree_with_possessor(self):
         text = (ROOT / 'chapters/nouns.tex').read_text()
-        for phrase in ('en blivt brug', 'der blivtes brug', 'de skællt bagen', 'der skælltes bagen'):
+        for phrase in ('de brug sla en bliv', 'de brug sla en svorade bliv',
+                       'de banger brug sla Martin', 'eg roghjalt sla Andærs'):
             self.assertIn(phrase, text)
-        for obsolete in ('de blivt brug', 'de blivtes brug', 'der skællt bagen'):
-            self.assertNotIn('{' + obsolete + '}', text)
+        for obsolete in ('blivt', 'blivtes', 'skællt', 'skælltes'):
+            self.assertNotIn(obsolete, text)
 
 
 if __name__ == '__main__':

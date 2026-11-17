@@ -12,8 +12,9 @@ prenominal adjectives. Constituent fronting can alter the order of the subject
 and verb.
 
 Nouns have masculine, feminine, and neuter gender, with several lexical plural
-patterns and a distinction between nominative and genitive case. Personal
-pronouns retain additional accusative and dative forms. Adjectives agree with
+patterns. Nominal possession is expressed with postnominal *sla* phrases,
+while personal pronouns retain accusative and dative forms and a separate
+possessive paradigm. Adjectives agree with
 the nouns they modify in gender and number. The verbal system includes finite
 and non-finite forms, tense and aspect distinctions, conditional constructions,
 and passive forms.

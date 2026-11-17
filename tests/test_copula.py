@@ -28,6 +28,38 @@ class CopulaTests(unittest.TestCase):
         self.assertIn(r'\nikp{ur}{become}', self.verbs)
         self.assertIn(r'\nikp{är}{I became}', self.verbs)
 
+    def test_be_glosses_match_copula_forms(self):
+        # Check forms in running examples, not just the displayed paradigm.
+        expected = {r'be.\Pres': 'ö', r'be.\Pst': 'vor',
+                    r'be.\Fut': 'vörs', r'be.\Cond': 'års',
+                    r'be.\Inf': 'vors', r'be.\PresP': 'edde',
+                    r'be.\PstP': 'vorur'}
+        checked = 0
+        for path in [*sorted((ROOT / 'chapters').glob('*.tex')),
+                     *sorted((ROOT / 'texts').glob('*.tex'))]:
+            pairs = re.findall(r'\\gla\s+(.*?)//\s*\\glb\s+(.*?)//',
+                               path.read_text(), re.S)
+            for source, gloss in pairs:
+                words, glosses = source.split(), gloss.split()
+                if not any(item.startswith('be.') for item in glosses):
+                    continue
+                with self.subTest(path=path.name, example=source):
+                    self.assertEqual(len(words), len(glosses))
+                    for word, item in zip(words, glosses):
+                        category = item.replace('{}', '').rstrip('.,;')
+                        if category in expected:
+                            self.assertEqual(word.strip('{}.,;'), expected[category])
+                            checked += 1
+        self.assertGreater(checked, 0)
+
+    def test_become_paradigm_is_preserved(self):
+        forms = {'går': 'I become', 'är': 'I became', 'gikt': 'I will become',
+                 'gins': 'I would become', 'gav': 'I would not become',
+                 'gårs': 'to become', 'gäde': 'becoming', 'ur': 'become'}
+        for form, gloss in forms.items():
+            with self.subTest(form=form):
+                self.assertIn(r'\nikp{' + form + '}{' + gloss + '}', self.verbs)
+
     def test_obsolete_copula_forms_and_table_absent(self):
         sources = [ROOT / 'README.md', ROOT / 'makefile',
                    *sorted((ROOT / 'chapters').glob('*.tex')),

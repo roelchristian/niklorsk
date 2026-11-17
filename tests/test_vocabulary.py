@@ -44,6 +44,9 @@ class VocabularyTests(unittest.TestCase):
             for stem, row in self.verbs.items():
                 head = r'\dictionaryentry{' + row['infinitive'] + '}'
                 self.assertIn(head, text)
+            self.assertEqual(text.count(r'\dictionaryentry{vors}'), 1)
+            self.assertNotIn(r'\dictionaryentry{ös}', text)
+            self.assertNotIn(r'\dictionaryentry{vor}', text)
             for infinitive, target in [('vors', 'tab:verb-to-be'), ('gårs', 'tab:verb-to-be')]:
                 entry = next(line for line in text.splitlines() if line.startswith(r'\dictionaryentry{' + infinitive + '}'))
                 self.assertIn(r'See Table~\ref{' + target + '}', entry)

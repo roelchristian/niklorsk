@@ -31,7 +31,7 @@ class AspectTests(unittest.TestCase):
 
     def test_perfect_auxiliary_and_invariable_participle(self):
         for form in ('får hjaltur', 'fårar hjaltur', 'fåræs hjaltur',
-                     'Ag får så nær hjaltur', 'får vorur i hjalts'):
+                     'Ag får så navn hjaltur', 'får vorur i hjalts'):
             self.assertIn(form, self.verbs)
         self.assertIn('invariable', self.verbs)
         self.assertIn('fårar nortur Joann', (ROOT / 'chapters/texts.tex').read_text())

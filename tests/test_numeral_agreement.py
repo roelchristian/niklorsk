@@ -29,7 +29,7 @@ class NumeralAgreementTests(unittest.TestCase):
                         'som hjalturen aften'):
             self.assertIn(example, self.modifiers)
         numeral_section = self.modifiers.split(r'\label{sec:numerals}', 1)[1]
-        self.assertIn(r'\nk{nør}', numeral_section)
+        self.assertIn(r'\nk{nø}', numeral_section)
         self.assertIn(r'\ref{tab:personal-pronouns}', numeral_section)
         self.assertIn(r'\nk{banga}', self.modifiers)
         self.assertIn(r'\nk{hjalturen}', self.modifiers)

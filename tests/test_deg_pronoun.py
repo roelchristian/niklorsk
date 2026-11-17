@@ -41,7 +41,7 @@ class DegPronounTests(unittest.TestCase):
         modifiers = (ROOT / 'chapters/modifiers.tex').read_text()
         self.assertIn(r'\nk{dåg sig}', modifiers)
         self.assertIn('Ag malm at Trøndhem dåg Matti malm at Rikke.', modifiers)
-        self.assertIn('Ag bram vin exam dåg Matti pølj', modifiers)
+        self.assertIn('Ag bram vin exam dåg Matti svor', modifiers)
         paths = [ROOT / 'vocabulary/vocabulary.csv']
         for folder in ('chapters', 'texts'):
             paths.extend((ROOT / folder).glob('*.tex'))

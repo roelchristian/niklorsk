@@ -38,8 +38,8 @@ class EmbeddedQuestionTests(unittest.TestCase):
             self.assertIn(r'\gla ' + example + '//', self.embedded)
 
     def test_content_question_order_and_quotation(self):
-        self.assertIn(r'\gla Ag sattar, kæll sløtar.//', self.embedded)
-        self.assertIn(r'\gla Ag sattar, kæll vædar Matti.//', self.embedded)
+        self.assertIn(r'\gla Ag sattar, deg sløtar.//', self.embedded)
+        self.assertIn(r'\gla Ag sattar, deg vædar Matti.//', self.embedded)
         self.assertIn('relative clause modifies a nominal antecedent', self.embedded)
         self.assertIn("\\gla Ag sattar: `Matti inte får børdur någ?'//", self.quoted)
         self.assertIn('reporting clause may remain declarative', self.quoted)

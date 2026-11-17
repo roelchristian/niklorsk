@@ -73,20 +73,20 @@ preserves distinctions that merge in ordinary pronunciation.
 
 ## Vocabulary and texts
 
-The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk lemmas, parts of
-speech, recorded noun gender, inflection groups, English meanings, and specified
-primary-stress positions. Verbs are cited by their explicitly recorded
-`infinitive`, including incorporated particles and prefixes; their existing
-`lemma` field retains the present stem for morphological lookup. Other entries
-use the `lemma` as their citation form. Derived words are listed separately.
-The same word list supplies the manuscript's vocabulary appendix,
-where group labels link to declension and conjugation tables. Recorded plural
-forms appear in the noun and derivation chapters. A question mark leaves an
-unrecorded class or paradigm open. The vocabulary does not yet record lexical
-accent categories. Run `python3 -m unittest discover -s tests -v` for
-source-only vocabulary checks. Older word lists containing verbs must add
-the `infinitive` column and supply each form explicitly; the build does not
-infer missing infinitives.
+The [vocabulary](vocabulary/vocabulary.csv) supplies the manuscript’s
+Niklorsk–English dictionary, whose inflection labels link to the relevant
+paradigms. Entries record parts of speech, noun gender, inflection groups,
+English meanings and primary stress where specified. Verbs are cited in the
+infinitive, with particles and prefixes incorporated; other entries use the
+lemma. Derived words have separate entries. A question mark identifies an
+unrecorded class or incomplete paradigm, while lexical accent remains
+unspecified throughout the word list. Noun plurals are given in the noun and
+derivation chapters.
+
+In the CSV, `infinitive` holds each verb’s citation form and `lemma` its present
+stem for morphological lookup. Older word lists containing verbs must supply
+the `infinitive` column explicitly, since the generator does not infer missing
+forms. Run `python3 -m unittest discover -s tests -v` for source-only checks.
 
 Additional material in [texts/](texts/) includes a translation draft from
 *Middlemarch* and a small Niklorsk–English corpus. These are separate from the

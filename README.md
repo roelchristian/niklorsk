@@ -59,7 +59,8 @@ preserves distinctions that merge in ordinary pronunciation.
 - [Nouns and pronouns](chapters/nouns.tex): gender, articles, number, case,
   personal and demonstrative pronouns, and noun phrases.
 - [Other word classes](chapters/modifiers.tex): adjective agreement and
-  comparison, possessive forms, adverbs, prepositions, and conjunctions.
+  comparison, possessive forms, cardinal numerals, counting in twenties,
+  long-scale numerals, adverbs, prepositions, and conjunctions.
 - [Clause structure](chapters/syntax.tex): basic word order, ditransitive verbs
   and the dative alternation, constituent fronting, questions, relative clauses,
   and complement clauses.

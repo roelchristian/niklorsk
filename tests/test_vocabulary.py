@@ -22,7 +22,7 @@ class VocabularyTests(unittest.TestCase):
         self.assertEqual(len(self.rows), 486)
         self.assertEqual(len(self.verbs), 113)
         special = {'ö': 'vors', 'går': 'gårs', 'får': 'fårs',
-                   'igom': 'igoms', 'tage': 'tages', 'baus': 'bauses',
+                   'igom': 'igoms', 'tage': 'tages', 'böys': 'böyses',
                    'mårs': 'mårses', 'skers': 'skerses', 'bra': 'brags',
                    'helbra': 'helbrags', 'få': 'fågs', 'kunda': 'kundags',
                    'sollna': 'sollnags', 'kanseler': 'kanselers'}
@@ -80,9 +80,9 @@ class VocabularyTests(unittest.TestCase):
             for path in (ROOT / folder).glob('*.tex'):
                 self.assertIsNone(re.search(r'\b(?:bärgs?|lods?|lodar)\b', path.read_text()), path)
         nouns = (ROOT / 'chapters/nouns.tex').read_text()
-        self.assertIn('Nar får auto?', nouns)
+        self.assertIn('Nar får öyto?', nouns)
         self.assertIn(r'\nk{fårs leder}', nouns)
-        self.assertIn(r'\nk{fågs auto}', nouns)
+        self.assertIn(r'\nk{fågs öyto}', nouns)
         self.assertIn('Læse får de ngell', nouns)
         self.assertIn('i fårs så 18 spis', (ROOT / 'chapters/verbs.tex').read_text())
         self.assertIn('Konta Brok fårar', (ROOT / 'texts/middlemarch.tex').read_text())

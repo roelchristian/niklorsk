@@ -79,29 +79,31 @@ preserves distinctions that merge in ordinary pronunciation.
 The [vocabulary](vocabulary/vocabulary.csv) supplies the manuscript’s
 Niklorsk–English dictionary, whose inflection labels link to the relevant
 paradigms. Entries record parts of speech, noun gender, inflection groups,
-English meanings, primary stress and lexical accent where specified. Verbs are cited in the
-infinitive, with particles and prefixes incorporated; other entries use the
-lemma. Derived words have separate entries. A question mark identifies an
-unrecorded class or incomplete paradigm. Acute accents mark primary stress;
-superscript 1 and 2 mark recorded lexical categories A1 and A2, independently
-of their surface realisation. Missing accent values remain unspecified. Noun plurals are given in the noun and
-derivation chapters.
+English meanings, primary stress and lexical accent where specified. Verbs use
+the infinitive as their citation form, with particles and prefixes incorporated,
+and derived words have separate entries. A question mark identifies an
+unrecorded class or incomplete paradigm; noun plurals are described in the noun
+and derivation chapters.
+
+In displayed headwords, an acute marks primary stress and superscript 1 or 2
+records lexical A1 or A2, independently of its surface realisation. An omitted
+superscript leaves the lexical category unspecified.
 
 In the CSV, `infinitive` holds each verb’s citation form and `lemma` its present
 stem for morphological lookup. Older word lists containing verbs must supply
 the `infinitive` column explicitly, since the generator does not infer missing
 forms. The separate optional `perfect_auxiliary` field records `BE` for directed
 motion verbs and `ALTERNATING` for predicates with a licensed activity/transition
-alternation. Blank verbal values default to `HAVE`; explicit `HAVE` is also
-accepted. These values describe lexical selection, not conjugation class.
-Non-verbal entries leave the field blank. The generated dictionary identifies
+alternation. These values describe lexical selection independently of conjugation class:
+verbal entries default to `HAVE`, which may also be recorded explicitly, while
+non-verbal entries leave the field blank. The generated dictionary identifies
 non-default selection and links to the perfect section.
 
 `stress` is a one-based syllable index, and `accent` is `A1`, `A2` or
 blank. `stress_anchor`, when required, identifies the stressed vowel by its
 one-based Unicode grapheme position in the citation form; it resolves an
 exception rather than supplying missing stress data. The generator groups
-`au` as one nucleus and treats other adjacent vowel graphemes as hiatus.
+`öy` as one nucleus and treats other adjacent vowel graphemes as hiatus.
 It emits `notation_warnings.json` alongside the generated vocabulary for
 missing or unresolved metadata. Display accents do not change stored spelling,
 lookup or sorting. Run `python3 -m unittest discover -s tests -v` for source-only checks.

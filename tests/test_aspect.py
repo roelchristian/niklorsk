@@ -17,7 +17,7 @@ class AspectTests(unittest.TestCase):
         obsolete = ('hjaltatt', 'hjaltet', 'bratt', 'sollnatt', 'kanselatt',
                     'kanselert', 'tagett', 'bördutt', 'bängdutt', 'slämatt',
                     'stettatt', 'svoratt', 'pöljatt', 'hjeckatt', 'mykatt',
-                    'bördet', 'vædatten', 'naurtet', 'enrammet', 'anslötet',
+                    'bördet', 'vædatten', 'naurtet', 'nöyrtet', 'enrammet', 'anslötet',
                     'anslötatt', 'voratt', 'vorst', 'normaˈlisatt')
         pattern = r'(?<!\w)(?:' + '|'.join(map(re.escape, obsolete)) + r')(?!\w)'
         for path in self.sources:

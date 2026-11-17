@@ -24,7 +24,7 @@ class AccentNotationTests(unittest.TestCase):
     def test_nuclei_compounds_and_prefixes(self):
         for word, stress, expected in [('magasin','3','magasín'),('hjalts','1','hjálts'),
                                        ('tages','1','táges'),('afte','1','áfte'),
-                                       ('bauses','1','báuses'),('bauses','2','bausés'),
+                                       ('böyses','1','bö́yses'),('böyses','2','böysés'),
                                        ('situasion','3','situásion'),('enhjalts','2','enhjálts'),
                                        ('gætugs','2','gætúgs'),('anslöts','1','ánslöts')]:
             self.assertEqual(build.stress_display(record(word, stress)), (expected, ''))
@@ -33,8 +33,8 @@ class AccentNotationTests(unittest.TestCase):
         self.assertEqual(build.stress_display(record('afte'))[0], 'afte')
         self.assertIn('unrecorded', build.stress_display(record('afte'))[1])
         self.assertIn('stress_anchor', build.stress_display(record('afte', '3'))[1])
-        self.assertEqual(build.stress_display(record('au', '2', anchor='2'))[0], 'aú')
-        self.assertIn('overrides', build.stress_display(record('au', '2', anchor='2'))[1])
+        self.assertEqual(build.stress_display(record('öy', '2', anchor='2'))[0], 'öý')
+        self.assertIn('overrides', build.stress_display(record('öy', '2', anchor='2'))[1])
         with self.assertRaises(build.BuildError):
             build.stress_display(record('afte', '1', anchor='2'))
 

@@ -225,7 +225,7 @@ def perfect_auxiliary(row: dict) -> str:
 
 
 # Stress anchors are one-based extended-grapheme positions in the citation form.
-# Niklorsk's phonemic au occupies one nucleus; other adjacent vowels are hiatus.
+# Niklorsk's written öy occupies one nucleus; other adjacent vowels are hiatus.
 # Explicit anchors take precedence for lexical syllabification exceptions.
 VOWEL_GRAPHEMES = set("aeiouyæåäö")
 
@@ -255,7 +255,7 @@ def stress_display(row: dict) -> tuple[str, str]:
         char = clusters[index].casefold()
         if char in VOWEL_GRAPHEMES:
             vowels.append(index)
-            if char == "a" and index + 1 < len(clusters) and clusters[index + 1].casefold() == "u":
+            if char == "ö" and index + 1 < len(clusters) and clusters[index + 1].casefold() == "y":
                 index += 1
         index += 1
     warning = ""
@@ -403,13 +403,13 @@ def vocabulary(stage: Path) -> int:
         r"\label{sec:vocabulary-key}",
         r"Headwords are nominative singular nouns, verbal infinitives, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites appear in the neuter, possessives in the masculine (masculine--neuter \nk{hamde}), and reflexive \nk{hæm} in the accusative. Articles are listed under \nk{en} and \nk{men} (\S~\ref{sec:indefinite-article}); for contracted \nk{atta}, see \S~\ref{sec:article-contraction}. Derivatives are listed separately; personal and place names are omitted.",
         "",
-        r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. An acute marks primary stress; superscripts 1 and 2 identify lexical Accent 1 and Accent 2. An absent acute or superscript leaves the respective property unrecorded, not neutralised; A0 denotes surface neutralisation. These editorial marks are not part of ordinary spelling (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ (including Ä), Ö, Å.",
+        r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. An acute marks primary stress, while superscripts 1 and 2 identify lexical Accent 1 and Accent 2. Either property may be unrecorded, in which case its mark is omitted; surface neutralisation is represented separately as A0. These editorial annotations are absent from ordinary spelling (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ (including Ä), Ö, Å.",
         "",
         r"\noindent\textbf{Inflection key.} N-ar, N-or, N-a, N-n: suffixal plurals; N-er: umlaut with \nk{-er}; N-U: umlaut alone; N-$\varnothing$: zero plural; N-s: borrowed \nk{-s} and recorded native alternatives; N-ånde: \nk{-ånde} nouns. N? indicates no recorded plural. Genitives follow \S~\ref{sec:nominal-case}; person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
         "",
         r"\noindent I, II: regular conjugations (Table~\ref{tab:verb-conjugation}); L: Latinate (Table~\ref{tab:verb-conjugation-latinate}); \emph{vowel alt.}: participial vowel alternation; \emph{stem alt.}: consonant restoration; \emph{irr.}: irregular; \emph{irr.?}: irregular, paradigm incomplete; V?: conjugation unrecorded; \emph{sep.}: mobile particle; \emph{insep.}: inseparable prefix.",
         "",
-        r"Perfect selection is specified for verbs taking \nk{vors} and for the licensed activity/transition alternation; other verbal entries take \nk{fårs} by default (\S~\ref{sec:perfect}). Auxiliary selection is independent of conjugation class.",
+        r"Perfect-auxiliary labels identify verbs taking \nk{vors} or allowing the licensed activity/transition alternation, independently of conjugation class; other verbal entries take \nk{fårs} by default (\S~\ref{sec:perfect}).",
         "",
         r"\noindent A: ordinary adjective agreement and comparison (Tables~\ref{tab:adj-declension}, \ref{tab:adj-comp}); A?: full agreement pattern unrecorded. Adv: regular \nk{-æginn/-gæginn} comparison; Adv-irr.: irregular comparison; Adv0: no comparative listed, including \nk{-s} adverbs (\S~\ref{sec:adverb-formation}).",
         "",

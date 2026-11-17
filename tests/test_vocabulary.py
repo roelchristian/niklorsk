@@ -1,5 +1,6 @@
 """Source-only checks for the dictionary; no TeX installation is required."""
 import csv
+import re
 import tempfile
 import types
 import unittest
@@ -18,9 +19,9 @@ class VocabularyTests(unittest.TestCase):
         self.verbs = {r['lemma']: r for r in self.rows if r['partofspeech'] == 'v'}
 
     def test_citation_forms(self):
-        self.assertEqual(len(self.rows), 488)
-        self.assertEqual(len(self.verbs), 115)
-        special = {'ö': 'ös', 'går': 'gårs', 'vor': 'vors', 'lod': 'lods',
+        self.assertEqual(len(self.rows), 487)
+        self.assertEqual(len(self.verbs), 114)
+        special = {'ö': 'ös', 'går': 'gårs', 'vor': 'vors', 'får': 'fårs',
                    'igom': 'igoms', 'tage': 'tages', 'baus': 'bauses',
                    'mårs': 'mårses', 'skers': 'skerses', 'bra': 'brags',
                    'helbra': 'helbrags', 'få': 'fågs', 'kunda': 'kundags',
@@ -38,7 +39,7 @@ class VocabularyTests(unittest.TestCase):
             stage = Path(directory)
             (stage / 'vocabulary').mkdir()
             (stage / 'vocabulary/vocabulary.csv').write_bytes((ROOT / 'vocabulary/vocabulary.csv').read_bytes())
-            self.assertEqual(build.vocabulary(stage), 488)
+            self.assertEqual(build.vocabulary(stage), 487)
             text = (stage / 'vocabulary/vocabulary.tex').read_text()
             for stem, row in self.verbs.items():
                 head = r'\dictionaryentry{' + row['infinitive'] + '}'
@@ -46,6 +47,27 @@ class VocabularyTests(unittest.TestCase):
             for infinitive, target in [('ös', 'tab:verb-to-be'), ('gårs', 'tab:verb-to-be'), ('vors', 'tab:verb-there-is')]:
                 entry = next(line for line in text.splitlines() if line.startswith(r'\dictionaryentry{' + infinitive + '}'))
                 self.assertIn(r'See Table~\ref{' + target + '}', entry)
+
+    def test_have_lexeme(self):
+        have = [row for row in self.rows if row['definition'] == 'to have']
+        self.assertEqual(len(have), 1)
+        self.assertEqual(have[0]['lemma'], 'får')
+        self.assertEqual(have[0]['infinitive'], 'fårs')
+        self.assertEqual(have[0]['inflection'], 'V-I')
+        self.assertNotIn('bärg', self.verbs)
+        self.assertNotIn('lod', self.verbs)
+        self.assertEqual(self.verbs['få']['infinitive'], 'fågs')
+        self.assertEqual(self.verbs['få']['definition'], 'to drive')
+        for folder in ('chapters', 'texts'):
+            for path in (ROOT / folder).glob('*.tex'):
+                self.assertIsNone(re.search(r'\b(?:bärgs?|lods?|lodar)\b', path.read_text()), path)
+        nouns = (ROOT / 'chapters/nouns.tex').read_text()
+        self.assertIn('Nar får auto?', nouns)
+        self.assertIn(r'\nk{fårs leder}', nouns)
+        self.assertIn(r'\nk{fågs auto}', nouns)
+        self.assertIn('Læse får de ngell', nouns)
+        self.assertIn('i fårs så 18 spis', (ROOT / 'chapters/verbs.tex').read_text())
+        self.assertIn('Konta Brok fårar', (ROOT / 'texts/middlemarch.tex').read_text())
 
     def test_missing_infinitive_rejected(self):
         with tempfile.TemporaryDirectory() as directory:

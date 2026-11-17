@@ -7,9 +7,9 @@ and a Niklorsk–English vocabulary.
 
 ## The language
 
-Niklorsk has a basic subject–verb–object word order. It uses prepositions, and
-adjectives generally precede the nouns they modify. The grammar also describes
-constituent fronting and the changes in word order associated with it.
+Niklorsk has basic subject–verb–object order, with prepositions and generally
+prenominal adjectives. Constituent fronting can alter the order of the subject
+and verb.
 
 Nouns have masculine, feminine, and neuter gender, with several lexical plural
 patterns and a distinction between nominative and genitive case. Personal
@@ -25,10 +25,10 @@ also combine in the perfect progressive. A synthetic perfect infinitive
 expresses anterior events in non-finite complements.
 
 Particle verbs ordinarily combine a preverbal particle with the verbal stem
-as one word. The grammar describes their separation with negation, pronominal
-or demonstrative objects, imperatives, and synthetic passives. It also treats
-particle placement with modals, in questions, and in inverted clauses. Mobile
-particles contrast with inseparable prefixes in both placement and stress.
+as one word, but separate with negation, pronominal or demonstrative objects,
+imperatives, and synthetic passives. Their placement with modals, in questions
+and in inverted clauses is treated alongside these patterns. Mobile particles
+contrast with inseparable prefixes in both placement and stress.
 
 The phonology chapter treats vowel and consonant length, diphthongs, syllable
 structure, variable lexical stress, two lexical pitch accents, and phrasal

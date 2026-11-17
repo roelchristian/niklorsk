@@ -7,9 +7,9 @@ and a Niklorsk–English vocabulary.
 
 ## The language
 
-Niklorsk has a basic subject–verb–object word order. It uses prepositions, and
-adjectives generally precede the nouns they modify. The grammar also describes
-constituent fronting and the changes in word order associated with it.
+Niklorsk has basic subject–verb–object order, with prepositions and generally
+prenominal adjectives. Constituent fronting can alter the order of the subject
+and verb.
 
 Nouns have masculine, feminine, and neuter gender, with several lexical plural
 patterns and a distinction between nominative and genitive case. Personal
@@ -18,16 +18,17 @@ the nouns they modify in gender and number. The verbal system includes finite
 and non-finite forms, tense and aspect distinctions, conditional constructions,
 and passive forms.
 
-Modern speech normally expresses the progressive with *vor i* followed by an
-infinitive. The synthetic progressive in *-att* or *-tt* remains preferred in
-writing, especially in literary prose. The two forms have essentially the same
-meaning; their usual difference is register.
+The present, past and future are inflected synthetically. Perfect aspect uses
+finite *fårs* ‘have’ with an invariable past participle, while the progressive
+uses finite *vors* followed by *i* and an infinitive; these constructions can
+also combine in the perfect progressive. A synthetic perfect infinitive
+expresses anterior events in non-finite complements.
 
 Particle verbs ordinarily combine a preverbal particle with the verbal stem
-as one word. The grammar describes their separation with negation, pronominal
-or demonstrative objects, imperatives, and synthetic passives. It also treats
-particle placement with modals, in questions, and in inverted clauses. Mobile
-particles contrast with inseparable prefixes in both placement and stress.
+as one word, but separate with negation, pronominal or demonstrative objects,
+imperatives, and synthetic passives. Their placement with modals, in questions
+and in inverted clauses is treated alongside these patterns. Mobile particles
+contrast with inseparable prefixes in both placement and stress.
 
 The phonology chapter treats vowel and consonant length, diphthongs, syllable
 structure, variable lexical stress, two lexical pitch accents, and phrasal
@@ -72,20 +73,20 @@ preserves distinctions that merge in ordinary pronunciation.
 
 ## Vocabulary and texts
 
-The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk lemmas, parts of
-speech, recorded noun gender, inflection groups, English meanings, and specified
-primary-stress positions. Verbs are cited by their explicitly recorded
-`infinitive`, including incorporated particles and prefixes; their existing
-`lemma` field retains the present stem for morphological lookup. Other entries
-use the `lemma` as their citation form. Derived words are listed separately.
-The same word list supplies the manuscript's vocabulary appendix,
-where group labels link to declension and conjugation tables. Recorded plural
-forms appear in the noun and derivation chapters. A question mark leaves an
-unrecorded class or paradigm open. The vocabulary does not yet record lexical
-accent categories. Run `python3 -m unittest discover -s tests -v` for
-source-only vocabulary checks. Older word lists containing verbs must add
-the `infinitive` column and supply each form explicitly; the build does not
-infer missing infinitives.
+The [vocabulary](vocabulary/vocabulary.csv) supplies the manuscript’s
+Niklorsk–English dictionary, whose inflection labels link to the relevant
+paradigms. Entries record parts of speech, noun gender, inflection groups,
+English meanings and primary stress where specified. Verbs are cited in the
+infinitive, with particles and prefixes incorporated; other entries use the
+lemma. Derived words have separate entries. A question mark identifies an
+unrecorded class or incomplete paradigm, while lexical accent remains
+unspecified throughout the word list. Noun plurals are given in the noun and
+derivation chapters.
+
+In the CSV, `infinitive` holds each verb’s citation form and `lemma` its present
+stem for morphological lookup. Older word lists containing verbs must supply
+the `infinitive` column explicitly, since the generator does not infer missing
+forms. Run `python3 -m unittest discover -s tests -v` for source-only checks.
 
 Additional material in [texts/](texts/) includes a translation draft from
 *Middlemarch* and a small Niklorsk–English corpus. These are separate from the

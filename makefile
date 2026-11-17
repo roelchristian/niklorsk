@@ -69,9 +69,82 @@ AUX_SUFFIXES = {".aux", ".toc", ".lot", ".lof", ".out", ".bbl", ".bcf", ".run.xm
 POS = {
     "adj": "adjective", "adv": "adverb", "art": "article",
     "conj": "conjunction", "interj": "interjection", "n": "noun", "prep": "preposition",
-    "pron": "pronoun", "v": "verb",
+    "pron": "pronoun", "v": "verb", "part": "particle", "num": "numeral",
 }
-VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "plurals", "definition", "stress"]
+VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "inflection", "definition", "stress"]
+PREVIOUS_VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "plurals", "definition", "stress"]
+# These are dictionary lookup groups, not additional grammatical classes.
+# Each code links to the existing description or a table of recorded forms.
+INFLECTION_GROUPS = {
+    "0": ("", "", set(POS)),
+    "N-ar": ("N-ar", "tab:plural-ar", {"n"}),
+    "N-or": ("N-or", "tab:plural-or", {"n"}),
+    "N-a": ("N-a", "tab:plural-a", {"n"}),
+    "N-n": ("N-n", "tab:plural-n", {"n"}),
+    "N-er": ("N-er", "tab:plural-er-umlaut", {"n"}),
+    "N-U": ("N-U", "tab:plural-umlaut-only", {"n"}),
+    "N-zero": (r"N-$\varnothing$", "tab:plural-zero", {"n"}),
+    "N-s": ("N-s", "tab:borrowed-s-plurals", {"n"}),
+    "N-ånde": ("N-ånde", "tab:action-nouns-ande", {"n"}),
+    "N?": ("N?", "sec:nominal-number", {"n"}),
+    "V-I": ("I", "tab:verb-conjugation", {"v"}),
+    "V-II": ("II", "tab:verb-conjugation", {"v"}),
+    "V-L": ("L", "tab:verb-conjugation-latinate", {"v"}),
+    "V-be": ("irr.", "tab:verb-to-be", {"v"}),
+    "V-ex": ("irr.", "tab:verb-there-is", {"v"}),
+    "V-modal": ("I, irr. past", "sec:modal-verbs", {"v"}),
+    "V-irr": ("irr.?", "sec:verb-conjugation", {"v"}),
+    "V?": ("V?", "sec:verb-conjugation", {"v"}),
+    "V-alt": ("vowel alt.", "tab:vowel-changes-participles", {"v"}),
+    "V-stem": ("stem alt.", "sec:consonant-restoration", {"v"}),
+    "Sep": ("sep.", "sec:separable-verbs", {"v"}),
+    "Insep": ("insep.", "sec:inseparable-prefixes", {"v"}),
+    "A": ("A", "tab:adj-declension", {"adj"}),
+    "A?": ("A?", "sec:adjective-declension", {"adj"}),
+    "P": ("P", "tab:personal-pronouns", {"pron"}),
+    "D": ("D", "tab:dem-pronouns", {"pron"}),
+    "Ind": ("Ind", "tab:indef-pronouns", {"pron"}),
+    "Q": ("Q", "tab:interr-pronouns", {"pron"}),
+    "Q0": ("Q0", "tab:interr-pronouns", {"pron"}),
+    "Poss": ("Poss", "tab:possessive-declension", {"pron"}),
+    "R": ("R", "tab:reflexive-forms", {"pron"}),
+    "RP": ("RP", "tab:reflexive-forms", {"pron"}),
+    "Art": ("Art", "tab:weak-articles", {"art"}),
+    "Adv": ("Adv", "sec:adverb-formation", {"adv"}),
+    "Adv-irr": ("Adv-irr.", "sec:adverb-formation", {"adv"}),
+    "Adv0": ("Adv0", "sec:adverb-formation", {"adv"}),
+    "Part": ("particle", "sec:separable-verbs", {"part"}),
+    "Neg": ("negative", "sec:verb-negation", {"part"}),
+    "Quest": ("question", "sec:yes-no-questions", {"part"}),
+}
+
+
+def plural_groups(lemma: str, plurals: list[str]) -> str:
+    """Classify only supplied legacy plurals; never generate a missing form."""
+    groups = []
+    for form in plurals:
+        if form == lemma:
+            group = "N-zero"
+        elif lemma.endswith("ånde") and form == lemma[:-4] + "önder":
+            group = "N-ånde"
+        elif form in {lemma + "n", lemma + "en"}:
+            group = "N-n"
+        elif form in {lemma + "a", lemma + lemma[-1:] + "a"}:
+            group = "N-a"
+        elif form.endswith("er"):
+            group = "N-er"
+        elif form.endswith("ar") or form == lemma + "r":
+            group = "N-ar"
+        elif form.endswith("or"):
+            group = "N-or"
+        elif form == lemma + "s":
+            group = "N-s"
+        else:
+            group = "N-U"
+        if group not in groups:
+            groups.append(group)
+    return "|".join(groups) or "N?"
+
 LEGACY_GENDERS = {"nm": "m", "nf": "f", "nn": "n"}
 # Dictionary collation follows Danish/Norwegian order, with Ö in the Ø position.
 # These equivalences affect sorting, never spelling.
@@ -139,16 +212,17 @@ def dictionary_heading(lemma: str) -> str:
 
 
 def read_vocabulary(source: Path) -> list[dict]:
-    """Read structured lexical records, accepting the original CSV headers."""
+    """Read lemma records and their linked inflection groups."""
     entries = {}
     with source.open(encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream, delimiter=";")
         legacy_fields = ["word", "partofspeech", "translation"]
         legacy = reader.fieldnames in (legacy_fields, legacy_fields + ["stress"])
-        if not legacy and reader.fieldnames != VOCABULARY_FIELDS:
+        previous_format = reader.fieldnames == PREVIOUS_VOCABULARY_FIELDS
+        if not legacy and not previous_format and reader.fieldnames != VOCABULARY_FIELDS:
             raise BuildError(
-                "Vocabulary needs lemma;partofspeech;gender;plurals;definition;stress "
-                "or the legacy word;partofspeech;translation header with optional stress."
+                "Vocabulary needs lemma;partofspeech;gender;inflection;definition;stress "
+                "or a supported previous vocabulary header."
             )
         for line, row in enumerate(reader, 2):
             if None in row or any(value is None for value in row.values()):
@@ -161,6 +235,7 @@ def read_vocabulary(source: Path) -> list[dict]:
             allowed_pos = set(POS) | (set(LEGACY_GENDERS) if legacy else set())
             if pos and pos not in allowed_pos:
                 raise BuildError(f"Unknown vocabulary part of speech on row {line}: {pos}.")
+            plurals = []
             if legacy:
                 word = row["word"].replace(r'\\"a', "ä").replace(r'\\"o', "ö").replace(r"\\ae\{\}", "æ")
                 forms = [form.strip() for form in word.split(",")]
@@ -170,34 +245,46 @@ def read_vocabulary(source: Path) -> list[dict]:
                 definition = row["translation"]
             else:
                 lemma, gender, definition = row["lemma"], row["gender"], row["definition"]
-                plurals = [form.strip() for form in row["plurals"].split("|")] if row["plurals"] else []
+                if previous_format and row["plurals"]:
+                    plurals = [form.strip() for form in row["plurals"].split("|")]
             if "," in lemma or "|" in lemma:
-                raise BuildError(f"Invalid lemma on vocabulary row {line}: put plural forms in the plurals field.")
-            if pos == "n" and gender not in {"m", "f", "n"}:
-                raise BuildError(f"Invalid noun gender on vocabulary row {line}: use m, f or n.")
+                raise BuildError(f"Invalid lemma on vocabulary row {line}: use one citation form.")
+            if pos == "n" and gender not in {"", "m", "f", "n"}:
+                raise BuildError(f"Invalid noun gender on vocabulary row {line}: use m, f, n or leave unrecorded.")
             if pos != "n" and gender:
                 raise BuildError(f"Unexpected gender on vocabulary row {line}: gender is recorded for nouns.")
             if any(not form or "," in form or "|" in form for form in plurals):
-                raise BuildError(f"Invalid plural list on vocabulary row {line}: use nonempty forms separated by pipes.")
+                raise BuildError(f"Invalid plural list on vocabulary row {line}.")
             if len(set(plurals)) != len(plurals):
                 raise BuildError(f"Repeated plural form on vocabulary row {line}.")
-            # Retain legacy incomplete-row compatibility after validating metadata.
             if legacy and not all(row[key] for key in legacy_fields):
                 continue
             if not lemma or not pos or not definition:
                 raise BuildError(f"Incomplete vocabulary row {line}: lemma, partofspeech and definition are required.")
+            if legacy or previous_format:
+                inflection = plural_groups(lemma, plurals) if pos == "n" else "0"
+            else:
+                inflection = row["inflection"]
+            groups = inflection.split("|")
+            if len(set(groups)) != len(groups):
+                raise BuildError(f"Repeated inflection group on vocabulary row {line}.")
+            for group in groups:
+                if group not in INFLECTION_GROUPS or pos not in INFLECTION_GROUPS[group][2]:
+                    raise BuildError(f"Invalid inflection group for {pos} on row {line}: {group}.")
+            if not (legacy or previous_format) and pos in {"n", "v", "adj", "pron", "art"} and "0" in groups:
+                raise BuildError(f"Missing inflection group on vocabulary row {line}; use the appropriate question-mark group for unrecorded paradigms.")
             key = unicodedata.normalize("NFC", lemma).casefold(), pos
-            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, plurals=plurals, definition=definition, stress=stress)
+            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, inflection=inflection, definition=definition, stress=stress)
             previous = entries.get(key)
             if previous:
                 if previous["gender"] != gender or previous["definition"] != definition:
                     raise BuildError(f"Conflicting lexical records for {lemma} on vocabulary row {line}.")
                 if previous["stress"] and stress and previous["stress"] != stress:
-                    raise BuildError(f"Conflicting stress for {lemma} on vocabulary row {line}: {previous['stress']} and {stress}.")
+                    raise BuildError(f"Conflicting stress for {lemma} on vocabulary row {line}.")
                 if not legacy:
-                    raise BuildError(f"Duplicate lemma and part of speech on vocabulary row {line}: {lemma}; combine its plural variants in one row.")
+                    raise BuildError(f"Duplicate lemma and part of speech on vocabulary row {line}: {lemma}.")
                 previous["stress"] = previous["stress"] or stress
-                previous["plurals"].extend(form for form in plurals if form not in previous["plurals"])
+                previous["inflection"] = "|".join(dict.fromkeys(previous["inflection"].split("|") + groups))
             else:
                 entries[key] = entry
     rows = sorted(entries.values(), key=lambda row: (
@@ -217,11 +304,11 @@ def vocabulary(stage: Path) -> int:
         writer = csv.writer(stream, delimiter=";", lineterminator="\n")
         writer.writerow(VOCABULARY_FIELDS)
         for row in rows:
-            writer.writerow(["|".join(row[key]) if key == "plurals" else row[key] for key in VOCABULARY_FIELDS])
+            writer.writerow([row[key] for key in VOCABULARY_FIELDS])
     used_pos = {row["partofspeech"] for row in rows}
     abbreviations = ["m. masculine", "f. feminine", "n. neuter"]
     abbreviations.extend(f"{key}. {value}" for key, value in POS.items() if key != "n" and key in used_pos)
-    abbreviations.append("pl. plural")
+    abbreviations.append("noun: gender unrecorded")
     legend = r"~\textperiodcentered{} ".join(abbreviations)
     # Initialise columns using the vocabulary font's baseline metrics.
     lines = [
@@ -230,6 +317,21 @@ def vocabulary(stage: Path) -> int:
         r"\addcontentsline{toc}{chapter}{Vocabulary}",
         r"\markboth{Vocabulary}{Vocabulary}",
         r"{\footnotesize\noindent " + legend + r"\par}",
+        "",
+
+        r"\section*{Citation forms and inflection groups}",
+        r"\label{sec:vocabulary-key}",
+        r"Entries give lemmas rather than separate inflected forms. Nouns are cited in the nominative singular, verbs in the present, and adjectives in the positive masculine form. Derived words remain separate entries. Personal pronouns use the nominative; demonstratives and indefinite pronouns use the neuter citation form. Ordinary possessives use the masculine form, reflexive \nk{hæm} the accusative, and reflexive possessive \nk{hamde} the masculine--neuter form. Articles are grouped under \nk{en}; contracted \nk{atta} is described in \S\ref{sec:article-contraction}. Personal and place names in the examples are not listed.",
+        "",
+        r"The labels below are lookup groups. Each entry's label links to its paradigm or description. A question mark means that the class or full paradigm is unrecorded; it does not mean that the word is indeclinable. The label \emph{noun} leaves gender unspecified, while \emph{n.} marks neuter gender. Person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
+        "",
+        r"\noindent\textbf{Nouns.} N-ar, N-or, N-a, and N-n refer to Tables~\ref{tab:plural-ar}--\ref{tab:plural-n}; N-er to plurals with umlaut and \nk{-er} (Table~\ref{tab:plural-er-umlaut}); N-U to umlaut alone (Table~\ref{tab:plural-umlaut-only}); and N-$\varnothing$ to zero plurals (Table~\ref{tab:plural-zero}). N-s includes borrowed \nk{-s} and recorded native alternatives (Table~\ref{tab:borrowed-s-plurals}). N-ånde refers to Table~\ref{tab:action-nouns-ande}. Multiple labels record alternative classes. N? means that no plural is recorded. Genitive formation follows \S\ref{sec:nominal-case} for all groups.",
+        "",
+        r"\noindent\textbf{Verbs.} I and II refer to the two columns of Table~\ref{tab:verb-conjugation}; L to the Latinate pattern in Table~\ref{tab:verb-conjugation-latinate}. The labels \emph{vowel alt.} and \emph{stem alt.} refer to Table~\ref{tab:vowel-changes-participles} and \S\ref{sec:consonant-restoration}. Irregular verbs link to their own accounts; \emph{irr.?} marks a verb described as irregular without a complete paradigm. V? leaves the conjugation unresolved. The labels \emph{sep.} and \emph{insep.} identify mobile particles and inseparable prefixes (\S\ref{sec:separable-verbs}; \S\ref{sec:inseparable-prefixes}).",
+        "",
+        r"\noindent\textbf{Modifiers.} A refers to ordinary adjective agreement (Table~\ref{tab:adj-declension}) and comparison (Table~\ref{tab:adj-comp}); A? leaves the full agreement pattern unrecorded. Adv marks adverbs with regular \nk{-inn} comparison; Adv-irr. marks the irregular comparative series; Adv0 marks those listed without a comparative, including the \nk{-s} adverbs for which no comparative is given (\S\ref{sec:adverb-formation}).",
+        "",
+        r"\noindent\textbf{Pronouns and articles.} P: personal (Table~\ref{tab:personal-pronouns}); D: demonstrative (Table~\ref{tab:dem-pronouns}); Ind: indefinite (Table~\ref{tab:indef-pronouns}); Q: interrogative with a plural, Q0: invariable interrogative (Table~\ref{tab:interr-pronouns}); Poss: ordinary possessive (Table~\ref{tab:possessive-declension}); R: argumental reflexive, RP: reflexive possessive (Table~\ref{tab:reflexive-forms}); Art: definite article (Table~\ref{tab:weak-articles}).",
         "",
         r"{\footnotesize\noindent A superscript numeral marks primary stress on a syllable of the lemma, counted from the first syllable. An unmarked entry has no individual stress specification; see Chapter~\ref{chap:phonology}, \S\ref{sec:stress-prosody}. Entries follow A--Z, Æ (including Ä), Ö, Å.\par}",
         "", r"{\footnotesize", r"\begin{multicols}{2}", "",
@@ -244,9 +346,13 @@ def vocabulary(stage: Path) -> int:
                 r"\noindent\begin{minipage}{\linewidth}",
                 r"\vocabcentered{" + letter + "}", "",
             ])
-        label = row["gender"] + "." if row["partofspeech"] == "n" else row["partofspeech"] + "."
-        plurals = ["unchanged" if form == row["lemma"] else form for form in row["plurals"]]
-        arguments = [row["lemma"], row["stress"], label, ", ".join(plurals), row["definition"]]
+        label = (row["gender"] + "." if row["gender"] else "noun") if row["partofspeech"] == "n" else row["partofspeech"] + "."
+        groups = []
+        for code in row["inflection"].split("|"):
+            name, target, _ = INFLECTION_GROUPS[code]
+            if name:
+                groups.append(r"\hyperref[" + target + "]{" + name + "}")
+        arguments = [row["lemma"], row["stress"], label, ", ".join(groups), row["definition"]]
         lines.extend([r"\dictionaryentry" + "".join("{" + value + "}" for value in arguments), ""])
         if new_letter:
             lines.extend([r"\end{minipage}\par", r"\endgroup", ""])

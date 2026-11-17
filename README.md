@@ -72,10 +72,13 @@ preserves distinctions that merge in ordinary pronunciation.
 ## Vocabulary and texts
 
 The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk lemmas, parts of
-speech, noun gender, plural forms where given, English meanings, and specified
-primary-stress positions. Alternate plurals appear together; unchanged plurals
-are explicitly recorded. The same word list supplies the manuscript's
-vocabulary appendix. It does not yet record lexical accent categories.
+speech, recorded noun gender, inflection groups, English meanings, and specified
+primary-stress positions. Entries use citation forms, with derived words listed
+separately. The same word list supplies the manuscript's vocabulary appendix,
+where group labels link to declension and conjugation tables. Recorded plural
+forms appear in the noun and derivation chapters. A question mark leaves an
+unrecorded class or paradigm open. The vocabulary does not yet record lexical
+accent categories.
 
 Additional material in [texts/](texts/) includes a translation draft from
 *Middlemarch* and a small Niklorsk–English corpus. These are separate from the

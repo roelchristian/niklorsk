@@ -238,7 +238,7 @@
     \noindent{\niklorskfont\upshape\color{grammarInk}#1%
         \ifstrempty{#2}{}{\textsuperscript{#2}}}%
     \nobreak\hspace{0.35em}\dictionarylabel{#3}%
-    \ifstrempty{#4}{}{\space(\dictionarylabel{pl.}\ #4)}%
+    \ifstrempty{#4}{}{\space[\dictionarylabel{#4}]}%
     % Definitions retain embedded forms as plain text; only the lemma is bold.
     \space{\let\nk\@firstofone\let\niklorsk\@firstofone #5}\par
     \endgroup

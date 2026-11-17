@@ -12,16 +12,17 @@ prenominal adjectives. Constituent fronting can alter the order of the subject
 and verb.
 
 Nouns have masculine, feminine, and neuter gender, with several lexical plural
-patterns and a distinction between nominative and genitive case. Personal
-pronouns retain additional accusative and dative forms. Adjectives agree with
+patterns. Nominal possession is expressed with postnominal *sla* phrases,
+while personal pronouns retain accusative and dative forms and a separate
+possessive paradigm. Adjectives agree with
 the nouns they modify in gender and number. The verbal system includes finite
 and non-finite forms, tense and aspect distinctions, conditional constructions,
 and passive forms.
 
 The copula *vors* covers identity, state, existence and location, with present
-*ö* and past *vor*. The present, past and future are inflected synthetically. Perfect aspect normally uses
+*ø* and past *vor*. The present, past and future are inflected synthetically. Perfect aspect normally uses
 finite *fårs* ‘have’ with an invariable past participle. Directed intransitive
-motion selects *vors* with a lexical participle agreeing in number, not gender; *läts*
+motion selects *vors* with a lexical participle agreeing in number, not gender; *læts*
 ‘walk’ permits this auxiliary in a licensed bounded-motion construction. The progressive
 uses finite forms of *vors* followed by *i* and an infinitive; these constructions can
 also combine in the perfect progressive. A synthetic perfect infinitive
@@ -33,7 +34,7 @@ imperatives, and synthetic passives. Their placement with modals, in questions
 and in inverted clauses is treated alongside these patterns. Mobile particles
 contrast with inseparable prefixes in both placement and stress.
 
-The phonology chapter treats vowel and consonant length, diphthongs, syllable
+The phonology chapter treats vowel and consonant length, the diphthong /œʏ̯/, syllable
 structure, variable lexical stress, two lexical pitch accents, and phrasal
 intonation. Accent 1 has an early high target followed by a fall; Accent 2
 rises to a late high target, with variable early laryngealisation. Their
@@ -69,7 +70,7 @@ preserves distinctions that merge in ordinary pronunciation.
   and the dative alternation, constituent fronting, questions, relative clauses,
   and complement clauses.
 - [Derivational morphology](chapters/derivations.tex): word-forming affixes and
-  their stress classes, the inseparable lexical derivational prefixes *gæ-*, *för-* and *en-*, and noun-noun compounds
+  their stress classes, the inseparable lexical derivational prefixes *gæ-*, *før-* and *en-*, and noun-noun compounds
   with primary and secondary stress.
 - [Sample texts](chapters/texts.tex): passages in Niklorsk with interlinear
   glosses and English translations.
@@ -105,7 +106,7 @@ non-default selection and links to the perfect section.
 blank. `stress_anchor`, when required, identifies the stressed vowel by its
 one-based Unicode grapheme position in the citation form; it resolves an
 exception rather than supplying missing stress data. The generator groups
-`öy` as one nucleus and treats other adjacent vowel graphemes as hiatus.
+`øy` as one nucleus and treats other adjacent vowel graphemes as hiatus.
 It emits `notation_warnings.json` alongside the generated vocabulary for
 missing or unresolved metadata. Display accents do not change stored spelling,
 lookup or sorting. Run `python3 -m unittest discover -s tests -v` for source-only checks.

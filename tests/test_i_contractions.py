@@ -31,9 +31,9 @@ class IContractionTests(unittest.TestCase):
     def test_bare_and_infinitival_i_preserved(self):
         modifiers = (ROOT / 'chapters/modifiers.tex').read_text()
         verbs = (ROOT / 'chapters/verbs.tex').read_text()
-        for phrase in ('i brug', 'i kung', 'i Malmö'):
+        for phrase in ('i brug', 'i kung', 'i Malmø'):
             self.assertIn(phrase, modifiers)
-        self.assertIn('Ag ö i hjalts en afte', verbs)
+        self.assertIn('Ag ø i hjalts en afte', verbs)
         rows = build.read_vocabulary(ROOT / 'vocabulary/vocabulary.csv')
         preposition = next(r for r in rows if r['lemma'] == 'i' and r['partofspeech'] == 'prep')
         self.assertIn('im, ir, ing, idæ', preposition['definition'])

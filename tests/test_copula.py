@@ -13,9 +13,9 @@ class CopulaTests(unittest.TestCase):
 
     def test_unified_paradigm(self):
         forms = {
-            'Present': ('ö', 'I am'),
+            'Present': ('ø', 'I am'),
             'Past': ('vor', 'I was'),
-            'Future': ('vörs', 'I will be'),
+            'Future': ('vørs', 'I will be'),
             'Conditional': ('års', 'I would be'),
             'Negative Conditional': ('voren', 'I would not be'),
             'Infinitive': ('vors', 'to be'),
@@ -26,18 +26,18 @@ class CopulaTests(unittest.TestCase):
             with self.subTest(category=category):
                 self.assertIn(category + r' & \nikp{' + form + '}{' + gloss + '}', self.verbs)
         self.assertIn(r'\nikp{ur}{become}', self.verbs)
-        self.assertIn(r'\nikp{är}{I became}', self.verbs)
+        self.assertIn(r'\nikp{ær}{I became}', self.verbs)
 
     def test_copula_perfect_uses_canonical_finite_forms(self):
-        for auxiliary in ('ö', 'vor', 'vörs', 'års', 'voren'):
-            self.assertIn('Matti ' + auxiliary + ' slötur', self.verbs)
+        for auxiliary in ('ø', 'vor', 'vørs', 'års', 'voren'):
+            self.assertIn('Matti ' + auxiliary + ' sløtur', self.verbs)
         # Auxiliary stacking keeps the participle of the same unified copula.
         self.assertIn('får vorur i hjalts', self.verbs)
 
     def test_be_glosses_match_copula_forms(self):
         # Check forms in running examples, not just the displayed paradigm.
-        expected = {r'be.\Pres': 'ö', r'be.\Pst': 'vor',
-                    r'be.\Fut': 'vörs', r'be.\Cond': 'års',
+        expected = {r'be.\Pres': 'ø', r'be.\Pst': 'vor',
+                    r'be.\Fut': 'vørs', r'be.\Cond': 'års',
                     r'be.\Inf': 'vors', r'be.\PresP': 'edde',
                     r'be.\PstP': 'vorur'}
         checked = 0
@@ -59,9 +59,9 @@ class CopulaTests(unittest.TestCase):
         self.assertGreater(checked, 0)
 
     def test_become_paradigm_is_preserved(self):
-        forms = {'går': 'I become', 'är': 'I became', 'gikt': 'I will become',
+        forms = {'går': 'I become', 'ær': 'I became', 'gikt': 'I will become',
                  'gins': 'I would become', 'gav': 'I would not become',
-                 'gårs': 'to become', 'gäde': 'becoming', 'ur': 'become'}
+                 'gårs': 'to become', 'gæde': 'becoming', 'ur': 'become'}
         for form, gloss in forms.items():
             with self.subTest(form=form):
                 self.assertIn(r'\nikp{' + form + '}{' + gloss + '}', self.verbs)
@@ -71,8 +71,8 @@ class CopulaTests(unittest.TestCase):
                    *sorted((ROOT / 'chapters').glob('*.tex')),
                    *sorted((ROOT / 'texts').glob('*.tex')),
                    ROOT / 'texts/corpus.csv', ROOT / 'vocabulary/vocabulary.csv']
-        # av, är and ur remain independently valid as a preposition or forms of gårs.
-        obsolete = re.compile(r'(?<![\w-])(?:ös|isk|voräs|vorems|vorade)(?!\w)', re.I)
+        # av, ær and ur remain independently valid as a preposition or forms of gårs.
+        obsolete = re.compile(r'(?<![\w-])(?:øs|isk|voræs|vorems|vorade)(?!\w)', re.I)
         for path in sources:
             with self.subTest(path=path.name):
                 text = path.read_text()

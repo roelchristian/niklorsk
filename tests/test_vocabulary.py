@@ -19,10 +19,10 @@ class VocabularyTests(unittest.TestCase):
         self.verbs = {r['lemma']: r for r in self.rows if r['partofspeech'] == 'v'}
 
     def test_citation_forms(self):
-        self.assertEqual(len(self.rows), 494)
+        self.assertEqual(len(self.rows), 501)
         self.assertEqual(len(self.verbs), 114)
-        special = {'ö': 'vors', 'går': 'gårs', 'får': 'fårs',
-                   'igom': 'igoms', 'tage': 'tages', 'böys': 'böyses',
+        special = {'ø': 'vors', 'går': 'gårs', 'får': 'fårs',
+                   'igom': 'igoms', 'tage': 'tages', 'bøys': 'bøyses',
                    'mårs': 'mårses', 'skers': 'skerses', 'bra': 'brags',
                    'helbra': 'helbrags', 'få': 'fågs', 'kunda': 'kundags',
                    'sollna': 'sollnags', 'kanseler': 'kanselers'}
@@ -39,17 +39,17 @@ class VocabularyTests(unittest.TestCase):
             stage = Path(directory)
             (stage / 'vocabulary').mkdir()
             (stage / 'vocabulary/vocabulary.csv').write_bytes((ROOT / 'vocabulary/vocabulary.csv').read_bytes())
-            self.assertEqual(build.vocabulary(stage), 494)
+            self.assertEqual(build.vocabulary(stage), 501)
             text = (stage / 'vocabulary/vocabulary.tex').read_text()
             for stem, row in self.verbs.items():
                 head = r'\dictionaryentry{' + build.stress_display(row)[0] + '}'
                 self.assertIn(head, text)
             self.assertEqual(text.count(r'\dictionaryentry{vors}'), 1)
-            self.assertNotIn(r'\dictionaryentry{ös}', text)
+            self.assertNotIn(r'\dictionaryentry{øs}', text)
             self.assertNotIn(r'\dictionaryentry{vor}', text)
-            entry = next(line for line in text.splitlines() if line.startswith(r'\dictionaryentry{slö́ts}'))
+            entry = next(line for line in text.splitlines() if line.startswith(r'\dictionaryentry{slǿts}'))
             self.assertIn(r'Perfect with \nk{vors}', entry)
-            entry = next(line for line in text.splitlines() if line.startswith(r'\dictionaryentry{läts}'))
+            entry = next(line for line in text.splitlines() if line.startswith(r'\dictionaryentry{læts}'))
             self.assertIn('bounded-motion construction', entry)
             for infinitive, target in [('vors', 'tab:verb-to-be'), ('gårs', 'tab:verb-to-be')]:
                 entry = next(line for line in text.splitlines() if line.startswith(r'\dictionaryentry{' + infinitive + '}'))
@@ -58,10 +58,10 @@ class VocabularyTests(unittest.TestCase):
     def test_unified_copula(self):
         copulas = [row for row in self.verbs.values() if row['infinitive'] == 'vors']
         self.assertEqual(len(copulas), 1)
-        self.assertEqual(copulas[0]['lemma'], 'ö')
+        self.assertEqual(copulas[0]['lemma'], 'ø')
         self.assertEqual(copulas[0]['inflection'], 'V-be')
         self.assertNotIn('vor', self.verbs)
-        self.assertNotIn('ös', [row['infinitive'] for row in self.verbs.values()])
+        self.assertNotIn('øs', [row['infinitive'] for row in self.verbs.values()])
         self.assertNotIn('V-ex', build.INFLECTION_GROUPS)
         self.assertEqual(self.verbs['går']['infinitive'], 'gårs')
 
@@ -72,7 +72,7 @@ class VocabularyTests(unittest.TestCase):
         self.assertEqual(have[0]['infinitive'], 'fårs')
         self.assertEqual(have[0]['inflection'], 'V-I')
         self.assertIn('perfect auxiliary', have[0]['definition'])
-        self.assertNotIn('bärg', self.verbs)
+        self.assertNotIn('bærg', self.verbs)
         self.assertNotIn('lod', self.verbs)
         self.assertEqual(self.verbs['få']['infinitive'], 'fågs')
         self.assertEqual(self.verbs['få']['definition'], 'to drive')
@@ -80,26 +80,26 @@ class VocabularyTests(unittest.TestCase):
             for path in (ROOT / folder).glob('*.tex'):
                 self.assertIsNone(re.search(r'\b(?:bärgs?|lods?|lodar)\b', path.read_text()), path)
         nouns = (ROOT / 'chapters/nouns.tex').read_text()
-        self.assertIn('Nar får öyto?', nouns)
+        self.assertIn('Nar får øyto?', nouns)
         self.assertIn(r'\nk{fårs leder}', nouns)
-        self.assertIn(r'\nk{fågs öyto}', nouns)
+        self.assertIn(r'\nk{fågs øyto}', nouns)
         self.assertIn('Læse får de ngell', nouns)
         self.assertIn('i fårs så 18 spis', (ROOT / 'chapters/verbs.tex').read_text())
         self.assertIn('Konta Brok fårar', (ROOT / 'texts/middlemarch.tex').read_text())
 
     def test_perfect_auxiliary_metadata(self):
-        be = {'slöts', 'mosts', 'malms', 'anslöts', 'atslöts',
-              'helslöts', 'hætslöts', 'ånslöts'}
+        be = {'sløts', 'mosts', 'malms', 'ansløts', 'atsløts',
+              'helsløts', 'hætsløts', 'ånsløts'}
         self.assertEqual({r['infinitive'] for r in self.rows
                           if build.perfect_auxiliary(r) == 'BE'}, be)
-        self.assertEqual(build.perfect_auxiliary(self.verbs['lät']), 'ALTERNATING')
-        for lemma in ('får', 'ö', 'går', 'kom', 'sollna', 'bra', 'hjalt', 'kvint', 'få'):
+        self.assertEqual(build.perfect_auxiliary(self.verbs['læt']), 'ALTERNATING')
+        for lemma in ('får', 'ø', 'går', 'kom', 'sollna', 'bra', 'hjalt', 'kvint', 'få'):
             self.assertEqual(build.perfect_auxiliary(self.verbs[lemma]), 'HAVE')
         for row in self.rows:
             if row['partofspeech'] != 'v':
                 self.assertEqual(build.perfect_auxiliary(row), '')
-        self.assertEqual(self.verbs['lät']['inflection'], 'V-I|V-alt')
-        self.assertEqual(self.verbs['anslöt']['inflection'], 'V-I|Sep')
+        self.assertEqual(self.verbs['læt']['inflection'], 'V-I|V-alt')
+        self.assertEqual(self.verbs['ansløt']['inflection'], 'V-I|Sep')
 
     def test_auxiliary_validation_and_old_header(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -109,7 +109,7 @@ class VocabularyTests(unittest.TestCase):
                     writer = csv.DictWriter(stream, fieldnames=fields, delimiter=';', extrasaction='ignore')
                     writer.writeheader()
                     writer.writerow(row)
-            for row in (dict(self.verbs['slöt'], perfect_auxiliary='MOTION'),
+            for row in (dict(self.verbs['sløt'], perfect_auxiliary='MOTION'),
                         dict(next(r for r in self.rows if r['partofspeech'] == 'n'), perfect_auxiliary='BE')):
                 write(row)
                 with self.assertRaisesRegex(build.BuildError, 'Invalid perfect auxiliary'):
@@ -125,8 +125,8 @@ class VocabularyTests(unittest.TestCase):
             with path.open('w') as stream:
                 writer = csv.DictWriter(stream, fieldnames=build.VOCABULARY_FIELDS, delimiter=';')
                 writer.writeheader()
-                writer.writerow(self.verbs['slöt'])
-                writer.writerow(dict(self.verbs['slöt'], perfect_auxiliary='HAVE'))
+                writer.writerow(self.verbs['sløt'])
+                writer.writerow(dict(self.verbs['sløt'], perfect_auxiliary='HAVE'))
             with self.assertRaisesRegex(build.BuildError, 'Conflicting perfect auxiliary'):
                 build.read_vocabulary(path)
 
@@ -142,10 +142,10 @@ class VocabularyTests(unittest.TestCase):
                 build.read_vocabulary(path)
 
     def test_auxiliary_and_accent_metadata_coexist(self):
-        motion = self.verbs['slöt']
+        motion = self.verbs['sløt']
         self.assertEqual(build.perfect_auxiliary(motion), 'BE')
         self.assertEqual(motion['stress'], '1')
-        self.assertEqual(build.stress_display(motion)[0], 'slö́ts')
+        self.assertEqual(build.stress_display(motion)[0], 'slǿts')
         self.assertEqual(motion['accent'], 'A1')
         self.assertEqual(build.perfect_auxiliary(self.verbs['hjalt']), 'HAVE')
         self.assertEqual(self.verbs['hjalt']['accent'], 'A1')

@@ -17,15 +17,16 @@ class ArticleCaseTests(unittest.TestCase):
         self.assertIn('Fronting either argument preserves its case', text)
         for form in ('der mama', 'egn hond', 'dæ hynd'):
             self.assertIn(form, text)
-        self.assertIn(r'\gla Matti brar om hond men skämd.//', text)
-        self.assertIn(r'\gla Om hond brar Matti men skämd.//', text)
+        self.assertIn(r'\gla Matti brar om hond men skæmd.//', text)
+        self.assertIn(r'\gla Om hond brar Matti men skæmd.//', text)
 
     def test_possessor_articles_agree_with_possessor(self):
         text = (ROOT / 'chapters/nouns.tex').read_text()
-        for phrase in ('en blivt brug', 'der blivtes brug', 'de skällt bagen', 'der skälltes bagen'):
+        for phrase in ('de brug sla en bliv', 'de brug sla en svorade bliv',
+                       'de banger brug sla Martin', 'eg roghjalt sla Andærs'):
             self.assertIn(phrase, text)
-        for obsolete in ('de blivt brug', 'de blivtes brug', 'der skällt bagen'):
-            self.assertNotIn('{' + obsolete + '}', text)
+        for obsolete in ('blivt', 'blivtes', 'skællt', 'skælltes'):
+            self.assertNotIn(obsolete, text)
 
 
 if __name__ == '__main__':

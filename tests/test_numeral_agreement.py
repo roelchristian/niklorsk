@@ -15,8 +15,8 @@ class NumeralAgreementTests(unittest.TestCase):
             self.assertIn(r'\nikp{som aften}{two books}', text)
             self.assertIn(r'\nikp{som dyr}{two bears}', text)
         self.assertIn(r'\nikp{men afte}{one book}', self.nouns)
-        self.assertIn(r'\nikp{menåröd aften}{twenty-one books}', self.modifiers)
-        self.assertIn(r'\nikp{somsmöler aften}{two hundred books}', self.modifiers)
+        self.assertIn(r'\nikp{menårød aften}{twenty-one books}', self.modifiers)
+        self.assertIn(r'\nikp{somsmøler aften}{two hundred books}', self.modifiers)
         rows = build.read_vocabulary(ROOT / 'vocabulary/vocabulary.csv')
         nouns = {r['lemma']: r for r in rows if r['partofspeech'] == 'n'}
         self.assertEqual(nouns['afte']['inflection'], 'N-n')
@@ -25,11 +25,11 @@ class NumeralAgreementTests(unittest.TestCase):
         self.assertIn(r'\nikp{dritte bliv}{a few men}', self.nouns)
 
     def test_agreement_examples(self):
-        for example in ('som banga aften', 'Som aften ö banga',
+        for example in ('som banga aften', 'Som aften ø banga',
                         'som hjalturen aften'):
             self.assertIn(example, self.modifiers)
         numeral_section = self.modifiers.split(r'\label{sec:numerals}', 1)[1]
-        self.assertIn(r'\nk{nör}', numeral_section)
+        self.assertIn(r'\nk{nør}', numeral_section)
         self.assertIn(r'\ref{tab:personal-pronouns}', numeral_section)
         self.assertIn(r'\nk{banga}', self.modifiers)
         self.assertIn(r'\nk{hjalturen}', self.modifiers)

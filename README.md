@@ -21,8 +21,8 @@ and passive forms.
 The present, past and future are inflected synthetically. Perfect aspect uses
 finite *fårs* ‘have’ with an invariable past participle, while the progressive
 uses finite *vors* followed by *i* and an infinitive; these constructions can
-also combine in the perfect progressive. The synthetic perfect infinitive
-remains available for anterior events in non-finite complements.
+also combine in the perfect progressive. A synthetic perfect infinitive
+expresses anterior events in non-finite complements.
 
 Particle verbs ordinarily combine a preverbal particle with the verbal stem
 as one word. The grammar describes their separation with negation, pronominal

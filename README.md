@@ -74,12 +74,18 @@ preserves distinctions that merge in ordinary pronunciation.
 
 The [vocabulary](vocabulary/vocabulary.csv) records Niklorsk lemmas, parts of
 speech, recorded noun gender, inflection groups, English meanings, and specified
-primary-stress positions. Entries use citation forms, with derived words listed
-separately. The same word list supplies the manuscript's vocabulary appendix,
+primary-stress positions. Verbs are cited by their explicitly recorded
+`infinitive`, including incorporated particles and prefixes; their existing
+`lemma` field retains the present stem for morphological lookup. Other entries
+use the `lemma` as their citation form. Derived words are listed separately.
+The same word list supplies the manuscript's vocabulary appendix,
 where group labels link to declension and conjugation tables. Recorded plural
 forms appear in the noun and derivation chapters. A question mark leaves an
 unrecorded class or paradigm open. The vocabulary does not yet record lexical
-accent categories.
+accent categories. Run `python3 -m unittest discover -s tests -v` for
+source-only vocabulary checks. Older word lists containing verbs must add
+the `infinitive` column and supply each form explicitly; the build does not
+infer missing infinitives.
 
 Additional material in [texts/](texts/) includes a translation draft from
 *Middlemarch* and a small Niklorsk–English corpus. These are separate from the

@@ -28,17 +28,21 @@ class LexicalAdditionTests(unittest.TestCase):
             (stage / 'vocabulary/vocabulary.csv').write_bytes((ROOT / 'vocabulary/vocabulary.csv').read_bytes())
             build.vocabulary(stage)
             rendered = (stage / 'vocabulary/vocabulary.tex').read_text()
+            near_entry = next(line for line in rendered.splitlines()
+                              if line.startswith(r'\dictionaryentry{nærer}'))
+            self.assertIn('prep.', near_entry)
+            self.assertIn('before, in front of', near_entry)
             for lemma, (_, _, _, plural) in expected.items():
                 entry = next(line for line in rendered.splitlines()
                              if line.startswith(r'\dictionaryentry{' + lemma + '}'))
                 self.assertIn(r'Pl. \nk{' + plural + '}.', entry)
 
-    def test_before_and_existing_synonyms(self):
+    def test_spatial_before_and_existing_entries(self):
         rows = build.read_vocabulary(ROOT / 'vocabulary/vocabulary.csv')
         matches = [row for row in rows if row['lemma'] == 'nærer']
         self.assertEqual(len(matches), 1)
         row = matches[0]
-        self.assertEqual((row['partofspeech'], row['inflection'], row['definition']), ('adv', 'Adv0', 'before'))
+        self.assertEqual((row['partofspeech'], row['inflection'], row['definition']), ('prep', '0', 'before, in front of'))
         for key in ('gender', 'plural', 'stress', 'accent', 'stress_anchor'):
             self.assertEqual(row[key], '')
         self.assertTrue(any(row['lemma'] == 'smed' and row['definition'] == 'before' for row in rows))

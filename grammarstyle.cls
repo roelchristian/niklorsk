@@ -101,7 +101,7 @@
 \setlength{\parskip}{0pt}
 % Use the same word space after sentences, abbreviations, and vocabulary lemmas.
 \frenchspacing
-\setlength{\emergencystretch}{1.2em}
+\setlength{\emergencystretch}{3em}
 \widowpenalty=10000
 \clubpenalty=10000
 \displaywidowpenalty=10000
@@ -119,6 +119,9 @@
     \def\nk#1{#1}%
     \def\niklorsk#1{#1}%
     \def\ipa#1{#1}%
+    \def\nkstress#1{#1}%
+    \def\nkaccent#1#2{#1}%
+    \def\accentcategory#1{}%
 }
 
 % Chapter-qualified labels support consultation across the whole grammar.
@@ -218,6 +221,15 @@
 \newcommand{\nikpp}[3]{\niklorsk{#1} [\ipa{#2}] `#3'}
 \newcommand{\nk}[1]{\niklorsk{#1}}
 \newcommand{\ipa}[1]{{\upshape #1}}
+% Editorial orthographic annotations: Unicode acute vowels preserve graphemes.
+\newcommand{\nkstress}[1]{\nk{#1}}
+\newcommand{\accentcategory}[1]{%
+    \ifstrequal{#1}{A1}{\textsuperscript{\normalfont\mdseries 1}}{%
+    \ifstrequal{#1}{A2}{\textsuperscript{\normalfont\mdseries 2}}{%
+    \ifstrempty{#1}{}{\ClassError{grammarstyle}{Unknown lexical accent #1}{Use A1, A2 or an empty category.}}}}%
+}
+\newcommand{\nkaccent}[2]{\nk{#1\accentcategory{#2}}}
+
 % Narrow vocabulary columns use natural word spaces, retaining entry indents.
 \newcommand{\glossarypair}[3]{%
     \begingroup
@@ -236,7 +248,7 @@
     \setlength{\hangindent}{1.3em}\hangafter=1
     \setlength{\parskip}{1bp}%
     \noindent{\niklorskfont\upshape\color{grammarInk}#1%
-        \ifstrempty{#2}{}{\textsuperscript{#2}}}%
+        \accentcategory{#2}}%
     \nobreak\hspace{0.35em}\dictionarylabel{#3}%
     \ifstrempty{#4}{}{\space{\normalfont\upshape (#4)}}%
     % Definitions retain embedded forms as plain text; only the lemma is bold.

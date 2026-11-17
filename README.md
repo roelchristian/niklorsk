@@ -18,9 +18,10 @@ the nouns they modify in gender and number. The verbal system includes finite
 and non-finite forms, tense and aspect distinctions, conditional constructions,
 and passive forms.
 
-The present, past and future are inflected synthetically. Perfect aspect uses
+The copula *vors* covers identity, state, existence and location, with present
+*ö* and past *vor*. The present, past and future are inflected synthetically. Perfect aspect uses
 finite *fårs* ‘have’ with an invariable past participle, while the progressive
-uses finite *vors* followed by *i* and an infinitive; these constructions can
+uses finite forms of *vors* followed by *i* and an infinitive; these constructions can
 also combine in the perfect progressive. A synthetic perfect infinitive
 expresses anterior events in non-finite complements.
 

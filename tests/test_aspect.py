@@ -37,8 +37,8 @@ class AspectTests(unittest.TestCase):
         self.assertIn('fårar nortur Joann', (ROOT / 'chapters/texts.tex').read_text())
 
     def test_progressive_remains_infinitival(self):
-        for form in ('vor i hjalts', 'är i hjalts', 'voräs i hjalts',
-                     'Ag vor så i hjalts', 'Ag vor så i mursts med op'):
+        for form in ('ö i hjalts', 'vor i hjalts', 'vörs i hjalts',
+                     'Ag ö så i hjalts', 'Ag ö så i mursts med op'):
             self.assertIn(form, self.verbs)
 
     def test_retained_nonfinite_and_mood_forms(self):
@@ -47,7 +47,7 @@ class AspectTests(unittest.TestCase):
                      'hjalter', 'brager', 'hjalte', 'brage'):
             self.assertIn(form, self.verbs)
         self.assertNotIn('braur', self.verbs)
-        self.assertIn(r'\nikp{ur}{been}', self.verbs)
+        self.assertIn(r'\nikp{vorur}{been}', self.verbs)
         self.assertIn(r'\nikp{ur}{become}', self.verbs)
 
     def test_passive_is_preserved(self):

@@ -19,9 +19,9 @@ class VocabularyTests(unittest.TestCase):
         self.verbs = {r['lemma']: r for r in self.rows if r['partofspeech'] == 'v'}
 
     def test_citation_forms(self):
-        self.assertEqual(len(self.rows), 487)
-        self.assertEqual(len(self.verbs), 114)
-        special = {'ö': 'ös', 'går': 'gårs', 'vor': 'vors', 'får': 'fårs',
+        self.assertEqual(len(self.rows), 486)
+        self.assertEqual(len(self.verbs), 113)
+        special = {'ö': 'vors', 'går': 'gårs', 'får': 'fårs',
                    'igom': 'igoms', 'tage': 'tages', 'baus': 'bauses',
                    'mårs': 'mårses', 'skers': 'skerses', 'bra': 'brags',
                    'helbra': 'helbrags', 'få': 'fågs', 'kunda': 'kundags',
@@ -39,14 +39,27 @@ class VocabularyTests(unittest.TestCase):
             stage = Path(directory)
             (stage / 'vocabulary').mkdir()
             (stage / 'vocabulary/vocabulary.csv').write_bytes((ROOT / 'vocabulary/vocabulary.csv').read_bytes())
-            self.assertEqual(build.vocabulary(stage), 487)
+            self.assertEqual(build.vocabulary(stage), 486)
             text = (stage / 'vocabulary/vocabulary.tex').read_text()
             for stem, row in self.verbs.items():
                 head = r'\dictionaryentry{' + row['infinitive'] + '}'
                 self.assertIn(head, text)
-            for infinitive, target in [('ös', 'tab:verb-to-be'), ('gårs', 'tab:verb-to-be'), ('vors', 'tab:verb-there-is')]:
+            self.assertEqual(text.count(r'\dictionaryentry{vors}'), 1)
+            self.assertNotIn(r'\dictionaryentry{ös}', text)
+            self.assertNotIn(r'\dictionaryentry{vor}', text)
+            for infinitive, target in [('vors', 'tab:verb-to-be'), ('gårs', 'tab:verb-to-be')]:
                 entry = next(line for line in text.splitlines() if line.startswith(r'\dictionaryentry{' + infinitive + '}'))
                 self.assertIn(r'See Table~\ref{' + target + '}', entry)
+
+    def test_unified_copula(self):
+        copulas = [row for row in self.verbs.values() if row['infinitive'] == 'vors']
+        self.assertEqual(len(copulas), 1)
+        self.assertEqual(copulas[0]['lemma'], 'ö')
+        self.assertEqual(copulas[0]['inflection'], 'V-be')
+        self.assertNotIn('vor', self.verbs)
+        self.assertNotIn('ös', [row['infinitive'] for row in self.verbs.values()])
+        self.assertNotIn('V-ex', build.INFLECTION_GROUPS)
+        self.assertEqual(self.verbs['går']['infinitive'], 'gårs')
 
     def test_have_lexeme(self):
         have = [row for row in self.rows if row['definition'].split(';')[0] == 'to have']

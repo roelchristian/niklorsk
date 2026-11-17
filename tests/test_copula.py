@@ -28,6 +28,12 @@ class CopulaTests(unittest.TestCase):
         self.assertIn(r'\nikp{ur}{become}', self.verbs)
         self.assertIn(r'\nikp{är}{I became}', self.verbs)
 
+    def test_copula_perfect_uses_canonical_finite_forms(self):
+        for auxiliary in ('ö', 'vor', 'vörs', 'års', 'voren'):
+            self.assertIn('Matti ' + auxiliary + ' slötur', self.verbs)
+        # Auxiliary stacking keeps the participle of the same unified copula.
+        self.assertIn('får vorur i hjalts', self.verbs)
+
     def test_be_glosses_match_copula_forms(self):
         # Check forms in running examples, not just the displayed paradigm.
         expected = {r'be.\Pres': 'ö', r'be.\Pst': 'vor',

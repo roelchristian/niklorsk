@@ -15,8 +15,8 @@ def main() -> int:
             "current directory. Generated vocabulary.tex and vocabulary_cleaned.csv "
             "remain in the fresh codex/builds/ directory printed by make. "
             "The structured CSV separates lemma, part of speech, gender, inflection group, "
-            "definition and stress; legacy word/partofspeech/translation headers "
-            "remain accepted. Stress records a positive lemma syllable index."
+            "definition, stress, perfect-auxiliary selection, accent and stress_anchor; legacy word/partofspeech/translation headers "
+            "remain accepted. Stress records a positive citation-form syllable index. Accent is A1, A2 or blank; an optional one-based grapheme anchor disambiguates stress placement."
         ),
     )
     parser.parse_args()

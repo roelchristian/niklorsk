@@ -72,7 +72,9 @@ POS = {
     "pron": "pronoun", "v": "verb", "part": "particle", "num": "numeral",
 }
 STEM_VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "inflection", "definition", "stress"]
-VOCABULARY_FIELDS = STEM_VOCABULARY_FIELDS + ["infinitive"]
+CITATION_VOCABULARY_FIELDS = STEM_VOCABULARY_FIELDS + ["infinitive"]
+VOCABULARY_FIELDS = CITATION_VOCABULARY_FIELDS + ["perfect_auxiliary", "accent", "stress_anchor"]
+PERFECT_AUXILIARIES = {"HAVE", "BE", "ALTERNATING"}
 PREVIOUS_VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "plurals", "definition", "stress"]
 # These are dictionary lookup groups, not additional grammatical classes.
 # Each code links to the existing description or a table of recorded forms.
@@ -217,6 +219,60 @@ def citation_form(row: dict) -> str:
     return row["infinitive"] or row["lemma"]
 
 
+def perfect_auxiliary(row: dict) -> str:
+    """Return lexical perfect selection independently of conjugation class."""
+    return (row.get("perfect_auxiliary") or "HAVE") if row["partofspeech"] == "v" else ""
+
+
+# Stress anchors are one-based extended-grapheme positions in the citation form.
+# Niklorsk's phonemic au occupies one nucleus; other adjacent vowels are hiatus.
+# Explicit anchors take precedence for lexical syllabification exceptions.
+VOWEL_GRAPHEMES = set("aeiouyæåäö")
+
+
+def orthographic_graphemes(text: str) -> list[str]:
+    clusters = []
+    for char in unicodedata.normalize("NFC", text):
+        if unicodedata.combining(char):
+            if not clusters:
+                raise BuildError("A headword cannot begin with a combining mark.")
+            clusters[-1] += char
+        else:
+            clusters.append(char)
+    return clusters
+
+
+def stress_display(row: dict) -> tuple[str, str]:
+    """Return display spelling and a warning, never infer missing lexical stress."""
+    word = citation_form(row)
+    stress, anchor = row.get("stress", ""), row.get("stress_anchor", "")
+    if not stress:
+        return word, "primary stress unrecorded"
+    clusters = orthographic_graphemes(word)
+    vowels = []
+    index = 0
+    while index < len(clusters):
+        char = clusters[index].casefold()
+        if char in VOWEL_GRAPHEMES:
+            vowels.append(index)
+            if char == "a" and index + 1 < len(clusters) and clusters[index + 1].casefold() == "u":
+                index += 1
+        index += 1
+    warning = ""
+    if anchor:
+        target = int(anchor) - 1
+        if target >= len(clusters) or clusters[target].casefold() not in VOWEL_GRAPHEMES:
+            raise BuildError(f"Stress anchor for {word} must identify a vowel grapheme in its citation form.")
+        if int(stress) > len(vowels) or target != vowels[int(stress) - 1]:
+            warning = "explicit stress_anchor overrides ordinary written-nucleus resolution"
+    elif int(stress) > len(vowels):
+        return word, f"stress index {stress} has no written nucleus; record stress_anchor"
+    else:
+        target = vowels[int(stress) - 1]
+    clusters[target] = unicodedata.normalize("NFC", clusters[target] + "\u0301")
+    return "".join(clusters), warning
+
+
 def read_vocabulary(source: Path) -> list[dict]:
     """Read lemma records and their linked inflection groups."""
     entries = {}
@@ -225,9 +281,9 @@ def read_vocabulary(source: Path) -> list[dict]:
         legacy_fields = ["word", "partofspeech", "translation"]
         legacy = reader.fieldnames in (legacy_fields, legacy_fields + ["stress"])
         previous_format = reader.fieldnames == PREVIOUS_VOCABULARY_FIELDS
-        if not legacy and not previous_format and reader.fieldnames not in (VOCABULARY_FIELDS, STEM_VOCABULARY_FIELDS):
+        if not legacy and not previous_format and reader.fieldnames not in (VOCABULARY_FIELDS, CITATION_VOCABULARY_FIELDS, STEM_VOCABULARY_FIELDS):
             raise BuildError(
-                "Vocabulary needs lemma;partofspeech;gender;inflection;definition;stress;infinitive "
+                "Vocabulary needs lemma;partofspeech;gender;inflection;definition;stress;infinitive;perfect_auxiliary;accent;stress_anchor "
                 "or a supported previous vocabulary header."
             )
         for line, row in enumerate(reader, 2):
@@ -237,6 +293,12 @@ def read_vocabulary(source: Path) -> list[dict]:
             stress = row.get("stress", "")
             if stress and (not stress.isascii() or not stress.isdecimal() or stress.startswith("0")):
                 raise BuildError(f"Invalid stress on vocabulary row {line}: use a positive syllable index or leave blank.")
+            accent = row.get("accent", "")
+            anchor = row.get("stress_anchor", "")
+            if accent not in {"", "A1", "A2"}:
+                raise BuildError(f"Invalid accent on vocabulary row {line}: use A1, A2 or leave blank; A0 is a surface category.")
+            if anchor and (not anchor.isascii() or not anchor.isdecimal() or anchor.startswith("0") or not stress):
+                raise BuildError(f"Invalid stress_anchor on vocabulary row {line}: use a positive grapheme index with a recorded stress index.")
             pos = row["partofspeech"]
             allowed_pos = set(POS) | (set(LEGACY_GENDERS) if legacy else set())
             if pos and pos not in allowed_pos:
@@ -286,10 +348,16 @@ def read_vocabulary(source: Path) -> list[dict]:
                 raise BuildError(f"Unexpected infinitive on non-verbal vocabulary row {line}.")
             if any(char in infinitive for char in ",| "):
                 raise BuildError(f"Invalid infinitive on vocabulary row {line}: use one incorporated citation form.")
+            auxiliary = row.get("perfect_auxiliary", "")
+            if auxiliary and (pos != "v" or auxiliary not in PERFECT_AUXILIARIES):
+                raise BuildError(f"Invalid perfect auxiliary on vocabulary row {line}: use HAVE, BE or ALTERNATING on verbs only.")
             key = unicodedata.normalize("NFC", infinitive or lemma).casefold(), pos
-            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, inflection=inflection, definition=definition, stress=stress, infinitive=infinitive)
+            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, inflection=inflection, definition=definition, stress=stress, infinitive=infinitive, perfect_auxiliary=auxiliary, accent=accent, stress_anchor=anchor)
+            stress_display(entry)
             previous = entries.get(key)
             if previous:
+                if perfect_auxiliary(previous) != perfect_auxiliary(entry):
+                    raise BuildError(f"Conflicting perfect auxiliary for {lemma} on vocabulary row {line}.")
                 if previous["gender"] != gender or previous["definition"] != definition:
                     raise BuildError(f"Conflicting lexical records for {lemma} on vocabulary row {line}.")
                 if previous["stress"] and stress and previous["stress"] != stress:
@@ -335,11 +403,13 @@ def vocabulary(stage: Path) -> int:
         r"\label{sec:vocabulary-key}",
         r"Headwords are nominative singular nouns, verbal infinitives, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites appear in the neuter, possessives in the masculine (masculine--neuter \nk{hamde}), and reflexive \nk{hæm} in the accusative. Articles are listed under \nk{en} and \nk{men} (\S~\ref{sec:indefinite-article}); for contracted \nk{atta}, see \S~\ref{sec:article-contraction}. Derivatives are listed separately; personal and place names are omitted.",
         "",
-        r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. Superscripts number the primary-stressed syllable from the beginning of the headword; unmarked entries leave stress unspecified (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ (including Ä), Ö, Å.",
+        r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. An acute marks primary stress; superscripts 1 and 2 identify lexical Accent 1 and Accent 2. An absent acute or superscript leaves the respective property unrecorded, not neutralised; A0 denotes surface neutralisation. These editorial marks are not part of ordinary spelling (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ (including Ä), Ö, Å.",
         "",
         r"\noindent\textbf{Inflection key.} N-ar, N-or, N-a, N-n: suffixal plurals; N-er: umlaut with \nk{-er}; N-U: umlaut alone; N-$\varnothing$: zero plural; N-s: borrowed \nk{-s} and recorded native alternatives; N-ånde: \nk{-ånde} nouns. N? indicates no recorded plural. Genitives follow \S~\ref{sec:nominal-case}; person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
         "",
         r"\noindent I, II: regular conjugations (Table~\ref{tab:verb-conjugation}); L: Latinate (Table~\ref{tab:verb-conjugation-latinate}); \emph{vowel alt.}: participial vowel alternation; \emph{stem alt.}: consonant restoration; \emph{irr.}: irregular; \emph{irr.?}: irregular, paradigm incomplete; V?: conjugation unrecorded; \emph{sep.}: mobile particle; \emph{insep.}: inseparable prefix.",
+        "",
+        r"Perfect selection is specified for verbs taking \nk{vors} and for the licensed activity/transition alternation; other verbal entries take \nk{fårs} by default (\S~\ref{sec:perfect}). Auxiliary selection is independent of conjugation class.",
         "",
         r"\noindent A: ordinary adjective agreement and comparison (Tables~\ref{tab:adj-declension}, \ref{tab:adj-comp}); A?: full agreement pattern unrecorded. Adv: regular \nk{-æginn/-gæginn} comparison; Adv-irr.: irregular comparison; Adv0: no comparative listed, including \nk{-s} adverbs (\S~\ref{sec:adverb-formation}).",
         "",
@@ -347,6 +417,7 @@ def vocabulary(stage: Path) -> int:
         "", r"{\footnotesize", r"\begin{multicols}{2}", "",
     ]
     previous = ""
+    notation_warnings = []
     for row in rows:
         letter = dictionary_heading(citation_form(row))
         new_letter = letter != previous
@@ -373,13 +444,25 @@ def vocabulary(stage: Path) -> int:
                 references.append(r"For the irregular past, see \S~\ref{sec:modal-verbs}.")
             elif code == "V-irr":
                 references.append(r"Paradigm incomplete; see \S~\ref{sec:verb-conjugation}.")
-        arguments = [citation_form(row), row["stress"], label, ", ".join(groups), row["definition"], " ".join(references)]
+        auxiliary = perfect_auxiliary(row)
+        if auxiliary == "BE":
+            references.append(r"Perfect with \nk{vors} (\S~\ref{sec:perfect}).")
+        elif auxiliary == "ALTERNATING":
+            references.append(r"Perfect with \nk{fårs}; \nk{vors} in the bounded-motion construction (\S~\ref{sec:perfect}).")
+        display, warning = stress_display(row)
+        missing = ([warning] if warning else []) + (["lexical accent unrecorded"] if not row["accent"] else [])
+        if missing:
+            notation_warnings.append({"headword": citation_form(row), "issues": missing})
+        arguments = [display, row["accent"], label, ", ".join(groups), row["definition"], " ".join(references)]
         lines.extend([r"\dictionaryentry" + "".join("{" + value + "}" for value in arguments), ""])
         if new_letter:
             lines.extend([r"\end{minipage}\par", r"\endgroup", ""])
         previous = letter
     lines.extend([r"\end{multicols}", "}", ""])
     (outdir / "vocabulary.tex").write_text("\n".join(lines), encoding="utf-8")
+    (outdir / "notation_warnings.json").write_text(json.dumps(notation_warnings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if notation_warnings:
+        print(f"Vocabulary notation: {len(notation_warnings)} records have incomplete metadata; see {outdir / 'notation_warnings.json'}", file=sys.stderr)
     return len(rows)
 
 

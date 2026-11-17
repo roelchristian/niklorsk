@@ -42,12 +42,12 @@ class AspectTests(unittest.TestCase):
                      'Matti ø ansløtur', 'Matti ø atsløtur',
                      'Matti vor sløtur', 'Matti vørs sløtur',
                      'Matti års sløtur', 'Matti voren sløtur',
-                     'Matti ø så sløtur', 'Matti ø så sløtur an',
+                     'Matti ø så sløtur', 'Matti ø så ansløtur',
                      'Gå ø sløturen', 'Matti tind sløtsk'):
             self.assertIn(form, self.verbs)
         for form in ('mustur', 'lotur', '-uren', '-guren'):
             self.assertIn(form, self.verbs)
-        self.assertNotIn('Matti ø så ansløtur', self.verbs)
+        self.assertNotIn('Matti ø så sløtur an', self.verbs)
 
     def test_number_only_past_participles(self):
         for path in self.sources:
@@ -92,7 +92,7 @@ class AspectTests(unittest.TestCase):
 
     def test_progressive_remains_infinitival(self):
         for form in ('ø i hjalts', 'vor i hjalts', 'vørs i hjalts',
-                     'Ag ø så i hjalts', 'Ag ø så i mursts med op'):
+                     'Ag ø så i hjalts', 'Ag ø så i opmursts med'):
             self.assertIn(form, self.verbs)
 
     def test_retained_nonfinite_and_mood_forms(self):

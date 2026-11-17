@@ -46,3 +46,44 @@ class MergedVowelInventoryTests(unittest.TestCase):
         for form in ('væds', 'vødur', 'læts', 'lotur'):
             self.assertIn(form, source)
         self.assertIn('distinct lexical classes', source)
+
+class RetiredVowelAuditTests(unittest.TestCase):
+    @staticmethod
+    def retired_spelling(text):
+        import unicodedata
+        # NFD finds diaereses even when another accent precedes them.
+        text = unicodedata.normalize('NFD', text)
+        return re.search(r'[aAoO][\u0300-\u036f]*\u0308|\\"\s*(?:\{\s*)?[aAoO]', text)
+
+    def test_audit_recognises_unicode_and_tex_variants(self):
+        for text in ('ä', 'Ö', 'a\u0308', 'O\u0308', 'o\u0308\u0301', 'o\u0301\u0308', 'ǟ',
+                     r'\"a', r'\"{o}', r'\" {A}'):
+            self.assertIsNotNone(self.retired_spelling(text), text)
+        for text in ('æ', 'ø', 'ǽ', 'ǿ', 'œ', 'œʏ̯'):
+            self.assertIsNone(self.retired_spelling(text), text)
+
+    def test_manuscript_and_corpus_use_current_spelling(self):
+        paths = [ROOT / 'README.md', ROOT / 'grammar.tex', ROOT / 'grammarstyle.cls',
+                 ROOT / 'vocabulary/vocabulary.csv']
+        for folder in ('chapters', 'preamble', 'texts'):
+            paths.extend((ROOT / folder).glob('*.tex'))
+            paths.extend((ROOT / folder).glob('*.csv'))
+        # No foreign-language diaeresis examples currently require an exception.
+        # Any future foreign quotation or IPA example must be reviewed separately.
+        for path in paths:
+            self.assertIsNone(self.retired_spelling(path.read_text()), path)
+
+    def test_generated_dictionary_uses_current_spelling(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            stage = Path(directory)
+            (stage / 'vocabulary').mkdir()
+            (stage / 'vocabulary/vocabulary.csv').write_bytes(
+                (ROOT / 'vocabulary/vocabulary.csv').read_bytes())
+            build.vocabulary(stage)
+            self.assertIsNone(self.retired_spelling(
+                (stage / 'vocabulary/vocabulary.tex').read_text()))
+        # Sorting aliases do not rewrite lexical spelling or assign phonology.
+        self.assertEqual(build.dictionary_key('ä'), build.dictionary_key('æ'))
+        self.assertEqual(build.dictionary_key('ö'), build.dictionary_key('ø'))
+        self.assertEqual(build.citation_form({'lemma': 'ö', 'infinitive': ''}), 'ö')

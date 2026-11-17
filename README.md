@@ -28,11 +28,11 @@ uses finite forms of *vors* followed by *i* and an infinitive; these constructio
 also combine in the perfect progressive. A synthetic perfect infinitive
 expresses anterior events in non-finite complements.
 
-Particle verbs ordinarily combine a preverbal particle with the verbal stem
-as one word, but separate with negation, pronominal or demonstrative objects,
-imperatives, and synthetic passives. Their placement with modals, in questions
-and in inverted clauses is treated alongside these patterns. Mobile particles
-contrast with inseparable prefixes in both placement and stress.
+Particle verbs separate the particle from a finite lexical verb in both main
+and subordinate clauses, including synthetic passives and imperatives.
+Infinitives and participles incorporate the particle, including under negation
+and with pronominal objects. Mobile particles contrast with inseparable
+prefixes in both placement and stress.
 
 The phonology chapter treats vowel and consonant length, the diphthong /œʏ̯/, syllable
 structure, variable lexical stress, two lexical pitch accents, and phrasal

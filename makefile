@@ -408,7 +408,7 @@ def vocabulary(stage: Path) -> int:
         "",
 
         r"\label{sec:vocabulary-key}",
-        r"Headwords are nominative singular nouns, verbal infinitives, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites appear in the neuter, possessives in the masculine (masculine--neuter \nk{hamde}), and reflexive \nk{hæm} in the accusative. Articles are listed under \nk{en} and \nk{men} (\S~\ref{sec:indefinite-article}); for preposition--article contractions, see \S~\ref{sec:article-contraction}. Derivatives are listed separately; personal and place names are omitted.",
+        r"Headwords are nominative singular nouns, verbal infinitives, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites appear in the neuter, possessives in the masculine (masculine--neuter \nk{hamde}), and reflexive \nk{hæm} in the accusative. Articles are listed under \nk{en} and \nk{men} (\S~\ref{sec:indefinite-article}); for preposition--article contractions, see \S~\ref{sec:article-contraction}. Derivatives are listed separately; proper names are included selectively.",
         "",
         r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. An acute marks primary stress, while superscripts 1 and 2 identify lexical Accent 1 and Accent 2. Either property may be unrecorded, in which case its mark is omitted; surface neutralisation is represented separately as A0. These editorial annotations are absent from ordinary spelling (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ, Ø, Å.",
         "",

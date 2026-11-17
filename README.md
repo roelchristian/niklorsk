@@ -93,8 +93,10 @@ records lexical A1 or A2, independently of its surface realisation. An omitted
 superscript leaves the lexical category unspecified.
 
 In the CSV, `infinitive` holds each verb’s citation form and `lemma` its present
-stem for morphological lookup. Older word lists containing verbs must supply
-the `infinitive` column explicitly, since the generator does not infer missing
+stem for morphological lookup. Where the present stem is unrecorded, `lemma`
+retains the attested infinitive and the inflection class remains `V?`; the stored
+form must not be treated as a present-tense form. Older word lists containing
+verbs must supply the `infinitive` column explicitly, since the generator does not infer missing
 forms. The separate optional `perfect_auxiliary` field records `BE` for directed
 motion verbs and `ALTERNATING` for predicates with a licensed activity/transition
 alternation. These values describe lexical selection independently of conjugation class:

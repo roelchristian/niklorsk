@@ -1,11 +1,11 @@
 lemma;partofspeech;gender;inflection;definition;stress;infinitive;perfect_auxiliary;accent;stress_anchor;plural
-afte;n;m;N-n;book;1;;;;;
+afte;n;m;N-n;book;1;;;;;aften
 ag;pron;;P;I;;;;;;
 aka;adv;;0;also;;;;;;
 ambulans;n;;N?;ambulance;;;;;;
 an;part;;Part;out;1;;;A1;;
 anhveng;v;;V-I|Sep;to discover, to find out;1;anhvengs;;;;
-ansløt;v;;V-I|Sep;to come out;1;ansløts;BE;;;
+ansløt;v;;V-I|Sep;to come out;1;ansløts;BE;A1;;
 arnum;n;m;N?;ruler;;;;;;
 asse;adv;;0;always;;;;;;
 at;part;;Part;into;;;;;;
@@ -29,23 +29,24 @@ bliv;n;m;N?;man;;;;;;
 blæ;adj;;A?;same;;;;;;
 blæ;adv;;Adv0;same, equally;;;;;;
 blåck;n;;N-s;blog;;;;;;
-bot;n;n;N-n;grass;;;;;;
+bot;n;n;N-n;grass;;;;;;boten
 bra;v;;V-II;to give;;brags;;;;
 bram;n;;N?;study;;;;;;
 bram;v;;V-I;to study;;brams;;;;
 brev;n;;N?;letter;;;;;;
 brevet;n;n;N?;owner;;;;;;
 brickhæd;n;f;N?;beauty;;;;;;
-brord;n;n;N-a;room;;;;;;
+brord;n;n;N-a;room;;;;;;brorda
 brug;n;f;N?;house;;;;;;
-brutal;adj;;A;brutal;;;;;;
-brutalitet;n;f;N?;brutality;;;;;;
+brutal;adj;;A;brutal;2;;;;;
+brutalitet;n;f;N?;brutality;4;;;;;
 brørd;n;;N?;room;;;;;;
 bråst;n;m;N?;cake;;;;;;
-bund;n;m;N-er;king;;;;;;
+bund;n;m;N-er;king;;;;;;bynder
 byck;adj;;A?;half;;;;;;
+bængds;v;;V?|V-stem;to cover;;bængds;;;;
 bær;adv;;Adv0;somewhat;;;;;;
-bærg;n;n;N-n;heaven;;;;;;
+bærg;n;n;N-n;heaven;;;;;;bærgen
 børd;v;;V-I|V-stem;to eat;;børds;;;;
 børn;n;;N?;secret;;;;;;
 børrs;n;;N?;forest;;;;;;
@@ -60,24 +61,24 @@ dans;n;;N?;dance;;;;;;
 danser;v;;V?;to dance;;dansers;;;;
 deg;pron;;Q;"who; also used as a relative pronoun";;;;;;
 det;prep;;0;about;;;;;;
-dokument;n;f;N-ar;document;3;;;;;
+dokument;n;f;N-ar;document;3;;;;;dokumentar
 drama;n;;N?;drama;;;;;;
 dramatiserats;n;f;N?;dramatization;;;;;;
-dramatiser;v;;V-L;to dramatize;;dramatisers;;;;
+dramatiser;v;;V-L;to dramatize;3;dramatisers;;;;
 dreg;n;m;N-a|N-ar;mind;;;;;;
 dritte;adj;;A?;a few;;;;;;
 drå;num;;0;four;;;;;;
 drådag;num;;0;fourteen;;;;;;
-dur;n;m;N-a;boy, son;;;;;;
+dur;n;m;N-a;boy, son;;;;;;durra
 dygg;n;;N?;bread;;;;;;
-dyr;n;m;N-zero;bear;;;;;;
+dyr;n;m;N-zero;bear;;;;;;dyr
 dægn;v;;V-I;must;;dægns;;;;
 dåg;conj;;0;but;;;;;;
 dåns;n;f;N?;wife;;;;;;
 efte;conj;;0;"if; whether";;;;;;
 efte bær;conj;;0;if ever;;;;;;
 efte ngå;conj;;0;if only;;;;;;
-element;n;m;N-n;element;;;;;;
+element;n;m;N-n;element;;;;;;elementen
 elge;pron;;Ind;any;;;;;;
 en;art;;Art;the;;;;;;
 Engelsk;n;;N?;English;;;;;;
@@ -88,17 +89,17 @@ enramm;v;;V-I|Insep;to produce or develop through labour (the result as direct o
 ensatt;v;;V-I|Insep;to obtain through requesting (the acquired entity as direct object);2;ensatts;;;;
 entor;v;;V-I|Insep;to become convinced (intransitive, optionally with an \nk{og} content clause), to acknowledge as true (content as direct object);2;entors;;;;
 exam;n;;N?;exam;;;;;;
-fabrik;n;f;N-ar;factory;2;;;;;
+fabrik;n;f;N-ar;factory;2;;;;;fabrickar
 fall;v;;V-I;cannot, to be physically unable to;;falls;;;;
 famd;adv;;0;therefore;;;;;;
 ferm;v;;V-I;to sit;;ferms;;;;
 finns;n;;N?;peace;;;;;;
-fjeltt;n;f;N-a;party, celebration;;;;;;
+fjeltt;n;f;N-a;party, celebration;;;;;;fjeltta
 fjerd;v;;V-I;to forget;;fjerds;;;;
 fjerdåge;adj;;A?;forgetful;;;;;;
 fjerdåghæd;n;f;N?;forgetfulness;;;;;;
-flick;n;f;N-ar;name;;;;;;
-forst;n;m;N-a;time;;;;;;
+flick;n;f;N-ar;name;;;;;;flickar
+forst;n;m;N-a;time;;;;;;forsta
 fylldag;num;;0;fifteen;;;;;;
 fylle;num;;0;five;;;;;;
 fænn;n;;N-s;fan, supporter;;;;;;
@@ -106,14 +107,14 @@ fænt;adj;;A;last;;;;;;
 fænt;adv;;0;last;;;;;;
 færg;n;;N?;home;;;;;;
 fød;v;;V-I;to heat up (a liquid);;føds;;;;
-fødånde;n;n;N-ånde;heating a liquid;;;;;;
+fødånde;n;n;N-ånde;heating a liquid;;;;;;fødønder
 førfjerd;v;;V-I|Insep;to forget irretrievably (forgotten content as direct object);2;førfjerds;;;;
 førgræd;v;;V-I|Insep;to wear out through use (an affected object as direct object);2;førgræds;;;;
 førklør;v;;V-I|Insep;to burn up, to consume by fire (an affected object as direct object);2;førklørs;;;;
 førkost;v;;V-I|Insep;to distort, to alter beyond recognition (an affected object as direct object);2;førkosts;;;;
 førramm;v;;V-I|Insep;to overwork, to exhaust through labour (a worker as direct object);2;førramms;;;;
 førsond;v;;V-I|Insep;to promise (cf. \nk{sonds} `to speak');2;førsonds;;;;
-førsondånde;n;n;N-ånde;promising;2;;;;;
+førsondånde;n;n;N-ånde;promising;2;;;;;førsondønder
 få;adj;;A?;a little;;;;;;
 få;v;;V-II;to drive;;fågs;;;;
 fålg;adj;;A?;small;;;;;;
@@ -123,13 +124,13 @@ gansegs;adv;;Adv;rarely;;;;;;
 geni;n;;N?;genius;;;;;;
 gett;conj;;0;because;;;;;;
 giml;v;;V-I;to buy;;gimls;;;;
-glus;n;m;N-ar;cat;1;;;A1;;
+glus;n;m;N-ar;cat;1;;;A1;;glussar
 glæst;n;n;N?;doctor;;;;;;
 grimhæd;n;f;N?;haste, hurry;;;;;;
-grom;adj;;A;stupid;;;;;;
-gromhæd;n;f;N?;stupidity;;;;;;
+grom;adj;;A;stupid;1;;;;;
+gromhæd;n;f;N?;stupidity;1;;;;;
 græd;v;;V-I;to use;;græds;;;;
-grædånde;n;n;N-ånde;use, usage;;;;;;
+grædånde;n;n;N-ånde;use, usage;;;;;;grædønder
 gæbot;v;;V-I|Insep;to cover with grass, to grass over (a surface as direct object);2;gæbots;;;;
 gæd;v;;V-I;to hope;;gæds;;;;
 gæjærv;v;;V-I|Insep;to exhaust, to make tired (an affected participant as direct object);2;gæjærvs;;;;
@@ -152,33 +153,33 @@ helmod;v;;V-I|Sep;to drink up, to finish drinking;1;helmods;;;;
 helsløt;v;;V-I|Sep;to come up, to ascend;1;helsløts;BE;;;
 hent;v;;V-I;to tell;;hents;;;;
 hjalt;v;;V-I;to write;1;hjalts;;A1;;
-hjaltygde;n;n;N?;writer;;;;;;
-hjaltånde;n;n;N-ånde;writing, an act of writing;;;;;;
+hjaltygde;n;n;N?;writer;1;;;;;
+hjaltånde;n;n;N-ånde;writing, an act of writing;;;;;;hjaltønder
 hjeck;v;;V-I;to talk, to speak;;hjecks;;;;
 hjær;v;;V?;to grow;;hjærs;;;;
-hjørtat;n;n;N-n;apology;;;;;;
-hjålt;n;n;N-er;cake;;;;;;
-hlåd;n;m;N-U;summer;;;;;;
+hjørtat;n;n;N-n;apology;;;;;;hjørtaten
+hjålt;n;n;N-er;cake;;;;;;hjølter
+hlåd;n;m;N-U;summer;;;;;;hlød
 hold;n;f;N?;daughter, girl;;;;;;
 hon;pron;;P|Poss;"she; her (possessive)";;;;;;
-hond;n;n;N-U;child;;;;;;
-honding;n;n;N?;child, little child;;;;;;
+hond;n;n;N-U;child;1;;;;;hynd
+honding;n;n;N?;child, little child;1;;;;;
 hons;n;m;N-exp;oil;;;;;;honsar
 hot;adj;;A;short;;;;;;
-hrådd;n;m;N-er;group;;;;;;
-hus;n;f;N-er;straw;;;;;;
+hrådd;n;m;N-er;group;;;;;;hrødder
+hus;n;f;N-er;straw;;;;;;hysser
 hveng;v;;V-I;to find;;hvengs;;;;
 hvæd;v;;V-I;to know;;hvæds;;;;
 hvær;n;m;N?;charm;;;;;;
 hæm;pron;;R;subject-oriented reflexive;;;;;;
-hærn;n;n;N-zero;antler;;;;;;
+hærn;n;n;N-zero;antler;;;;;;hærn
 hæt;part;;Part;down;;;;;;
 hætsløt;v;;V-I|Sep;to come down;1;hætsløts;BE;;;
 høg;n;;N?;eye;;;;;;
 hør;n;;N?;pen;;;;;;
 håg;n;;N?;clothing;;;;;;
 hålla;adv;;Adv0;near;;;;;;
-hålv;n;n;N-zero;deep pool in a river;;;;;;
+hålv;n;n;N-zero;deep pool in a river;;;;;;hålv
 i;part;;Part;in;;;;;;
 i;prep;;0;in, on, at, within, inside (with definite articles: im, ir, ing, idæ);;;;;;
 igom;v;;V-modal;can, to be physically able to;;igoms;;;;
@@ -196,6 +197,7 @@ it;pron;;P;you (plural);;;;;;
 jagt;v;;V-I;to remember;;jagts;;;;
 jagtåge;adj;;A?;inclined to remember;;;;;;
 jagtåghæd;n;f;N?;habitual attentiveness to remembering;;;;;;
+Jesu;n;;N?;Jesus (proper name);;;;;;
 jærv;adj;;A;tired;;;;;;
 jærvhæd;n;f;N?;tiredness;;;;;;
 jø;pron;;P;it (neuter);;;;;;
@@ -203,7 +205,7 @@ jør;pron;;Poss;its;;;;;;
 jørv;adj;;A;single;;;;;;
 jårt;n;f;N?;town;;;;;;
 kafe;n;;N?;coffee;;;;;;
-kaffe;n;m;N-n;coffee;;;;;;
+kaffe;n;m;N-n;coffee;;;;;;kaffen
 kalm;n;m;N-er;seed;;;;;;kælmer
 kamm;pron;;Q0;"when; also used as a relative pronoun";;;;;;
 kampus;n;;N?;campus;;;;;;
@@ -213,8 +215,8 @@ kannibaliserats;n;f;N?;cannibalization;;;;;;
 kannibaliser;v;;V-L;to cannibalize;;kannibalisers;;;;
 kanselerfør;adj;;A;cancellable;;;;;;
 kanseler;v;;V-L;to cancel;;kanselers;;;;
-kapp;n;f;N-er;coat;;;;;;
-kelv;n;n;N-n;half;;;;;;
+kapp;n;f;N-er;coat;;;;;;kæpper
+kelv;n;n;N-n;half;;;;;;kelven
 kinnotek;n;;N?;cinema;;;;;;
 klickerfør;adj;;A;clickable;;;;;;
 klicker;v;;V?;to click;;klickers;;;;
@@ -225,19 +227,19 @@ kom;v;;V-I;to die;;koms;;;;
 konta;n;f;N?;Miss;;;;;;
 kort;adj;;A;short;;;;;;
 kost;v;;V-I;to change;;kosts;;;;
-kostånde;n;n;N-ånde;changing, an alteration;;;;;;
+kostånde;n;n;N-ånde;changing, an alteration;;;;;;kostønder
 koverb;n;;N?;coverb;;;;;;
 krugadegs;adv;;Adv;befittingly;;;;;;
 krugnat;n;;N?;crowd;;;;;;
-krust;n;n;N-n;earthquake;;;;;;
+krust;n;n;N-n;earthquake;;;;;;krusten
 kunda;v;;V-II;to stop;;kundags;;;;
-kung;n;m;N-U;mirror;;;;;;
+kung;n;m;N-U;mirror;;;;;;kyng
 kun;v;;V-I;cannot, to lack general ability;;kuns;;;;
 kupp;v;;V-I;to take;;kupps;;;;
-kvett;n;n;N-a;previous day;;;;;;
+kvett;n;n;N-a;previous day;;;;;;kvetta
 kvill;v;;V-I;to begin;;kvills;;;;
 kvint;v;;V-I;to bake;;kvints;;;;
-kvintånde;n;n;N-ånde;baking;;;;;;
+kvintånde;n;n;N-ånde;baking;;;;;;kvintønder
 kæg;pron;;Q0;"where; also used as a relative pronoun";;;;;;
 kør;v;;V-I;to receive;;kørs;;;;
 lasst;n;;N?;salt;;;;;;
@@ -246,12 +248,12 @@ lek;v;;V-I;to respond;;leks;;;;
 licke;adv;;0;quite;;;;;;
 ligt;adj;;A?;a lot of;;;;;;
 liter;n;;N?;litre;;;;;;
-læb;n;f;N-a;next day, morrow;;;;;;
+læb;n;f;N-a;next day, morrow;;;;;;læba
 læptåpp;n;;N-s;laptop;;;;;;
 lære;adv;;0;now;;;;;;
 læse;pron;;Ind;every, everyone, everything;;;;;;
 læt;v;;V-I|V-alt;to walk;;læts;ALTERNATING;;;
-magasin;n;n;N-ar;store;3;;;A1;;
+magasin;n;n;N-ar;store;3;;;A1;;magasinnar
 malm;v;;V-I;to go;;malms;BE;;;
 mama;n;f;N?;mother;;;;;;
 man;pron;;D;this (proximal);;;;;;
@@ -260,7 +262,7 @@ mask;n;;N?;vermin;;;;;;
 med;pron;;D;that, that over there;;;;;;
 meg;pron;;P|Poss;"you (singular); your (singular)";;;;;;
 meger;v;;V?;to vote;;megers;;;;
-megerånde;n;n;N-ånde;voting, a vote as an event;;;;;;
+megerånde;n;n;N-ånde;voting, a vote as an event;;;;;;megerønder
 men;adv;;0;here;;;;;;
 men;art;;Art-ind;a, an;;;;;;
 men;num;;0;one;;;;;;
@@ -272,17 +274,16 @@ merk;num;;0;nine;;;;;;
 merkdag;num;;0;nineteen;;;;;;
 miljon;num;;0;one million;;;;;;
 miljær;num;;0;one thousand million;;;;;;
-mobil;n;m;N-ar;phone;;;;;;
-modd;n;m;N-er;meadow;;;;;;
+mobil;n;m;N-ar;phone;;;;;;mobilar
+modd;n;m;N-er;meadow;;;;;;mydder
 mod;v;;V-I;to drink;1;mods;;;;
 morg;v;;V-I;to rain;;morgs;;;;
 most;v;;V-I;to come;;mosts;BE;;;
 murst;v;;V-I;to cut;;mursts;;;;
-murstånde;n;n;N-ånde;cutting, a cut or cutting operation;;;;;;
+murstånde;n;n;N-ånde;cutting, a cut or cutting operation;;;;;;murstønder
 myck;v;;V-I;to do, to make;;mycks;;;;
-myk;v;;V-I;to do, to make;;myks;;;;
 mæga;interj;;0;thanks;;;;;;
-møyg;n;n;N-n;friend;;;;;;
+møyg;n;n;N-n;friend;;;;;;møygen
 møyrs;n;;N?;fame;;;;;;
 møys;adj;;A;happy;;;;;;
 møysegs;adv;;Adv;happily;;;;;;
@@ -298,15 +299,15 @@ nervøs;adj;;A;nervous;2;;;;;
 ngell;n;f;N?;right;;;;;;
 ngord;n;n;N?;sibling;;;;;;
 ngordhæd;n;f;N?;brotherhood, sisterhood;;;;;;
-ngøld;n;m;N-ar;cow;;;;;;
+ngøld;n;m;N-ar;cow;;;;;;ngølddar
 ngå;adv;;Adv0;only;;;;;;
 nigot;adv;;0;almost;;;;;;
 niklorsk;n;;N?;Niklorsk;2;;;;;
 nog;n;f;N?;voice;;;;;;
-norg;n;n;N-zero;rocky islet;;;;;;
+norg;n;n;N-zero;rocky islet;;;;;;norg
 normal;adj;;A;normal;;;;;;
-normaliserats;n;f;N?;normalization;;;;;;
-normaliser;v;;V-L;to normalize;;normalisers;;;;
+normaliserats;n;f;N?;normalization;3;;;;;
+normaliser;v;;V-L;to normalize;3;normalisers;;;;
 normals;adv;;Adv0;normally;;;;;;
 nosk;adv;;Adv0;very;;;;;;
 ny;conj;;0;when;;;;;;
@@ -314,7 +315,8 @@ nyst;n;f;N?;part;;;;;;
 næ;pron;;Poss;his;;;;;;
 nær;adv;;Adv-irr;for a long time;;;;;;
 nærer;prep;;0;before, in front of;;;;;;
-nør;pron;;P|Poss;"they; their";;;;;;
+nø;pron;;P;they;;;;;;
+nør;pron;;Poss;their;;;;;;
 nørs;adv;;0;never;;;;;;
 nøyp;v;;V-I|V-alt;to snow;;nøyps;;;;
 nøyrt;v;;V-I;to seize;;nøyrts;;;;
@@ -322,7 +324,7 @@ nå;adv;;Adv0;such, so;;;;;;
 någ;adv;;0;already;;;;;;
 någn;adj;;A;old;;;;;;
 objektiv;adj;;A;objective;;;;;;
-objektivitet;n;f;N?;objectivity;;;;;;
+objektivitet;n;f;N?;objectivity;5;;;;;
 og;conj;;0;that (complementizer);;;;;;
 op;part;;Part;apart;;;;;;
 opmurst;v;;V-I|Sep;to cut apart, to cut into pieces;1;opmursts;;;;
@@ -334,21 +336,21 @@ Papps;n;m;N?;Pope;;;;;;
 par;prep;;0;by the;;;;;;
 passiv;adj;;A;passive;;;;;;
 passivetet;n;f;N?;passivity;;;;;;
-patat;n;m;N-or;potato;2;;;;;
-person;n;f;N-ar;person;2;;;;;
+patat;n;m;N-or;potato;2;;;;;patattor
+person;n;f;N-ar;person;2;;;;;personar
 personal;adj;;A;personal;;;;;;
 personals;adv;;Adv0;personally;;;;;;
 pipa;n;;N?;pipe;;;;;;
 pisn;adj;;A;miserable;;;;;;
 pjæt;v;;V-I;to loiter;;pjæts;;;;
 plast;n;;N?;plastic;;;;;;
-plastrum;n;;N?;plastic utensil;;;;;;
+plastrum;n;;N?;plastic utensil;1;;;;;
 professor;n;;N?;professor;;;;;;
 profet;n;m;N-ar;prophet;;;;;;profetar
-projekt;n;m;N-ar;project;;;;;;
+projekt;n;m;N-ar;project;;;;;;projektar
 prover;v;;V?;to try;;provers;;;;
 præst;n;;N?;priest;;;;;;
-pær;n;f;N-or;pen;;;;;;
+pær;n;f;N-or;pen;;;;;;pæror
 på;prep;;0;by;;;;;;
 pådkasst;n;;N-s;podcast;;;;;;
 ramm;v;;V-I;to work;;ramms;;;;
@@ -365,7 +367,7 @@ rum;n;;N?;utensil;;;;;;
 ræn;n;;N?;sweat;;;;;;
 rød;num;;0;twenty;;;;;;
 rør;n;;N?;rye;;;;;;
-rørdygg;n;;N?;rye bread;;;;;;
+rørdygg;n;;N?;rye bread;1;;;;;
 røy;v;;V-II;to be like, to resemble;;røygs;;;;
 røyk;v;;V-I;to smoke;;røyks;;;;
 sag;num;;0;six;;;;;;
@@ -376,27 +378,27 @@ sig;adv;;Adv0;as well, also;;;;;;
 ska;pron;;Ind;all;;;;;;
 skers;v;;V-I;to sing;;skerses;;;;
 skersygde;n;n;N?;singer;;;;;;
-skersånde;n;n;N-ånde;singing;;;;;;
+skersånde;n;n;N-ånde;singing;;;;;;skersønder
 skrig;adj;;A;difficult;;;;;;
 skun;adj;;A;blind;;;;;;
-skæll;n;f;N-a;fish;;;;;;
-skæmd;n;n;N-ar;toy;;;;;;
+skæll;n;f;N-a;fish;;;;;;skælla
+skæmd;n;n;N-ar;toy;;;;;;skæmdar
 skænn;n;;N-s;scan;;;;;;
 skæpp;n;f;N?;ship;;;;;;
-skåv;n;n;N-zero;reef, submerged rock;;;;;;
+skåv;n;n;N-zero;reef, submerged rock;;;;;;skåv
 sla;prep;;0;of, from;;;;;;
 slut;num;;0;three;;;;;;
 slutdag;num;;0;thirteen;;;;;;
 slæm;v;;V-I;to paint;;slæms;;;;
 sløt;v;;V-I;to come;1;sløts;BE;A1;;
-slåg;n;;N?;type;;;;;;
+slåg;n;m;N?;type;;;;;;
 slågan;n;;N-s;slogan;;;;;;
 smed;conj;;0;before;;;;;;
 smæ;pron;;Ind;no;;;;;;
 smål;num;;0;one hundred;;;;;;
 snæck;n;;N-s;snack;;;;;;
 snør;n;;N?;beach;;;;;;
-snørbrug;n;f;N?;beach house;;;;;;
+snørbrug;n;f;N?;beach house;1;;;;;
 sollna;v;;V-II;to be born;;sollnags;;;;
 som;num;;0;two;;;;;;
 somdag;num;;0;twelve;;;;;;
@@ -404,7 +406,7 @@ sond;v;;V-I|V-alt;to speak;;sonds;;;;
 sonne;pron;;Ind;each, each one;;;;;;
 sort;v;;V-I;to complete;;sorts;;;;
 spa;n;;N?;spa;;;;;;
-spis;n;n;N-ar;year;;;;;;
+spis;n;n;N-ar;year;;;;;;spisar
 spæmm;n;;N-s;spam;;;;;;
 stett;v;;V-I;to cry;;stetts;;;;
 stor;n;m;N?;brother;;;;;;
@@ -419,13 +421,13 @@ stør;n;m;N?;day;;;;;;
 størs;n;n;N?;error;;;;;;
 svar;v;;V-I;to smoke;;svars;;;;
 svensk;n;;N?;Swede;;;;;;
-svern;n;m;N-zero;red deer, stag;;;;;;
+svern;n;m;N-zero;red deer, stag;;;;;;svern
 svor;v;;V-I;to sleep;;svors;;;;
 svoråge;adj;;A?;habitually sleepy;;;;;;
 svoråghæd;n;f;N?;habitual sleepiness;;;;;;
 svår;n;;N?;money;;;;;;
 sæd;v;;V-I;to hear;;sæds;;;;
-sægge;n;n;N-n;morning;;;;;;
+sægge;n;n;N-n;morning;;;;;;sæggen
 sælv;n;n;N-exp;"plant; herb";;;;;;sælver
 sær;n;;N?;water;;;;;;
 sæte;n;;N?;lake;;;;;;
@@ -433,11 +435,11 @@ søygna;pron;;Poss;our;;;;;;
 så;part;;Neg;not;;;;;;
 sådag;num;;0;sixteen;;;;;;
 sål;n;m;N?;birth;;;;;;
-tadd;n;m;N-U;father;;;;;;
+tadd;n;m;N-U;father;;;;;;tædd
 tage;v;;V?;to bring;1;tages;;A2;;
-tak;n;n;N-U;brow;;;;;;
+tak;n;n;N-U;brow;;;;;;tæk
 tall;num;;0;one thousand;;;;;;
-talt;n;n;N-n;news;;;;;;
+talt;n;n;N-n;news;;;;;;talten
 te;n;;N?;tea;;;;;;
 tid;v;;V-I;to call;;tids;;;;
 til;prep;;0;for, in order to;;;;;;
@@ -450,14 +452,14 @@ tor;v;;V-I;to believe;;tors;;;;
 total;adj;;A;total;;;;;;
 totals;adv;;Adv0;totally;;;;;;
 trag;v;;V-I;to pay;;trags;;;;
-tragånde;n;n;N-ånde;payment;;;;;;
+tragånde;n;n;N-ånde;payment;;;;;;tragønder
 triljon;num;;0;one million million million;;;;;;
 træ;n;f;N?;queen;;;;;;
 tuck;n;n;N?;box;;;;;;
 tvent;adj;;A;slow;;;;;;
 tventegs;adv;;Adv;slowly;;;;;;
 tølle;conj;;0;or;;;;;;
-tøng;n;m;N-zero;salmon;;;;;;
+tøng;n;m;N-zero;salmon;;;;;;tøng
 tånd;num;;0;eight;;;;;;
 tåndag;num;;0;eighteen;;;;;;
 ud;prep;;0;over, above;;;;;;
@@ -467,24 +469,24 @@ vacks;n;m;N-er;mustard;;;;;;væckser
 vadd;n;f;N-er;tree;;;;;;vædder
 vand;v;;V-I;to drive;;vands;;;;
 vandygde;n;n;N?;driver;;;;;;
-vandånde;n;n;N-ånde;driving, a drive;;;;;;
+vandånde;n;n;N-ånde;driving, a drive;;;;;;vandønder
 vase;n;f;N?;vase;;;;;;
 vatt;adv;;0;both;;;;;;
 vell;v;;V-I;can, to be able to;;vells;;;;
 velt;n;;N?;storm;;;;;;
-verb;n;m;N-ar;word;;;;;;
+verb;n;m;N-ar;word;;;;;;verbar
 vi;part;;0;yes;;;;;;
 vin;prep;;0;for, because of;;;;;;
 ø;v;;V-be;"to be, exist; copula and auxiliary";;vors;;;;
-vædfør;adj;;A;visible;;;;;;
+vædfør;adj;;A;visible;1;;;;;
 væd;v;;V-I|V-alt;to see;;væds;;;;
 væl;pron;;Ind;some;;;;;;
 være;prep;;0;under, below;;;;;;
 værg;n;m;N-n;lord, master;;;;;;værgen
-værs;n;n;N-n;science;;;;;;
-værser;n;m;N-ar;scientist;;;;;;
+værs;n;n;N-n;science;;;;;;værsen
+værser;n;m;N-ar;scientist;;;;;;værserar
 væt;n;;N?;wheat;;;;;;
-våst;n;n;N-zero;rocky field, boulder field;;;;;;
+våst;n;n;N-zero;rocky field, boulder field;;;;;;våst
 æder;conj;;0;while;;;;;;
 æder;prep;;0;as, in the capacity of;;;;;;
 æga;pron;;Poss;my;;;;;;
@@ -504,4 +506,4 @@ våst;n;n;N-zero;rocky field, boulder field;;;;;;
 ånhjalt;v;;V-I|Sep;to write off (as a loss);1;ånhjalts;;;;
 ånsløt;v;;V-I|Sep;to come off;1;ånsløts;BE;;;
 åntug;v;;V-I|Sep;to fatten away, to become obese;1;åntugs;;;;
-ånvand;v;;V-I|Sep;to drive away, to expel by driving;1;ånvands;;;;
+ånvand;v;;V-I|Sep;to drive away, to expel by driving;1;ånvands;;A1;;

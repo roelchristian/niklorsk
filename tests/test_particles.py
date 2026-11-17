@@ -32,8 +32,8 @@ class ParticleTests(unittest.TestCase):
         self.assertIn('Ag hvæd, efte Matti sløtar an', self.syntax)
 
     def test_nonfinite_particles_survive_negation_and_light_objects(self):
-        for example in ('Ag igom ånvands en dyr', 'Ag igom nær ånvands',
-                        'Ag igom så ånvands en dyr', 'Ag igom så nær ånvands',
+        for example in ('Ag igom ånvands en dyr', 'Ag igom navn ånvands',
+                        'Ag igom så ånvands en dyr', 'Ag igom så navn ånvands',
                         'Ag får opmurstur eg hjålt', 'Ag får så opmurstur eg hjålt',
                         'Ag får så med opmurstur', 'Matti ø så ansløtur',
                         'Ag ø i opmursts eg hjålt', 'Ag ø så i opmursts med'):
@@ -53,7 +53,7 @@ class ParticleTests(unittest.TestCase):
                 text = path.read_text()
                 self.assertIsNone(obsolete.search(text))
                 for example in ('Matti ø så sløtur an', 'Ag får så murstur op',
-                                'Ag får så med murstur op', 'Ag igom nær vands ån',
+                                'Ag får så med murstur op', 'Ag igom navn vands ån',
                                 'Ag ø så i mursts med op'):
                     self.assertNotIn(example, text)
 

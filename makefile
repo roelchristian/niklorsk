@@ -92,7 +92,6 @@ INFLECTION_GROUPS = {
     "V-II": ("II", "tab:verb-conjugation", {"v"}),
     "V-L": ("L", "tab:verb-conjugation-latinate", {"v"}),
     "V-be": ("irr.", "tab:verb-to-be", {"v"}),
-    "V-ex": ("irr.", "tab:verb-there-is", {"v"}),
     "V-modal": ("I, irr. past", "sec:modal-verbs", {"v"}),
     "V-irr": ("irr.?", "sec:verb-conjugation", {"v"}),
     "V?": ("V?", "sec:verb-conjugation", {"v"}),
@@ -364,10 +363,10 @@ def vocabulary(stage: Path) -> int:
             if name:
                 groups.append(r"\hyperref[" + target + "]{" + name + "}")
         # Explicit numbered references remain usable in print as well as on screen.
-        # Only the two dedicated tables contain full irregular paradigms.
+        # Only the dedicated table contains full irregular paradigms.
         references = []
         for code in row["inflection"].split("|"):
-            if code in {"V-be", "V-ex"}:
+            if code == "V-be":
                 target = INFLECTION_GROUPS[code][1]
                 references.append(r"See Table~\ref{" + target + "}.")
             elif code == "V-modal":

@@ -197,7 +197,7 @@ jörv;adj;;A;single;;;;;;
 jårt;n;f;N?;town;;;;;;
 kafe;n;;N?;coffee;;;;;;
 kaffe;n;m;N-n;coffee;;;;;;
-kalm;n;;N-er;seed;;;;;;kälmer
+kalm;n;m;N-er;seed;;;;;;kälmer
 kamm;pron;;Q0;"when; also used as a relative pronoun";;;;;;
 kampus;n;;N?;campus;;;;;;
 kan;pron;;Q;"what; also used as a relative pronoun";;;;;;
@@ -405,7 +405,7 @@ strim;n;;N-s;stream;1;;;A1;;
 strom;adv;;Adv0;already;;;;;;
 strål;adj;;A;pretty;;;;;;
 student;n;;N?;student;;;;;;
-stöb;n;;N-ar;bird;;;;;;stöbar
+stöb;n;f;N-ar;bird;;;;;;stöbar
 stör;n;m;N?;day;;;;;;
 störs;n;n;N?;error;;;;;;
 svar;v;;V-I;to smoke;;svars;;;;
@@ -417,7 +417,7 @@ svoråghæd;n;f;N?;habitual sleepiness;;;;;;
 svår;n;;N?;money;;;;;;
 sæd;v;;V-I;to hear;;sæds;;;;
 sægge;n;n;N-n;morning;;;;;;
-sälv;n;;N-exp;"plant; herb";;;;;;sälver
+sälv;n;n;N-exp;"plant; herb";;;;;;sälver
 sär;n;;N?;water;;;;;;
 säte;n;;N?;lake;;;;;;
 söygna;pron;;Poss;our;;;;;;
@@ -436,7 +436,7 @@ tilvådför;adj;;A;noticeable;;;;;;
 tind;v;;V-I;to seem;;tinds;;;;
 titt;v;;V-I;to hide;;titts;;;;
 tog;v;;V-I;to want, to desire;;togs;;;;
-torg;n;;N-n;branch of a tree;;;;;;torgen
+torg;n;n;N-n;branch of a tree;;;;;;torgen
 tor;v;;V-I;to believe;;tors;;;;
 total;adj;;A;total;;;;;;
 totals;adv;;Adv0;totally;;;;;;
@@ -454,8 +454,8 @@ tåndag;num;;0;eighteen;;;;;;
 ud;prep;;0;over, above;;;;;;
 udbär;adv;;0;sometimes;;;;;;
 unga;adj;;A?;sad;;;;;;
-vacks;n;;N-er;mustard;;;;;;väckser
-vadd;n;;N-er;tree;;;;;;vädder
+vacks;n;m;N-er;mustard;;;;;;väckser
+vadd;n;f;N-er;tree;;;;;;vädder
 vand;v;;V-I;to drive;;vands;;;;
 vandygde;n;n;N?;driver;;;;;;
 vandånde;n;n;N-ånde;driving, a drive;;;;;;

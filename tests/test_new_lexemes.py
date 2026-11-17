@@ -11,9 +11,11 @@ class NewLexemeTests(unittest.TestCase):
         entries = {build.citation_form(r): r for r in rows}
         plurals = {'stöb':'stöbar', 'vadd':'vädder', 'sälv':'sälver',
                    'kalm':'kälmer', 'vacks':'väckser', 'torg':'torgen'}
+        genders = {'stöb':'f', 'vadd':'f', 'sälv':'n',
+                   'kalm':'m', 'vacks':'m', 'torg':'n'}
         for word, plural in plurals.items():
             self.assertEqual(entries[word]['plural'], plural)
-            self.assertEqual(entries[word]['gender'], '')
+            self.assertEqual(entries[word]['gender'], genders[word])
         for word in [*plurals, 'hjärs', 'fålg']:
             self.assertEqual(entries[word]['stress'], '')
             self.assertEqual(entries[word]['accent'], '')
@@ -39,5 +41,5 @@ class NewLexemeTests(unittest.TestCase):
                     w=csv.DictWriter(f,fieldnames=build.VOCABULARY_FIELDS,delimiter=';')
                     w.writeheader();w.writerow(record)
                 return build.read_vocabulary(path)
-            for changes in ({'plural':''}, {'plural':'sälver|sälvar'}, {'partofspeech':'adj','inflection':'A?'}):
+            for changes in ({'plural':''}, {'plural':'sälver|sälvar'}, {'partofspeech':'adj','inflection':'A?','gender':''}):
                 with self.assertRaises(build.BuildError): read(**changes)

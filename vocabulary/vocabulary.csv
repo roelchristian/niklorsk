@@ -23,6 +23,8 @@ begn;v;;V-I;to read;;begns;;;;
 biljon;num;;0;one million million;;;;;;
 billæ;adv;;0;right away;;;;;;
 bing;adv;;Adv-irr;well;;;;;;
+bli;n;m;N-zero;mountain;;;;;;bli
+blind;n;n;N-ar;word;;;;;;blindar
 bliv;n;m;N?;man;;;;;;
 blæ;adj;;A?;same;;;;;;
 blæ;adv;;Adv0;same, equally;;;;;;
@@ -308,6 +310,7 @@ ny;conj;;0;when;;;;;;
 nyst;n;f;N?;part;;;;;;
 næ;pron;;Poss;his;;;;;;
 nær;adv;;Adv-irr;for a long time;;;;;;
+nærer;adv;;Adv0;before;;;;;;
 nør;pron;;P|Poss;"they; their";;;;;;
 nørs;adv;;0;never;;;;;;
 nøyp;v;;V-I|V-alt;to snow;;nøyps;;;;
@@ -338,6 +341,7 @@ pjæt;v;;V-I;to loiter;;pjæts;;;;
 plast;n;;N?;plastic;;;;;;
 plastrum;n;;N?;plastic utensil;;;;;;
 professor;n;;N?;professor;;;;;;
+profet;n;m;N-ar;prophet;;;;;;profetar
 projekt;n;m;N-ar;project;;;;;;
 prover;v;;V?;to try;;provers;;;;
 præst;n;;N?;priest;;;;;;
@@ -483,6 +487,7 @@ våst;n;n;N-zero;rocky field, boulder field;;;;;;
 ængel;n;m;N?;angel;;;;;;
 ænn;num;;0;seven;;;;;;
 ænndag;num;;0;seventeen;;;;;;
+ænsel;n;n;N-exp;donkey;;;;;;ænsler
 æpp;n;;N-s;app;;;;;;
 øvtygde;n;;N?;teacher;;;;;;
 øygig;adv;;Adv-irr;often;;;;;;

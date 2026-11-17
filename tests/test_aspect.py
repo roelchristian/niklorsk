@@ -58,6 +58,28 @@ class AspectTests(unittest.TestCase):
         # Present participle agreement remains distinct.
         self.assertIn('hjaltade', modifiers)
 
+    def test_interlinear_participial_agreement(self):
+        pairs = re.findall(r'\\gla\s+(.*?)//\s*\\glb\s+(.*?)//',
+                           self.verbs, re.S)
+        examples = {source: gloss for source, gloss in pairs}
+        be_perfect = 'Matti ö slötur. Gå ö slöturen.'
+        passive = 'Der hjölter får vorur kvinturen på Matti.'
+        self.assertIn(be_perfect, examples)
+        self.assertIn(passive, examples)
+        for source in (be_perfect, passive):
+            self.assertEqual(len(source.split()), len(examples[source].split()))
+        self.assertIn(r'come.\PstP{}.\Sg{}', examples[be_perfect])
+        self.assertIn(r'come.\PstP{}.\Pl{}', examples[be_perfect])
+        self.assertIn(r'be.\PstP{} bake.\PstP{}.\Pl{}', examples[passive])
+
+    def test_interlinear_token_alignment(self):
+        for path in [*sorted((ROOT / 'chapters').glob('*.tex')),
+                     *sorted((ROOT / 'texts').glob('*.tex'))]:
+            for source, gloss in re.findall(
+                    r'\\gla\s+(.*?)//\s*\\glb\s+(.*?)//', path.read_text(), re.S):
+                with self.subTest(path=path.name, example=source):
+                    self.assertEqual(len(source.split()), len(gloss.split()))
+
     def test_auxiliary_scope_and_selection_limits(self):
         self.assertIn('Neither the subject nor an object controls agreement on its participle', self.verbs)
         self.assertIn('retains \\nk{fårs} even with an embedded motion verb', self.verbs)

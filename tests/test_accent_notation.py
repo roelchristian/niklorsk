@@ -70,6 +70,32 @@ class AccentNotationTests(unittest.TestCase):
             with self.assertRaisesRegex(build.BuildError, 'surface category'):
                 build.read_vocabulary(path)
 
+    def test_accent_and_stress_metadata_validate_independently(self):
+        rows = build.read_vocabulary(ROOT / 'vocabulary/vocabulary.csv')
+        base = next(row for row in rows if row['lemma'] == 'afte')
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / 'vocabulary.csv'
+
+            def read_variant(**changes):
+                with source.open('w', encoding='utf-8', newline='') as stream:
+                    writer = csv.DictWriter(stream, fieldnames=build.VOCABULARY_FIELDS, delimiter=';')
+                    writer.writeheader()
+                    writer.writerow(dict(base, **changes))
+                return build.read_vocabulary(source)[0]
+
+            # A documented category need not imply a recorded stress location.
+            row = read_variant(stress='', accent='A2', stress_anchor='')
+            self.assertEqual(row['accent'], 'A2')
+            self.assertEqual(build.stress_display(row)[0], 'afte')
+            self.assertIn('unrecorded', build.stress_display(row)[1])
+            for changes in ({'stress': '0'}, {'stress': '１'},
+                            {'stress': '', 'stress_anchor': '1'},
+                            {'stress': '1', 'stress_anchor': '0'},
+                            {'stress': '1', 'stress_anchor': '2'},
+                            {'stress': '1', 'stress_anchor': '99'}):
+                with self.subTest(changes=changes), self.assertRaises(build.BuildError):
+                    read_variant(**changes)
+
     def test_editorial_macros_and_morphological_contrast(self):
         cls=(ROOT/'grammarstyle.cls').read_text()
         chapter=(ROOT/'chapters/phonology.tex').read_text()

@@ -29,14 +29,14 @@ bing;adv;;Adv-irr;well;;
 bliv;n;m;N?;man;;
 blä;adj;;A?;same;;
 blä;adv;;Adv0;same, equally;;
-blåkk;n;;N-s;blog;;
+blåck;n;;N-s;blog;;
 bot;n;n;N-n;grass;;
 bra;v;;V-II;to give;;brags
 bram;n;;N?;study;;
 bram;v;;V-I;to study;;brams
 brev;n;;N?;letter;;
 brevet;n;n;N?;owner;;
-brikkhæd;n;f;N?;beauty;;
+brickhæd;n;f;N?;beauty;;
 brord;n;n;N-a;room;;
 brug;n;f;N?;house;;
 brutal;adj;;A;brutal;;
@@ -44,6 +44,7 @@ brutalitet;n;f;N?;brutality;;
 bråst;n;m;N?;cake;;
 brörd;n;;N?;room;;
 bund;n;m;N-er;king;;
+byck;adj;;A?;half;;
 bärg;v;;V-I;to have;;bärgs
 bått;adv;;Adv0;very much;;
 bær;adv;;Adv0;somewhat;;
@@ -95,7 +96,7 @@ fjeltt;n;f;N-a;party, celebration;;
 fjerd;v;;V-I;to forget;;fjerds
 fjerdåge;adj;;A?;forgetful;;
 fjerdåghæd;n;f;N?;forgetfulness;;
-flikk;n;f;N-ar;name;;
+flick;n;f;N-ar;name;;
 forst;n;m;N-a;time;;
 fylldag;num;;0;fifteen;;
 fylle;num;;0;five;;
@@ -139,7 +140,6 @@ gæskun;v;;V-I|Insep;to render blind (an affected participant as direct object);
 gæsond;v;;V-I|Insep;to address, to speak to (someone as direct object);2;gæsonds
 gætug;v;;V-I|Insep;to become fat;2;gætugs
 gævand;v;;V-I|Insep;to traverse by driving (a territory as direct object);2;gævands
-halv;adj;;A?;half;;
 hamde;pron;;RP;subject-oriented reflexive possessive;;
 hel;part;;Part;up;;
 helbra;v;;V-II|Sep;to give up;1;helbrags
@@ -150,7 +150,7 @@ hent;v;;V-I;to tell;;hents
 hjalt;v;;V-I;to write;;hjalts
 hjaltygde;n;n;N?;writer;;
 hjaltånde;n;n;N-ånde;writing, an act of writing;;
-hjekk;v;;V-I;to talk, to speak;;hjekks
+hjeck;v;;V-I;to talk, to speak;;hjecks
 hjålt;n;n;N-er;cake;;
 hjörtat;n;n;N-n;apology;;
 hlåd;n;m;N-U;summer;;
@@ -208,8 +208,8 @@ kanselerför;adj;;A;cancellable;;
 kapp;n;f;N-er;coat;;
 kelv;n;n;N-n;half;;
 kinnotek;n;;N?;cinema;;
-klikker;v;;V?;to click;;klikkers
-klikkerför;adj;;A;clickable;;
+klicker;v;;V?;to click;;klickers
+klickerför;adj;;A;clickable;;
 klipp;n;;N-s;clip;;
 klör;v;;V-I;to burn;;klörs
 kom;v;;V-I;to die;;koms
@@ -237,7 +237,7 @@ lasst;n;;N?;salt;;
 leder;n;;N?;fever, high temperature;;
 lek;v;;V-I;to respond;;leks
 ligt;adj;;A?;a lot of;;
-likke;adv;;0;quite;;
+licke;adv;;0;quite;;
 liter;n;;N?;litre;;
 lod;v;;V-irr;to have;;lods
 läb;n;f;N-a;next day, morrow;;
@@ -279,7 +279,7 @@ most;v;;V-I;to come;;mosts
 murst;v;;V-I;to cut;;mursts
 murstånde;n;n;N-ånde;cutting, a cut or cutting operation;;
 myk;v;;V-I;to do, to make;;myks
-mykk;v;;V-I;to do, to make;;mykks
+myck;v;;V-I;to do, to make;;mycks
 måment;n;;N?;moment;;
 mår;pron;;D;that (medial);;
 mårs;v;;V-I|V-alt;to dwell;;mårses
@@ -386,7 +386,7 @@ slöt;v;;V-I;to come;1;slöts
 smed;conj;;0;before;;
 smä;pron;;Ind;no;;
 smål;num;;0;one hundred;;
-snäkk;n;;N-s;snack;;
+snäck;n;;N-s;snack;;
 snör;n;;N?;beach;;
 snörbrug;n;f;N?;beach house;;
 sollna;v;;V-II;to be born;;sollnags
@@ -441,7 +441,7 @@ trag;v;;V-I;to pay;;trags
 tragånde;n;n;N-ånde;payment;;
 triljon;num;;0;one million million million;;
 træ;n;f;N?;queen;;
-tukk;n;n;N?;box;;
+tuck;n;n;N?;box;;
 tvent;adj;;A;slow;;
 tventegs;adv;;Adv;slowly;;
 tånd;num;;0;eight;;

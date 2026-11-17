@@ -18,10 +18,11 @@ the nouns they modify in gender and number. The verbal system includes finite
 and non-finite forms, tense and aspect distinctions, conditional constructions,
 and passive forms.
 
-Modern speech normally expresses the progressive with *vor i* followed by an
-infinitive. The synthetic progressive in *-att* or *-tt* remains preferred in
-writing, especially in literary prose. The two forms have essentially the same
-meaning; their usual difference is register.
+The present, past and future are inflected synthetically. Perfect aspect uses
+finite *fårs* ‘have’ with an invariable past participle, while the progressive
+uses finite *vors* followed by *i* and an infinitive; these constructions can
+also combine in the perfect progressive. The synthetic perfect infinitive
+remains available for anterior events in non-finite complements.
 
 Particle verbs ordinarily combine a preverbal particle with the verbal stem
 as one word. The grammar describes their separation with negation, pronominal

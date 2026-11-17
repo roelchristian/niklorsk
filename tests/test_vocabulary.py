@@ -49,11 +49,12 @@ class VocabularyTests(unittest.TestCase):
                 self.assertIn(r'See Table~\ref{' + target + '}', entry)
 
     def test_have_lexeme(self):
-        have = [row for row in self.rows if row['definition'] == 'to have']
+        have = [row for row in self.rows if row['definition'].split(';')[0] == 'to have']
         self.assertEqual(len(have), 1)
         self.assertEqual(have[0]['lemma'], 'får')
         self.assertEqual(have[0]['infinitive'], 'fårs')
         self.assertEqual(have[0]['inflection'], 'V-I')
+        self.assertIn('perfect auxiliary', have[0]['definition'])
         self.assertNotIn('bärg', self.verbs)
         self.assertNotIn('lod', self.verbs)
         self.assertEqual(self.verbs['få']['infinitive'], 'fågs')

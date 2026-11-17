@@ -230,7 +230,7 @@
 \newcommand{\dictionarylabel}[1]{%
     {\normalfont\fontsize{7.8bp}{11.2bp}\selectfont\itshape #1}%
 }
-\newcommand{\dictionaryentry}[5]{%
+\newcommand{\dictionaryentry}[6]{%
     \par\begingroup
     \raggedright\setlength{\parindent}{0pt}%
     \setlength{\hangindent}{1.3em}\hangafter=1
@@ -238,9 +238,10 @@
     \noindent{\niklorskfont\upshape\color{grammarInk}#1%
         \ifstrempty{#2}{}{\textsuperscript{#2}}}%
     \nobreak\hspace{0.35em}\dictionarylabel{#3}%
-    \ifstrempty{#4}{}{\space[\dictionarylabel{#4}]}%
+    \ifstrempty{#4}{}{\space{\normalfont\upshape (#4)}}%
     % Definitions retain embedded forms as plain text; only the lemma is bold.
-    \space{\let\nk\@firstofone\let\niklorsk\@firstofone #5}\par
+    \space{\let\nk\@firstofone\let\niklorsk\@firstofone #5}.%
+    \ifstrempty{#6}{}{\space{\normalfont\upshape #6}}\par
     \endgroup
 }
 \newcommand{\vocabcentered}[1]{%

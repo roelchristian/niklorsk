@@ -320,21 +320,18 @@ def vocabulary(stage: Path) -> int:
         r"{\footnotesize\noindent " + legend + r"\par}",
         "",
 
-        r"\section*{Citation forms and inflection groups}",
         r"\label{sec:vocabulary-key}",
-        r"Entries give lemmas rather than separate inflected forms. Nouns are cited in the nominative singular, verbs in the present, and adjectives in the positive masculine form. Derived words remain separate entries. Personal pronouns use the nominative; demonstratives and indefinite pronouns use the neuter citation form. Ordinary possessives use the masculine form, reflexive \nk{hæm} the accusative, and reflexive possessive \nk{hamde} the masculine--neuter form. Definite articles are grouped under \nk{en}; the indefinite article is cited as \nk{men} (\S\ref{sec:indefinite-article}). Contracted \nk{atta} is described in \S\ref{sec:article-contraction}. Personal and place names in the examples are not listed.",
+        r"Entries give citation forms: nominative singular nouns, present-tense verbs, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites are cited in the neuter; possessives in the masculine, except \nk{hamde} (masculine--neuter). Reflexive \nk{hæm} is cited in the accusative. Definite articles are grouped under \nk{en}; the indefinite article appears under \nk{men} (\S~\ref{sec:indefinite-article}); contracted \nk{atta} is treated in \S~\ref{sec:article-contraction}. Derivatives have separate entries; personal and place names are excluded.",
         "",
-        r"The labels below are lookup groups. Each entry's label links to its paradigm or description. A question mark means that the class or full paradigm is unrecorded; it does not mean that the word is indeclinable. The label \emph{noun} leaves gender unspecified, while \emph{n.} marks neuter gender. Person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
+        r"Parenthesised inflection labels link to paradigms or descriptions; multiple labels are separated by commas. A question mark denotes an unrecorded class or incomplete paradigm, not invariability. Superscript numerals identify the primary-stressed syllable, counted from the beginning of the lemma; absence of a numeral leaves stress unspecified (\S~\ref{sec:stress-prosody}). Alphabetical order is A--Z, Æ (including Ä), Ö, Å.",
         "",
-        r"\noindent\textbf{Nouns.} N-ar, N-or, N-a, and N-n refer to Tables~\ref{tab:plural-ar}--\ref{tab:plural-n}; N-er to plurals with umlaut and \nk{-er} (Table~\ref{tab:plural-er-umlaut}); N-U to umlaut alone (Table~\ref{tab:plural-umlaut-only}); and N-$\varnothing$ to zero plurals (Table~\ref{tab:plural-zero}). N-s includes borrowed \nk{-s} and recorded native alternatives (Table~\ref{tab:borrowed-s-plurals}). N-ånde refers to Table~\ref{tab:action-nouns-ande}. Multiple labels record alternative classes. N? means that no plural is recorded. Genitive formation follows \S\ref{sec:nominal-case} for all groups.",
+        r"\noindent\textbf{Inflection key.} N-ar, N-or, N-a, N-n: suffixal plurals; N-er: umlaut with \nk{-er}; N-U: umlaut alone; N-$\varnothing$: zero plural; N-s: borrowed \nk{-s} and recorded native alternatives; N-ånde: \nk{-ånde} nouns. N? indicates no recorded plural. Genitives follow \S~\ref{sec:nominal-case}; person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
         "",
-        r"\noindent\textbf{Verbs.} I and II refer to the two columns of Table~\ref{tab:verb-conjugation}; L to the Latinate pattern in Table~\ref{tab:verb-conjugation-latinate}. The labels \emph{vowel alt.} and \emph{stem alt.} refer to Table~\ref{tab:vowel-changes-participles} and \S\ref{sec:consonant-restoration}. Irregular verbs link to their own accounts; \emph{irr.?} marks a verb described as irregular without a complete paradigm. V? leaves the conjugation unresolved. The labels \emph{sep.} and \emph{insep.} identify mobile particles and inseparable prefixes (\S\ref{sec:separable-verbs}; \S\ref{sec:inseparable-prefixes}).",
+        r"\noindent I, II: regular conjugations (Table~\ref{tab:verb-conjugation}); L: Latinate (Table~\ref{tab:verb-conjugation-latinate}); \emph{vowel alt.}: participial vowel alternation; \emph{stem alt.}: consonant restoration; \emph{irr.}: irregular; \emph{irr.?}: irregular, paradigm incomplete; V?: conjugation unrecorded; \emph{sep.}: mobile particle; \emph{insep.}: inseparable prefix.",
         "",
-        r"\noindent\textbf{Modifiers.} A refers to ordinary adjective agreement (Table~\ref{tab:adj-declension}) and comparison (Table~\ref{tab:adj-comp}); A? leaves the full agreement pattern unrecorded. Adv marks adverbs with regular \nk{-æginn/-gæginn} comparison; Adv-irr. marks the irregular comparative series; Adv0 marks those listed without a comparative, including the \nk{-s} adverbs for which no comparative is given (\S\ref{sec:adverb-formation}).",
+        r"\noindent A: ordinary adjective agreement and comparison (Tables~\ref{tab:adj-declension}, \ref{tab:adj-comp}); A?: full agreement pattern unrecorded. Adv: regular \nk{-æginn/-gæginn} comparison; Adv-irr.: irregular comparison; Adv0: no comparative listed, including \nk{-s} adverbs (\S~\ref{sec:adverb-formation}).",
         "",
-        r"\noindent\textbf{Pronouns and articles.} P: personal (Table~\ref{tab:personal-pronouns}); D: demonstrative (Table~\ref{tab:dem-pronouns}); Ind: indefinite (Table~\ref{tab:indef-pronouns}); Q: interrogative with a plural, Q0: invariable interrogative (Table~\ref{tab:interr-pronouns}); Poss: ordinary possessive (Table~\ref{tab:possessive-declension}); R: argumental reflexive, RP: reflexive possessive (Table~\ref{tab:reflexive-forms}); Art: definite article (Table~\ref{tab:weak-articles}); Art-ind: indefinite article (\S\ref{sec:indefinite-article}).",
-        "",
-        r"{\footnotesize\noindent A superscript numeral marks primary stress on a syllable of the lemma, counted from the first syllable. An unmarked entry has no individual stress specification; see Chapter~\ref{chap:phonology}, \S\ref{sec:stress-prosody}. Entries follow A--Z, Æ (including Ä), Ö, Å.\par}",
+        r"\noindent P: personal; D: demonstrative; Ind: indefinite; Q: interrogative with plural; Q0: invariable interrogative; Poss: possessive; R: argumental reflexive; RP: reflexive possessive; Art: definite article; Art-ind: indefinite article.",
         "", r"{\footnotesize", r"\begin{multicols}{2}", "",
     ]
     previous = ""
@@ -353,7 +350,18 @@ def vocabulary(stage: Path) -> int:
             name, target, _ = INFLECTION_GROUPS[code]
             if name:
                 groups.append(r"\hyperref[" + target + "]{" + name + "}")
-        arguments = [row["lemma"], row["stress"], label, ", ".join(groups), row["definition"]]
+        # Explicit numbered references remain usable in print as well as on screen.
+        # Only the two dedicated tables contain full irregular paradigms.
+        references = []
+        for code in row["inflection"].split("|"):
+            if code in {"V-be", "V-ex"}:
+                target = INFLECTION_GROUPS[code][1]
+                references.append(r"See Table~\ref{" + target + "}.")
+            elif code == "V-modal":
+                references.append(r"For the irregular past, see \S~\ref{sec:modal-verbs}.")
+            elif code == "V-irr":
+                references.append(r"Paradigm incomplete; see \S~\ref{sec:verb-conjugation}.")
+        arguments = [row["lemma"], row["stress"], label, ", ".join(groups), row["definition"], " ".join(references)]
         lines.extend([r"\dictionaryentry" + "".join("{" + value + "}" for value in arguments), ""])
         if new_letter:
             lines.extend([r"\end{minipage}\par", r"\endgroup", ""])

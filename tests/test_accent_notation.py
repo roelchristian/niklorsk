@@ -111,7 +111,7 @@ class AccentNotationTests(unittest.TestCase):
         chapter = (ROOT/'chapters/phonology.tex').read_text()
         table = chapter.split(r'\label{tab:particle-lexical-accent}', 1)[1].split(r'\end{table}', 1)[0]
         for form in [r'\nkaccent{án}{A1}', r'\nkaccent{ǻn}{A1}',
-                     r'\nkaccent{slǿt}{A1}', r'\nkaccent{ánˌsløt}{A1}',
+                     r'\nkaccent{slǿt}{A1}', r'\nkaccent{ánˌsløts}{A1}',
                      r'\nkaccent{slǿtar}{A1}', r'\nkaccent{Slǿte}{A1}']:
             self.assertIn(form, table)
 

@@ -19,8 +19,8 @@ class VocabularyTests(unittest.TestCase):
         self.verbs = {r['lemma']: r for r in self.rows if r['partofspeech'] == 'v'}
 
     def test_citation_forms(self):
-        self.assertEqual(len(self.rows), 486)
-        self.assertEqual(len(self.verbs), 113)
+        self.assertEqual(len(self.rows), 494)
+        self.assertEqual(len(self.verbs), 114)
         special = {'ö': 'vors', 'går': 'gårs', 'får': 'fårs',
                    'igom': 'igoms', 'tage': 'tages', 'böys': 'böyses',
                    'mårs': 'mårses', 'skers': 'skerses', 'bra': 'brags',
@@ -39,7 +39,7 @@ class VocabularyTests(unittest.TestCase):
             stage = Path(directory)
             (stage / 'vocabulary').mkdir()
             (stage / 'vocabulary/vocabulary.csv').write_bytes((ROOT / 'vocabulary/vocabulary.csv').read_bytes())
-            self.assertEqual(build.vocabulary(stage), 486)
+            self.assertEqual(build.vocabulary(stage), 494)
             text = (stage / 'vocabulary/vocabulary.tex').read_text()
             for stem, row in self.verbs.items():
                 head = r'\dictionaryentry{' + build.stress_display(row)[0] + '}'

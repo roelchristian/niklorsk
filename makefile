@@ -73,7 +73,8 @@ POS = {
 }
 STEM_VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "inflection", "definition", "stress"]
 CITATION_VOCABULARY_FIELDS = STEM_VOCABULARY_FIELDS + ["infinitive"]
-VOCABULARY_FIELDS = CITATION_VOCABULARY_FIELDS + ["perfect_auxiliary", "accent", "stress_anchor"]
+ANNOTATED_VOCABULARY_FIELDS = CITATION_VOCABULARY_FIELDS + ["perfect_auxiliary", "accent", "stress_anchor"]
+VOCABULARY_FIELDS = ANNOTATED_VOCABULARY_FIELDS + ["plural"]
 PERFECT_AUXILIARIES = {"HAVE", "BE", "ALTERNATING"}
 PREVIOUS_VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "plurals", "definition", "stress"]
 # These are dictionary lookup groups, not additional grammatical classes.
@@ -89,6 +90,7 @@ INFLECTION_GROUPS = {
     "N-zero": (r"N-$\varnothing$", "tab:plural-zero", {"n"}),
     "N-s": ("N-s", "tab:borrowed-s-plurals", {"n"}),
     "N-ånde": ("N-ånde", "tab:action-nouns-ande", {"n"}),
+    "N-exp": ("N-exp", "sec:nominal-number", {"n"}),
     "N?": ("N?", "sec:nominal-number", {"n"}),
     "V-I": ("I", "tab:verb-conjugation", {"v"}),
     "V-II": ("II", "tab:verb-conjugation", {"v"}),
@@ -281,9 +283,9 @@ def read_vocabulary(source: Path) -> list[dict]:
         legacy_fields = ["word", "partofspeech", "translation"]
         legacy = reader.fieldnames in (legacy_fields, legacy_fields + ["stress"])
         previous_format = reader.fieldnames == PREVIOUS_VOCABULARY_FIELDS
-        if not legacy and not previous_format and reader.fieldnames not in (VOCABULARY_FIELDS, CITATION_VOCABULARY_FIELDS, STEM_VOCABULARY_FIELDS):
+        if not legacy and not previous_format and reader.fieldnames not in (VOCABULARY_FIELDS, ANNOTATED_VOCABULARY_FIELDS, CITATION_VOCABULARY_FIELDS, STEM_VOCABULARY_FIELDS):
             raise BuildError(
-                "Vocabulary needs lemma;partofspeech;gender;inflection;definition;stress;infinitive;perfect_auxiliary;accent;stress_anchor "
+                "Vocabulary needs lemma;partofspeech;gender;inflection;definition;stress;infinitive;perfect_auxiliary;accent;stress_anchor;plural "
                 "or a supported previous vocabulary header."
             )
         for line, row in enumerate(reader, 2):
@@ -351,8 +353,13 @@ def read_vocabulary(source: Path) -> list[dict]:
             auxiliary = row.get("perfect_auxiliary", "")
             if auxiliary and (pos != "v" or auxiliary not in PERFECT_AUXILIARIES):
                 raise BuildError(f"Invalid perfect auxiliary on vocabulary row {line}: use HAVE, BE or ALTERNATING on verbs only.")
+            plural = row.get("plural", "")
+            if plural and (pos != "n" or any(c in plural for c in ",| ")):
+                raise BuildError(f"Invalid explicit plural on vocabulary row {line}: use one noun form.")
+            if "N-exp" in groups and not plural:
+                raise BuildError(f"Missing explicit plural on vocabulary row {line}.")
             key = unicodedata.normalize("NFC", infinitive or lemma).casefold(), pos
-            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, inflection=inflection, definition=definition, stress=stress, infinitive=infinitive, perfect_auxiliary=auxiliary, accent=accent, stress_anchor=anchor)
+            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, inflection=inflection, definition=definition, stress=stress, infinitive=infinitive, perfect_auxiliary=auxiliary, accent=accent, stress_anchor=anchor, plural=plural)
             stress_display(entry)
             previous = entries.get(key)
             if previous:
@@ -406,7 +413,7 @@ def vocabulary(stage: Path) -> int:
         r"Inflection labels in parentheses link to paradigms or descriptions; a question mark indicates an unrecorded class or incomplete paradigm, not invariability. An acute marks primary stress, while superscripts 1 and 2 identify lexical Accent 1 and Accent 2. Either property may be unrecorded, in which case its mark is omitted; surface neutralisation is represented separately as A0. These editorial annotations are absent from ordinary spelling (\S~\ref{sec:stress-prosody}). Entries follow the order A--Z, Æ (including Ä), Ö, Å.",
         "",
         r"\begingroup\raggedright",
-        r"\noindent\textbf{Inflection key.} N-ar, N-or, N-a, N-n: suffixal plurals; N-er: umlaut with \nk{-er}; N-U: umlaut alone; N-$\varnothing$: zero plural; N-s: borrowed \nk{-s} and recorded native alternatives; N-ånde: \nk{-ånde} nouns. N? indicates no recorded plural. Genitives follow \S~\ref{sec:nominal-case}; person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
+        r"\noindent\textbf{Inflection key.} N-ar, N-or, N-a, N-n: suffixal plurals; N-er: umlaut with \nk{-er}; N-U: umlaut alone; N-$\varnothing$: zero plural; N-s: borrowed \nk{-s} and recorded native alternatives; N-ånde: \nk{-ånde} nouns. N-exp identifies an explicitly recorded plural without assigning a productive class; N? indicates no recorded plural. Genitives follow \S~\ref{sec:nominal-case}; person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
         "",
         r"\noindent I, II: regular conjugations (Table~\ref{tab:verb-conjugation}); L: Latinate (Table~\ref{tab:verb-conjugation-latinate}); \emph{vowel alt.}: participial vowel alternation; \emph{stem alt.}: consonant restoration; \emph{irr.}: irregular; \emph{irr.?}: irregular, paradigm incomplete; V?: conjugation unrecorded; \emph{sep.}: mobile particle; \emph{insep.}: inseparable prefix.",
         "",
@@ -438,6 +445,8 @@ def vocabulary(stage: Path) -> int:
         # Explicit numbered references remain usable in print as well as on screen.
         # Only the dedicated table contains full irregular paradigms.
         references = []
+        if row["plural"]:
+            references.append(r"Pl. \nk{" + row["plural"] + "}.")
         for code in row["inflection"].split("|"):
             if code == "V-be":
                 target = INFLECTION_GROUPS[code][1]

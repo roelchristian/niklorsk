@@ -83,7 +83,9 @@ English meanings, primary stress and lexical accent where specified. Verbs use
 the infinitive as their citation form, with particles and prefixes incorporated,
 and derived words have separate entries. A question mark identifies an
 unrecorded class or incomplete paradigm; noun plurals are described in the noun
-and derivation chapters.
+and derivation chapters. An optional `plural` field preserves an explicitly
+recorded noun plural and prints it in the entry; `N-exp` records such a form
+without assigning a productive inflection class.
 
 In displayed headwords, an acute marks primary stress and superscript 1 or 2
 records lexical A1 or A2, independently of its surface realisation. An omitted

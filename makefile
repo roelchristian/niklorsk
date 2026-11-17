@@ -71,7 +71,8 @@ POS = {
     "conj": "conjunction", "interj": "interjection", "n": "noun", "prep": "preposition",
     "pron": "pronoun", "v": "verb", "part": "particle", "num": "numeral",
 }
-VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "inflection", "definition", "stress"]
+STEM_VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "inflection", "definition", "stress"]
+VOCABULARY_FIELDS = STEM_VOCABULARY_FIELDS + ["infinitive"]
 PREVIOUS_VOCABULARY_FIELDS = ["lemma", "partofspeech", "gender", "plurals", "definition", "stress"]
 # These are dictionary lookup groups, not additional grammatical classes.
 # Each code links to the existing description or a table of recorded forms.
@@ -212,6 +213,11 @@ def dictionary_heading(lemma: str) -> str:
     return DICTIONARY_EQUIVALENTS.get(letter, letter).upper()
 
 
+def citation_form(row: dict) -> str:
+    """Use the recorded infinitive, retaining the stored stem and class data."""
+    return row["infinitive"] or row["lemma"]
+
+
 def read_vocabulary(source: Path) -> list[dict]:
     """Read lemma records and their linked inflection groups."""
     entries = {}
@@ -220,9 +226,9 @@ def read_vocabulary(source: Path) -> list[dict]:
         legacy_fields = ["word", "partofspeech", "translation"]
         legacy = reader.fieldnames in (legacy_fields, legacy_fields + ["stress"])
         previous_format = reader.fieldnames == PREVIOUS_VOCABULARY_FIELDS
-        if not legacy and not previous_format and reader.fieldnames != VOCABULARY_FIELDS:
+        if not legacy and not previous_format and reader.fieldnames not in (VOCABULARY_FIELDS, STEM_VOCABULARY_FIELDS):
             raise BuildError(
-                "Vocabulary needs lemma;partofspeech;gender;inflection;definition;stress "
+                "Vocabulary needs lemma;partofspeech;gender;inflection;definition;stress;infinitive "
                 "or a supported previous vocabulary header."
             )
         for line, row in enumerate(reader, 2):
@@ -274,8 +280,15 @@ def read_vocabulary(source: Path) -> list[dict]:
                     raise BuildError(f"Invalid inflection group for {pos} on row {line}: {group}.")
             if not (legacy or previous_format) and pos in {"n", "v", "adj", "pron", "art"} and "0" in groups:
                 raise BuildError(f"Missing inflection group on vocabulary row {line}; use the appropriate question-mark group for unrecorded paradigms.")
-            key = unicodedata.normalize("NFC", lemma).casefold(), pos
-            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, inflection=inflection, definition=definition, stress=stress)
+            infinitive = row.get("infinitive", "")
+            if pos == "v" and not infinitive:
+                raise BuildError(f"Missing infinitive on vocabulary row {line}: record the citation form explicitly.")
+            if pos != "v" and infinitive:
+                raise BuildError(f"Unexpected infinitive on non-verbal vocabulary row {line}.")
+            if any(char in infinitive for char in ",| "):
+                raise BuildError(f"Invalid infinitive on vocabulary row {line}: use one incorporated citation form.")
+            key = unicodedata.normalize("NFC", infinitive or lemma).casefold(), pos
+            entry = dict(lemma=lemma, partofspeech=pos, gender=gender, inflection=inflection, definition=definition, stress=stress, infinitive=infinitive)
             previous = entries.get(key)
             if previous:
                 if previous["gender"] != gender or previous["definition"] != definition:
@@ -289,7 +302,7 @@ def read_vocabulary(source: Path) -> list[dict]:
             else:
                 entries[key] = entry
     rows = sorted(entries.values(), key=lambda row: (
-        dictionary_key(row["lemma"]), unicodedata.normalize("NFC", row["lemma"]).casefold(),
+        dictionary_key(citation_form(row)), unicodedata.normalize("NFC", citation_form(row)).casefold(),
         row["lemma"], row["partofspeech"],
     ))
     if not rows:
@@ -321,9 +334,9 @@ def vocabulary(stage: Path) -> int:
         "",
 
         r"\label{sec:vocabulary-key}",
-        r"Entries give citation forms: nominative singular nouns, present-tense verbs, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites are cited in the neuter; possessives in the masculine, except \nk{hamde} (masculine--neuter). Reflexive \nk{hæm} is cited in the accusative. Definite articles are grouped under \nk{en}; the indefinite article appears under \nk{men} (\S~\ref{sec:indefinite-article}); contracted \nk{atta} is treated in \S~\ref{sec:article-contraction}. Derivatives have separate entries; personal and place names are excluded.",
+        r"Entries give citation forms: nominative singular nouns, infinitives of verbs, positive masculine adjectives and nominative personal pronouns. Demonstratives and indefinites are cited in the neuter; possessives in the masculine, except \nk{hamde} (masculine--neuter). Reflexive \nk{hæm} is cited in the accusative. Definite articles are grouped under \nk{en}; the indefinite article appears under \nk{men} (\S~\ref{sec:indefinite-article}); contracted \nk{atta} is treated in \S~\ref{sec:article-contraction}. Derivatives have separate entries; personal and place names are excluded.",
         "",
-        r"Parenthesised inflection labels link to paradigms or descriptions; multiple labels are separated by commas. A question mark denotes an unrecorded class or incomplete paradigm, not invariability. Superscript numerals identify the primary-stressed syllable, counted from the beginning of the lemma; absence of a numeral leaves stress unspecified (\S~\ref{sec:stress-prosody}). Alphabetical order is A--Z, Æ (including Ä), Ö, Å.",
+        r"Parenthesised inflection labels link to paradigms or descriptions; multiple labels are separated by commas. A question mark denotes an unrecorded class or incomplete paradigm, not invariability. Superscript numerals identify the primary-stressed syllable, counted from the beginning of the headword; absence of a numeral leaves stress unspecified (\S~\ref{sec:stress-prosody}). Alphabetical order is A--Z, Æ (including Ä), Ö, Å.",
         "",
         r"\noindent\textbf{Inflection key.} N-ar, N-or, N-a, N-n: suffixal plurals; N-er: umlaut with \nk{-er}; N-U: umlaut alone; N-$\varnothing$: zero plural; N-s: borrowed \nk{-s} and recorded native alternatives; N-ånde: \nk{-ånde} nouns. N? indicates no recorded plural. Genitives follow \S~\ref{sec:nominal-case}; person nouns follow the contextual gender rule in Chapter~\ref{chap:nouns}.",
         "",
@@ -336,7 +349,7 @@ def vocabulary(stage: Path) -> int:
     ]
     previous = ""
     for row in rows:
-        letter = dictionary_heading(row["lemma"])
+        letter = dictionary_heading(citation_form(row))
         new_letter = letter != previous
         if new_letter:
             lines.extend([
@@ -361,7 +374,7 @@ def vocabulary(stage: Path) -> int:
                 references.append(r"For the irregular past, see \S~\ref{sec:modal-verbs}.")
             elif code == "V-irr":
                 references.append(r"Paradigm incomplete; see \S~\ref{sec:verb-conjugation}.")
-        arguments = [row["lemma"], row["stress"], label, ", ".join(groups), row["definition"], " ".join(references)]
+        arguments = [citation_form(row), row["stress"], label, ", ".join(groups), row["definition"], " ".join(references)]
         lines.extend([r"\dictionaryentry" + "".join("{" + value + "}" for value in arguments), ""])
         if new_letter:
             lines.extend([r"\end{minipage}\par", r"\endgroup", ""])

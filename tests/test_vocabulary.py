@@ -80,7 +80,7 @@ class VocabularyTests(unittest.TestCase):
             for path in (ROOT / folder).glob('*.tex'):
                 self.assertIsNone(re.search(r'\b(?:bärgs?|lods?|lodar)\b', path.read_text()), path)
         nouns = (ROOT / 'chapters/nouns.tex').read_text()
-        self.assertIn('Nar får øyto?', nouns)
+        self.assertIn('Nu får øyto?', nouns)
         self.assertIn(r'\nk{fårs leder}', nouns)
         self.assertIn(r'\nk{fågs øyto}', nouns)
         self.assertIn('Læse får de ngell', nouns)
